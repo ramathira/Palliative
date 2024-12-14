@@ -6,9 +6,11 @@ use App\Models\Ward;
 use App\Models\AshaWorker;
 use App\Models\Anganwadi;
 use App\Models\AWC_Worker;
+use App\Models\ComfortDevices;
 use App\Models\Diagnosis;
 use App\Models\Mlsp;
 use App\Models\Role;
+use App\Models\TreatmentTypes;
 use Illuminate\Http\Request;
 
 class ListController extends Controller
@@ -90,6 +92,18 @@ class ListController extends Controller
     {
          $mlsp = Mlsp::where('status',1)->get();
          return response()->json($mlsp);
+
+    }
+    public function get_treatment_types()
+    {
+        $treatment_types = TreatmentTypes::orderBy('treatment_type', 'asc')->get();
+         return response()->json($treatment_types);
+
+    }
+    public function get_comfort_devices()
+    {
+        $comfort_devices = ComfortDevices::orderBy('comfort_device_name', 'asc')->get();
+         return response()->json($comfort_devices);
 
     }
     

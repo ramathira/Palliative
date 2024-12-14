@@ -15,6 +15,7 @@ use App\Http\Controllers\AshaWorkerController;
 use App\Http\Controllers\AnganwadiController;
 use App\Http\Controllers\MidLevelServiceProviderController;
 use App\Http\Controllers\DiagnosisController;
+use App\Http\Controllers\TreatmentTypeController;
 
 Route::get('theme-switcher/{activeTheme}', [ThemeController::class, 'switch'])->name('theme-switcher');
 
@@ -117,6 +118,13 @@ Route::middleware('auth')->group(function () {
      
     ]);
 
+    Route::resource('/treatment_types', TreatmentTypeController::class)
+    ->names([
+       'index' => 'treatment_types.index',
+        'create' => 'treatment_types.create',
+        'store' => 'treatment_types.store',       
+    ]);
+
  
     Route::get('/ward_members', [WardController::class, 'members_list'])->name('ward_members.members_list');
     Route::get('/ward_member_edit', [WardController::class, 'members_edit'])->name('ward_members.member_edit');
@@ -144,6 +152,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/get_diagnosis', [ListController::class, 'get_diagnosis']);
     Route::get('/get_all_roles', [ListController::class, 'get_roles']);
     Route::get('/get_all_mlsp', [ListController::class, 'get_all_mlsp']);
+    Route::get('/get_treatment_types', [ListController::class, 'get_treatment_types']);
+    Route::get('/get_comfort_devices', [ListController::class, 'get_comfort_devices']);
 });
 
 

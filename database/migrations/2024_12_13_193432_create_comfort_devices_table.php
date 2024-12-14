@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('patient_disease', function (Blueprint $table) {
+        Schema::create('mt_comfort_devices', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('patient_id')  ;
-            $table->foreign('patient_id')->references('id')->on('patient_master')->onDelete('cascade');  
-            $table->string('diagnosis',500)  ;
+            $table->string('comfort_device_name',50)  ;
             $table->timestamps();
         });
     }
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('patient_disease');
+        Schema::dropIfExists('mt_comfort_devices');
     }
 };

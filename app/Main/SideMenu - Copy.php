@@ -63,13 +63,6 @@ class SideMenu
                 ],
             ],
         ],
-        [
-            'icon' => "List",
-           'route_name' => "assesment_checklist.create",
-            'params' => [],
-            'title' => "Assesment Checklist",
-            'permission' => 'assesment-checklist',           
-        ],
 
         "SUBCENTRE",
             
@@ -138,15 +131,6 @@ class SideMenu
        'route_name' => "diagnosis.index",
         'params' => [],
         'title' => "Diagnosis",
-        'permission' => 'diagnosis-list',           
-    ],
-    "TREATMENT",
-            
-      [
-        'icon' => "Album",
-       'route_name' => "treatment_types.index",
-        'params' => [],
-        'title' => "Treatment Types",
         'permission' => 'diagnosis-list',           
     ],
           

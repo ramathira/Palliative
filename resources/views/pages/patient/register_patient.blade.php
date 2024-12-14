@@ -633,7 +633,7 @@
                                         </div>
                                     </div>
                                     <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
-                                   
+                                        രോഗം കണ്ടെത്തിയ തീയതി 
                                     </div>
                                 </div>
                             </div>
@@ -660,7 +660,7 @@
                                     </div>
                                 </div>
                                 <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
-                                 
+                                    രോഗം വന്നതിനു മുമ്പുള്ള അവസ്ഥാ 
                                 </div>
                             </div>
                         </div>
@@ -777,7 +777,7 @@
                                     </div>
                                 </div>
                                 <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
-                                 
+                                    ചികിത്സാ വിവരങ്ങൾ 
                                 </div>
                             </div>
                         </div>
@@ -872,7 +872,7 @@
                                     </div>
                                 </div>
                                 <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
-                                 
+                                    രോഗം വന്നതിനു ശേഷമുള്ള അവസ്ഥാ 
                                 </div>
                             </div>
                         </div>
@@ -885,6 +885,56 @@
                             </div>                               
                         </div>
                     </div> 
+
+
+                    <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
+                        <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
+                            <div class="text-left">
+                                <div class="flex items-center">
+                                    <div class="font-medium">Treatment Category </div>
+                                    <div
+                                        class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
+                                        Required
+                                    </div>
+                                </div>
+                               
+                            </div>
+                        </div>
+                        <div class="mt-3 w-full flex-1 xl:mt-0">
+                            <x-base.form-select id="treatment-type-select" name="treatment_category"  >
+                            <option value="">Select treatment Type</option> 
+                            </x-base.form-select>
+                        </div>
+                    </div> 
+
+                    <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
+                        <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
+                            <div class="text-left">
+                                <div class="flex items-center">
+                                    <div class="font-medium">Comfort Devices </div>
+                                    <div
+                                        class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
+                                        Required
+                                    </div>
+                                </div>
+                               
+                            </div>
+                        </div>
+
+                        <div class="mt-3 w-full flex-1 xl:mt-0">                                
+                            <x-base.preview>
+                                <x-base.tom-select
+                                    class="w-full"
+                                    data-placeholder="Select the Comfort Devices"
+                                    multiple
+                                    id="comfortdevices-select"
+                                    name="comfortdevices[]"
+                                >                                                                                                          
+                                </x-base.tom-select>
+                            </x-base.preview>                                                   
+                        </div>
+                       
+                    </div>
                   
                      
 
@@ -1105,7 +1155,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Update button states based on current step
     function updateButtons() {
-        document.getElementById("prev-button").style.display = currentStep === 0 ? "none" : "inline-block";
+        // document.getElementById("prev-button").style.display = currentStep === 0 ? "none" : "inline-block";
         document.getElementById("next-button").textContent = currentStep === steps.length - 1 ? "Submit" : "Next";
     }
 
@@ -1300,6 +1350,34 @@ $(document).ready(function() {
         console.error('Error fetching diagnosis:', error);
     }
 });
+
+
+
+
+
+
+jQuery.ajax({
+        url: '/get_treatment_types',
+        type: 'GET',
+        dataType: 'json',
+        success: function (response) {
+            const $select = jQuery('#treatment-type-select');
+
+           
+            if ($select.length) {
+                $select.empty().append('<option value="">Select</option>');
+
+                response.forEach(function (data) {
+                    $select.append('<option value="' + data.id + '">' + data.treatment_type + '</option>');
+                });
+            } else {
+                console.error('Treament type select element not found.');
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error('Error fetching treatment type:', error);
+        }
+    });
 
 
 
