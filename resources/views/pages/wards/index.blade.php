@@ -156,6 +156,11 @@
                                         <x-base.form-check.input type="checkbox" />
                                     </x-base.table.td>
                                     <x-base.table.td
+                                    class="border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500"
+                                >
+                                Ward No
+                                </x-base.table.td>
+                                    <x-base.table.td
                                         class="border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500"
                                     >
                                     Wards
@@ -181,6 +186,20 @@
                                     <x-base.table.tr class="[&_td]:last:border-b-0">
                                         <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
                                             <x-base.form-check.input type="checkbox" />
+                                        </x-base.table.td>
+                                        <x-base.table.td class="w-80 border-dashed py-4 dark:bg-darkmode-600">
+                                            <div class="flex items-center">
+                                               
+                                                <div class="ml-3.5">
+                                                    <a
+                                                        class="whitespace-nowrap font-medium"
+                                                        href=""
+                                                    >
+                                                        {{ $ward['ward_no'] }}
+                                                    </a>
+                                                  
+                                                </div>
+                                            </div>
                                         </x-base.table.td>
                                         <x-base.table.td class="w-80 border-dashed py-4 dark:bg-darkmode-600">
                                             <div class="flex items-center">

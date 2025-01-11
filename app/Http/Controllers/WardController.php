@@ -68,7 +68,8 @@ class WardController extends Controller
         try
         {
            
-            $request->validate([              
+            $request->validate([      
+                'ward_no' => ['required', 'integer', 'unique:mt_wards,ward_no'],        
                 'ward' => ['required', 'string', 'max:255','unique:mt_wards,ward_name'],
                'subcentre' => 'required|integer|exists:mt_subcentres,id',
                
@@ -77,6 +78,7 @@ class WardController extends Controller
            
     
              Ward::create([
+                'ward_no' => $request->ward_no,
                 'ward_name' => $request->ward,
                 'subcentre' => $request->subcentre,
                 

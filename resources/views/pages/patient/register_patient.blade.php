@@ -75,7 +75,7 @@
             <div class="mt-7 step"  id="step-1">
                 <div class="box box--stacked flex flex-col">
                     <div class="p-7">
-                       
+                      
                         <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
                             <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
                                 <div class="text-left">
@@ -131,8 +131,13 @@
                                             <x-base.litepicker
                                                 class="mx-auto block"
                                                 data-single-mode="true"
-                                                name="dob"
+                                                name="dob"                                                
+                                                data-min-date="1924-01-01"
+                                               data-default-date="1980-01-01" 
+                                               
                                             />
+
+                                         
                                         
                                        
                             </div>
@@ -544,7 +549,6 @@
                             </div>
                         </div>
 
-                      
                        
                       
                         
@@ -580,14 +584,14 @@
                                    
                                 </div>
                             </div>
-                            <div class="mt-3 w-full flex-1 xl:mt-0">                                
+                           <div class="mt-4 w-full flex-1 xl:mt-0">                                
                                 <x-base.preview>
                                     <x-base.tom-select
                                         class="w-full"
                                         data-placeholder="Select the Diagnosis"
                                         multiple
                                         id="diagnosis-select"
-                                        name="diagnosis[]"
+                                        name="diagnosis"
                                     >                                                                                                          
                                     </x-base.tom-select>
                                 </x-base.preview>                                                   
@@ -615,9 +619,10 @@
                                 <x-base.form-textarea
                                 class="-mb-1.5 resize-none rounded-xl pr-16"
                                 placeholder="Type disease details..."
+                                name="diagnosis_details"
                                 />                                   
                             </div>                               
-                        </div>
+                        </div>                        
                     </div>    
                     
                    
@@ -643,6 +648,9 @@
                                             <x-base.litepicker
                                                 class="mx-auto block"
                                                 data-single-mode="true"
+                                                 name="diagnosis_date"
+                                                 data-min-date="1924-01-01"                                               
+                                                 
                                             />
                                         
                                        
@@ -669,6 +677,7 @@
                                 <x-base.form-textarea
                                 class="-mb-1.5 resize-none rounded-xl pr-16"
                                 placeholder="Type  details..."
+                                name="prior_condition"
                                 />                                   
                             </div>                               
                         </div>
@@ -692,6 +701,7 @@
                                         type="text"
                                         placeholder="Hospital Name"
                                         id="hospital_name"
+                                          name="hospital_name"
                                         
                                     />
                                     
@@ -719,6 +729,7 @@
                                     type="text"
                                     placeholder="Doctor's Name"
                                     id="doctor_name"
+                                      name="doctor_name"
                                     />
                                 </div>
                             </div>
@@ -739,25 +750,18 @@
                                     <div
                                         class="w-full rounded-md border border-slate-300/60 bg-white px-3 py-2 shadow-sm first:rounded-b-none last:-mt-px last:rounded-t-none focus:z-10 first:md:rounded-r-none first:md:rounded-bl-md last:md:-ml-px last:md:mt-0 last:md:rounded-l-none last:md:rounded-tr-md [&:not(:first-child):not(:last-child)]:-mt-px [&:not(:first-child):not(:last-child)]:rounded-none [&:not(:first-child):not(:last-child)]:md:-ml-px [&:not(:first-child):not(:last-child)]:md:mt-0">
                                         <x-base.form-check>
-                                            <x-base.form-check.input
-                                                id="checkbox-switch-1"
-                                                type="radio"
-                                                value=""
-                                            />
-                                            <x-base.form-check.label for="checkbox-switch-1">
+                                        
+                                            <input type="radio" id="checkbox-switch-public" name="treatment_type" value="1" >
+                                            <x-base.form-check.label for="checkbox-switch-public">
                                                 Public 
                                             </x-base.form-check.label>
                                         </x-base.form-check>
                                     </div>
                                     <div
                                         class="w-full rounded-md border border-slate-300/60 bg-white px-3 py-2 shadow-sm first:rounded-b-none last:-mt-px last:rounded-t-none focus:z-10 first:md:rounded-r-none first:md:rounded-bl-md last:md:-ml-px last:md:mt-0 last:md:rounded-l-none last:md:rounded-tr-md [&:not(:first-child):not(:last-child)]:-mt-px [&:not(:first-child):not(:last-child)]:rounded-none [&:not(:first-child):not(:last-child)]:md:-ml-px [&:not(:first-child):not(:last-child)]:md:mt-0">
-                                        <x-base.form-check>
-                                            <x-base.form-check.input
-                                                id="checkbox-switch-2"
-                                                type="radio"
-                                                value=""
-                                            />
-                                            <x-base.form-check.label for="checkbox-switch-2">
+                                        <x-base.form-check>                                         
+                                            <input type="radio" id="checkbox-switch-private" name="treatment_type" value="1" >
+                                            <x-base.form-check.label for="checkbox-switch-private">
                                                 Private
                                             </x-base.form-check.label>
                                         </x-base.form-check>
@@ -792,7 +796,8 @@
                                                             type="checkbox"
                                                              class="toggle-checkbox"
                                                                data-target="#allopathy-textarea"
-                                                            value=""
+                                                            value="1"
+                                                            name="allopathy"
                                                         />
                                                         <x-base.form-check.label for="checkbox-switch-4">
                                                           Allopathy
@@ -802,9 +807,10 @@
                                                         <x-base.form-check.input
                                                             id="checkbox-switch-5"
                                                             type="checkbox"
-                                                            value=""
+                                                            value="1"
                                                              class="toggle-checkbox"
                                                               data-target="#ayurveda-textarea"
+                                                               name="ayurveda"
                                                         />
                                                         <x-base.form-check.label for="checkbox-switch-5">
                                                           Ayurveda
@@ -814,9 +820,10 @@
                                                         <x-base.form-check.input
                                                             id="checkbox-switch-6"
                                                             type="checkbox"
-                                                            value=""
+                                                            value="1"
                                                              class="toggle-checkbox"
                                                               data-target="#homeopathy-textarea"
+                                                              name="homeopathy"
                                                         />
                                                         <x-base.form-check.label for="checkbox-switch-6">
                                                            Homeopathy
@@ -824,41 +831,69 @@
                                                     </x-base.form-check>
                                                 </div>
                                             </div>
-
-                                            <div class="mt-3">
-                                                
-                                                <!-- Textarea for Allopathy -->
-                                              
-                                                <x-base.form-textarea
-                                                class="-mb-1.5 resize-none rounded-xl pr-16 hidden"
-                                                placeholder="Enter details for allopathy treatment"
-                                                name="allopathy"
-                                                id="allopathy-textarea"
-                                                /> 
-                                            </br>
-                                                <!-- Textarea for Ayurveda -->
-                                               
-                                                <x-base.form-textarea
-                                                class="-mb-1.5 resize-none rounded-xl pr-16 hidden"
-                                                placeholder="Enter details for ayurveda treatment"
-                                                name="ayurveda"
-                                                id="ayurveda-textarea"
-                                                /> 
-                                                <br>
-                                                <!-- Textarea for Homeopathy -->
-                                                <x-base.form-textarea
-                                                class="-mb-1.5 resize-none rounded-xl pr-16 hidden"
-                                                placeholder="Enter details for homeopathy treatment"
-                                                name="homeopathy"
-                                                id="homeopathy-textarea"
-                                                /> 
-                                              
-                                            </div>
+                                            
                                           
                                         </x-base.preview>                                 
                             </div>                               
                         </div>
                     </div> 
+
+
+                    <!-- Textarea for Allopathy -->
+
+                    <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center ">
+                        <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
+                            <div class="text-left">
+                                                             
+                            </div>
+                        </div>
+                        <div class="mt-3 w-full flex-1 xl:mt-0">
+                            <div class="flex flex-col items-center md:flex-row">
+                                <x-base.form-textarea
+                                class="-mb-1.5 resize-none rounded-xl pr-16 hidden"
+                                placeholder="Enter details for allopathy treatment"
+                                name="allopathy_treatment"
+                                id="allopathy-textarea"
+                                />                                  
+                            </div>                               
+                        </div>                        
+                    </div>  
+                    <!-- Textarea for Ayurveda -->
+                    <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center ">
+                        <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
+                            <div class="text-left">
+                                <div class="flex items-center">
+                                                                      
+                                </div>                              
+                            </div>
+                        </div>
+                        <div class="mt-3 w-full flex-1 xl:mt-0">
+                            <div class="flex flex-col items-center md:flex-row">                               
+                                <x-base.form-textarea
+                                class="-mb-1.5 resize-none rounded-xl pr-16 hidden"
+                                placeholder="Enter details for ayurveda treatment"
+                                name="ayurveda_treatment"
+                                id="ayurveda-textarea"
+                                />                                  
+                            </div>                               
+                        </div>                        
+                    </div>  
+                    <!-- Textarea for Homeopathy -->
+                    <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center ">
+                        <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
+                          
+                        </div>
+                        <div class="mt-3 w-full flex-1 xl:mt-0">
+                            <div class="flex flex-col items-center md:flex-row">                               
+                                <x-base.form-textarea
+                                class="-mb-1.5 resize-none rounded-xl pr-16 hidden"
+                                placeholder="Enter details for homeopathy treatment"
+                                name="homeopathy_treatment"
+                                id="homeopathy-textarea"
+                                />                                  
+                            </div>                               
+                        </div>                        
+                    </div>
 
 
                     <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
@@ -881,6 +916,7 @@
                                 <x-base.form-textarea
                                 class="-mb-1.5 resize-none rounded-xl pr-16"
                                 placeholder="Present Health Condition"
+                                name="present_condition"
                                 />                                   
                             </div>                               
                         </div>
@@ -900,10 +936,23 @@
                                
                             </div>
                         </div>
-                        <div class="mt-3 w-full flex-1 xl:mt-0">
+                        {{-- <div class="mt-3 w-full flex-1 xl:mt-0">
                             <x-base.form-select id="treatment-type-select" name="treatment_category"  >
                             <option value="">Select treatment Type</option> 
                             </x-base.form-select>
+                        </div> --}}
+
+                        <div class="mt-3 w-full flex-1 xl:mt-0">                                
+                            <x-base.preview>
+                                <x-base.tom-select
+                                    class="w-full"
+                                    data-placeholder="Select Treatment Types"
+                                    multiple
+                                    id="treatment-type-select"
+                                    name="treatment_category"
+                                >                                                                                                          
+                                </x-base.tom-select>
+                            </x-base.preview>                                                   
                         </div>
                     </div> 
 
@@ -928,7 +977,7 @@
                                     data-placeholder="Select the Comfort Devices"
                                     multiple
                                     id="comfortdevices-select"
-                                    name="comfortdevices[]"
+                                    name="comfortdevices"
                                 >                                                                                                          
                                 </x-base.tom-select>
                             </x-base.preview>                                                   
@@ -1002,6 +1051,8 @@ document.addEventListener("DOMContentLoaded", function () {
         saveBasicStepData(currentStep);
         if(currentStep==1)
         saveLocationStepData(currentStep);
+        if(currentStep==2)
+        saveDiagnosisStepData(currentStep);
     });
 
     // Event listener for "Previous" button
@@ -1017,6 +1068,12 @@ document.addEventListener("DOMContentLoaded", function () {
     function saveBasicStepData(step) {
     const data = {};
     const inputs = steps[step].querySelectorAll("input, select");
+
+    const nextButton = document.querySelector("#next-button"); // Assuming your button has this ID
+    
+    // 🔒 Disable the next button immediately
+    nextButton.disabled = true;
+    nextButton.textContent = 'Saving...'; 
 
     // Collect the data for the current step
     inputs.forEach(input => {
@@ -1041,6 +1098,8 @@ document.addEventListener("DOMContentLoaded", function () {
     .then(responseData => {
         if (responseData.success === false) {
             displayValidationErrors(responseData.errors);
+            nextButton.disabled = false;
+            nextButton.textContent = 'Next';
         } else {
             // 🔥 Save patient_id in formData for later use
             if (responseData.patient_id) {
@@ -1052,6 +1111,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 currentStep++;
                 steps[currentStep].style.display = "block";
                 updateButtons();
+                nextButton.disabled = false;
+                nextButton.textContent = 'Next';
             } else {
                 submitFormData(); // Submit the full form after the last step
             }
@@ -1059,6 +1120,8 @@ document.addEventListener("DOMContentLoaded", function () {
     })
     .catch(error => {
         console.error("Error saving step data:", error);
+        nextButton.disabled = false;
+        nextButton.textContent = 'Next';
     });
 }
 
@@ -1069,11 +1132,16 @@ document.addEventListener("DOMContentLoaded", function () {
       function saveLocationStepData(step) {
         const data = {};
         const inputs = steps[step].querySelectorAll("input, select");
+        const nextButton = document.querySelector("#next-button"); // Assuming your button has this ID
+    
+    // 🔒 Disable the next button immediately
+    nextButton.disabled = true;
+    nextButton.textContent = 'Saving...'; 
 
         // Collect the data for the current step
         inputs.forEach(input => {
-            if (input.name) {
-                if (input.type === 'radio' && !input.checked) return; // Skip unchecked radio buttons
+            if (input.name) {               
+                 if (input.type === 'radio' && !input.checked) return; 
                 data[input.name] = input.value;
                 formData[input.name] = input.value; // Save the data in the formData object
             }
@@ -1096,12 +1164,16 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(responseData => {
             if (responseData.success === false) {
                 displayValidationErrors(responseData.errors);
+                nextButton.disabled = false;
+            nextButton.textContent = 'Next';
             } else {
                 if (currentStep < steps.length - 1) {
                     steps[currentStep].style.display = "none";
                     currentStep++;
                     steps[currentStep].style.display = "block";
                     updateButtons();
+                    nextButton.disabled = false;
+
                 } else {
                     submitFormData(); // Submit the full form after the last step
                 }
@@ -1109,8 +1181,79 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .catch(error => {
             console.error("Error saving step data:", error);
+            nextButton.disabled = false;
+        nextButton.textContent = 'Next';
         });
     }
+
+
+    function saveDiagnosisStepData(step) {
+    const data = {};
+    const inputs = steps[step].querySelectorAll("input, select,textarea");
+    const nextButton = document.querySelector("#next-button"); // Assuming your button has this ID
+    
+    // 🔒 Disable the next button immediately
+    nextButton.disabled = true;
+    nextButton.textContent = 'Saving...'; 
+
+    inputs.forEach(input => {
+        if (input.name) {
+            if (input.type === 'radio' && !input.checked) return; // Skip unchecked radio buttons
+            else if (input.type === 'checkbox' && !input.checked) return; 
+            if (input.classList.contains('tom-select')) {
+                    const selectedOptions = Array.from(input.options)
+                        .filter(option => option.selected)
+                        .map(option => option.value);
+                    data[input.name] = selectedOptions;
+                    formData[input.name] = selectedOptions;
+                } else {
+                data[input.name] = input.value;
+                formData[input.name] = input.value;
+            }
+        }
+    });
+
+    if (formData.patient_id) {
+        data.patient_id = formData.patient_id; 
+    }
+
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    fetch("/save-patient-disease", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": csrfToken
+        },
+        body: JSON.stringify(data) 
+    })
+    .then(response => response.json())
+    .then(responseData => {
+        if (responseData.success === false) {
+            displayValidationErrors(responseData.errors);
+            nextButton.disabled = false;
+            nextButton.textContent = 'Next';
+        } else {
+            if (currentStep < steps.length - 1) {
+                steps[currentStep].style.display = "none";
+                currentStep++;
+                steps[currentStep].style.display = "block";
+                updateButtons();
+              
+            } else {
+              
+         //       submitFormData(); 
+         window.location.replace('/patient_list');
+            }
+        }
+    })
+    .catch(error => {
+        console.error("Error saving step data:", error);
+        nextButton.disabled = false;
+        nextButton.textContent = 'Next';
+    });
+}
+
 
     // Display validation errors for the current step
     function displayValidationErrors(errors) {
@@ -1236,7 +1379,7 @@ $(document).ready(function() {
         } else {
            
             jQuery('#ward-select').empty();
-            jQuery('#ward-select').append('<option value="">Select a Wards</option>');
+            jQuery('#ward-select').append('<option value="">Select a Ward</option>');
         }
     });
 
@@ -1253,9 +1396,9 @@ $(document).ready(function() {
                    jQuery('#ward_no').empty();
                    jQuery('#ward_phone').empty();               
                
-                if (response && response.ward_member && response.ward_member.member_name) {                  
+                if (response && response.ward_member && response.ward_member.member_name) {                   
                     jQuery('#ward_member').val(response.ward_member.member_name); 
-                    jQuery('#ward_no').val(response.ward_member.ward); 
+                    jQuery('#ward_no').val(response.ward_no); 
                     jQuery('#ward_phone').val(response.ward_member.contact_number); 
                 } else {                  
                     jQuery('#ward_member').val('');
@@ -1321,7 +1464,7 @@ $(document).ready(function() {
                   
         } else {
          
-            $('#ward_member').empty();
+            $('#awc-worker-select').empty();
           
         }
     });
@@ -1333,18 +1476,30 @@ $(document).ready(function() {
     type: 'GET',
     dataType: 'json',
     success: function (response) {
-        const $select = jQuery('#diagnosis-select');
+        // const $select = jQuery('#diagnosis-select');
 
-        if ($select.length) {
-            // Clear existing options
-            $select[0].tomselect.clearOptions();
+        // if ($select.length) {
+        //     // Clear existing options
+        //     $select[0].tomselect.clearOptions();
             
-            response.forEach(function (data) {
-                $select[0].tomselect.addOption({ value: data.id, text: data.diagnosis });
-            });
-        } else {
-            console.error('Diagnosis select element not found.');
-        }
+        //     response.forEach(function (data) {
+        //         $select[0].tomselect.addOption({ value: data.id, text: data.diagnosis });
+        //     });
+        // } else {
+        //     console.error('Diagnosis select element not found.');
+        // }
+
+
+
+        var diagSelect = jQuery('#diagnosis-select')[0].tomselect; 
+diagSelect.clearOptions(); 
+diagSelect.addOption({value: '', text: 'Select a Diagnosis'}); 
+
+response.forEach(function(data) { 
+    diagSelect.addOption({value: data.id, text: data.diagnosis});
+});
+
+diagSelect.refreshOptions();
     },
     error: function (xhr, status, error) {
         console.error('Error fetching diagnosis:', error);
@@ -1356,28 +1511,78 @@ $(document).ready(function() {
 
 
 
-jQuery.ajax({
-        url: '/get_treatment_types',
-        type: 'GET',
-        dataType: 'json',
-        success: function (response) {
-            const $select = jQuery('#treatment-type-select');
+
+// jQuery.ajax({
+//         url: '/get_treatment_types',
+//         type: 'GET',
+//         dataType: 'json',
+//         success: function (response) {
+//             const $select = jQuery('#treatment-type-select');
 
            
-            if ($select.length) {
-                $select.empty().append('<option value="">Select</option>');
+//             if ($select.length) {
+//                 $select.empty().append('<option value="">Select</option>');
 
-                response.forEach(function (data) {
-                    $select.append('<option value="' + data.id + '">' + data.treatment_type + '</option>');
-                });
-            } else {
-                console.error('Treament type select element not found.');
-            }
-        },
-        error: function (xhr, status, error) {
-            console.error('Error fetching treatment type:', error);
+//                 response.forEach(function (data) {
+//                     $select.append('<option value="' + data.id + '">' + data.treatment_type + '</option>');
+//                 });
+//             } else {
+//                 console.error('Treament type select element not found.');
+//             }
+//         },
+//         error: function (xhr, status, error) {
+//             console.error('Error fetching treatment type:', error);
+//         }
+//     });
+
+
+
+    jQuery.ajax({
+    url: '/get_treatment_types',
+    type: 'GET',
+    dataType: 'json',
+    success: function (response) {
+        const $select = jQuery('#treatment-type-select');
+
+        if ($select.length) {
+            // Clear existing options
+            $select[0].tomselect.clearOptions();
+            
+            response.forEach(function (data) {
+                $select[0].tomselect.addOption({ value: data.id, text: data.treatment_type });
+            });
+        } else {
+            console.error('Treament type select element not found.');
         }
-    });
+    },
+    error: function (xhr, status, error) {
+        console.error('Error fetching treatment type:', error);
+    }
+});
+
+
+    jQuery.ajax({
+    url: '/get_comfort_devices',
+    type: 'GET',
+    dataType: 'json',
+    success: function (response) {
+        const $select = jQuery('#comfortdevices-select');
+
+        if ($select.length) {
+            // Clear existing options
+            $select[0].tomselect.clearOptions();
+            
+            response.forEach(function (data) {
+                $select[0].tomselect.addOption({ value: data.id, text: data.comfort_device_name });
+            });
+        } else {
+            console.error('Comfort select element not found.');
+        }
+    },
+    error: function (xhr, status, error) {
+        console.error('Error fetching diagnosis:', error);
+    }
+});
 
 
 
@@ -1411,6 +1616,8 @@ jQuery.ajax({
         }
     });
 });
+
+
 
     </script>
     @endpush

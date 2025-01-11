@@ -10,6 +10,7 @@ class Ward extends Model
 
     
     protected $fillable = [
+        'ward_no',
         'ward_name',
         'subcentre'
         

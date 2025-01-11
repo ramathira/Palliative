@@ -16,4 +16,8 @@ class SubCentre extends Model
     {
         return $this->hasMany(Ward::class, 'subcentre', 'id');
     }
+    public function patientLocations()
+    {
+        return $this->hasMany(PatientLocation::class, 'subcentre_id', 'id');
+    }
 }

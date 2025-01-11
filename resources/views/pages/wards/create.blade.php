@@ -35,6 +35,17 @@
                                             <x-base.preview>
                                                 <div>
                                                     <x-base.form-label for="ward-name">
+                                                        Ward No
+                                                    </x-base.form-label>
+                                                    <x-base.form-input
+                                                        id="ward-no"
+                                                        type="number"
+                                                        placeholder="Ward No"
+                                                        name="ward_no"
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <x-base.form-label for="ward-name">
                                                         Ward Name
                                                     </x-base.form-label>
                                                     <x-base.form-input

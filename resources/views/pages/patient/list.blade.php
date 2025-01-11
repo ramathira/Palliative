@@ -184,7 +184,7 @@
                                                 <div class="ml-3.5">
                                                     <a
                                                         class="whitespace-nowrap font-medium"
-                                                        href=""
+                                                        href="/patient_profile/{{ $patient['id'] }}"
                                                     >
                                                         {{ $patient['first_name'] }}
                                                     </a>
@@ -214,7 +214,7 @@
                                                         class="whitespace-nowrap font-medium"
                                                         href=""
                                                     > 
-                                                    {{  $patient->dob  }}
+                                                    {{ \Carbon\Carbon::parse($patient->dob)->format('d-M-Y') }}
                                                     </a>
                                                   
                                                 </div>
@@ -228,7 +228,8 @@
                                                         class="whitespace-nowrap font-medium"
                                                         href=""
                                                     > 
-                                                        {{  ($patient->gender==1)? "Male":"Female"  }}
+                                                        {{   ($patient->gender===1)? "Male":"Female"  }}
+                                                       
                                                     </a>
                                                   
                                                 </div>

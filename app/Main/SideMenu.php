@@ -54,13 +54,9 @@ class SideMenu
                     'route_name' => "patient.list",
                     'params' => [],
                     'title' => "List",
+                    'permission' => 'patient-list',
                 ],
-                [
-                    'icon' => "PanelBottom",
-                    'route_name' => "notification",
-                    'params' => [],
-                    'title' => "TTTT",
-                ],
+               
             ],
         ],
         [
@@ -147,6 +143,13 @@ class SideMenu
        'route_name' => "treatment_types.index",
         'params' => [],
         'title' => "Treatment Types",
+        'permission' => 'diagnosis-list',           
+    ],
+    [
+        'icon' => "Album",
+       'route_name' => "medicines.index",
+        'params' => [],
+        'title' => "Medicine",
         'permission' => 'diagnosis-list',           
     ],
           

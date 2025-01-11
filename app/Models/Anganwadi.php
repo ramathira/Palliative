@@ -13,4 +13,8 @@ class Anganwadi extends Model
     {
         return $this->belongsTo(SubCentre::class,'subcentre_id');
     }
+    public function anganwadi_worker()
+    {
+        return $this->belongsTo(AWC_Worker::class,'awc_id','id');
+    }
 }

@@ -8,10 +8,12 @@ use App\Models\Anganwadi;
 use App\Models\AWC_Worker;
 use App\Models\ComfortDevices;
 use App\Models\Diagnosis;
+use App\Models\Medicine;
 use App\Models\Mlsp;
 use App\Models\Role;
 use App\Models\TreatmentTypes;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ListController extends Controller
 {
@@ -106,5 +108,26 @@ class ListController extends Controller
          return response()->json($comfort_devices);
 
     }
-    
+    public function get_medicines()
+    {
+        $medicines = Medicine::orderBy('medicine', 'asc')->get();
+         return response()->json($medicines);
+
+    }
+    public function get_medicine_modes()
+    {
+        $medicine_modes = DB::table('mt_medicine_mode')
+               ->orderBy('medicine_mode', 'asc')
+               ->get();
+         return response()->json($medicine_modes);
+
+    }
+    public function get_medicine_types()
+    {
+        $medicine_modes = DB::table('mt_medicine_type')
+        ->orderBy('medicine_type', 'asc')
+        ->get();
+  return response()->json($medicine_modes);
+
+    }
 }

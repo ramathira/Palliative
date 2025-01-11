@@ -8,6 +8,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\AssesmentController;
 use App\Http\Controllers\ListController;
 use App\Http\Controllers\WardController;
 use App\Http\Controllers\SubcentreController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\AshaWorkerController;
 use App\Http\Controllers\AnganwadiController;
 use App\Http\Controllers\MidLevelServiceProviderController;
 use App\Http\Controllers\DiagnosisController;
+use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\TreatmentTypeController;
 
 Route::get('theme-switcher/{activeTheme}', [ThemeController::class, 'switch'])->name('theme-switcher');
@@ -125,6 +127,13 @@ Route::middleware('auth')->group(function () {
         'store' => 'treatment_types.store',       
     ]);
 
+    Route::resource('/medicines', MedicineController::class)
+    ->names([
+       'index' => 'medicines.index',
+        'create' => 'medicines.create',
+        'store' => 'medicines.store',       
+    ]);
+
  
     Route::get('/ward_members', [WardController::class, 'members_list'])->name('ward_members.members_list');
     Route::get('/ward_member_edit', [WardController::class, 'members_edit'])->name('ward_members.member_edit');
@@ -141,7 +150,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/register_patient', [PatientController::class, 'add_new_patient'])->name('patient.create');
     Route::post('/save-patient-basic', [PatientController::class, 'save_patient_basic'])->name('patient.save-patient-basic');
     Route::post('/save-patient-location', [PatientController::class, 'save_patient_location'])->name('patient.save-patient-location');
+    Route::post('/save-patient-disease', [PatientController::class, 'save_patient_disease'])->name('patient.save-patient-disease');
     Route::get('/patient_list', [PatientController::class, 'patient_list'])->name('patient.list');
+    Route::get('/patient_profile/{id}', [PatientController::class, 'patient_profile'])->name('patient.profile');
+    Route::post('/patient_family_save', [PatientController::class, 'save_family'])->name('patient_family_save');
+    Route::post('/patient_medicine_save', [PatientController::class, 'save_medicine'])->name('patient_medicine_save');
 
     Route::get('/subcentres', [ListController::class, 'get_subcentre']);
     Route::get('/get_wards/{subcentreId}', [ListController::class, 'getWardsBySubCentre']);
@@ -154,9 +167,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/get_all_mlsp', [ListController::class, 'get_all_mlsp']);
     Route::get('/get_treatment_types', [ListController::class, 'get_treatment_types']);
     Route::get('/get_comfort_devices', [ListController::class, 'get_comfort_devices']);
+    Route::get('/get_all_medicines', [ListController::class, 'get_medicines']);
+    Route::get('/get_all_medicine_modes', [ListController::class, 'get_medicine_modes']);
+    Route::get('/get_all_medicine_types', [ListController::class, 'get_medicine_types']);
 });
-
-
+/*----- Assesment Checklist FHC-----*/
+Route::get('/assesment-checklist', [AssesmentController::class, 'assesment_checklist_pageone'])->name('assesment_checklist.create');
+/*----- Assesment Checklist FHC-----*/
 Route::controller(PageController::class)->group(function () {
     Route::get('settings', 'settings')->name('settings');
     // Route::get('users', 'users')->name('users');
