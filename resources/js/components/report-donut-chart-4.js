@@ -13,9 +13,9 @@
                 type: "doughnut",
                 data: {
                     labels: [
-                        "31 - 50 Years old",
-                        ">= 50 Years old",
-                        "17 - 30 Years old",
+                        "83",
+                        "130",
+                        "",
                     ],
                     datasets: [
                         {

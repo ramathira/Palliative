@@ -11,7 +11,7 @@ class AshaWorkerController extends Controller
     public function index()
     {
         
-        $ashas = AshaWorker::with('ward')->get(); 
+        $ashas = AshaWorker::with(['ward_details','subcentre_details'])->get();  //dd($ashas);
         return view('pages.ashaworker.index', compact('ashas'));
     }
 

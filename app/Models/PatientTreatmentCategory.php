@@ -12,4 +12,8 @@ class PatientTreatmentCategory extends Model
     {
         return $this->belongsTo(Patient::class, 'patient_id');
     }
+    public function treatment_type()
+    {
+        return $this->belongsTo(TreatmentTypes::class, 'treatment_category_id');
+    }
 }

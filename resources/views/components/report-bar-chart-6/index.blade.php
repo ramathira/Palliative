@@ -14,5 +14,5 @@
 
 @pushOnce('scripts')
     @vite('resources/js/utils/colors.js')
-    @vite('resources/js/components/report-bar-chart-6.js')
+    @vite('resources/js/components/report-bar-chart-6.js?v=1.0.1')
 @endPushOnce

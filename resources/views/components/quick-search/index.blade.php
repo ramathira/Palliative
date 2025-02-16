@@ -144,7 +144,7 @@
                         </a>
                     </div>
                     <div class="mt-3.5 flex flex-col gap-1">
-                        @foreach ($users->take(3) as $fakerKey => $faker)
+                        
                             <a
                                 class="flex items-center gap-2.5 rounded-md border border-transparent p-1 hover:border-slate-100 hover:bg-slate-50/80"
                                 href=""
@@ -152,18 +152,18 @@
                                 <div
                                     class="image-fit zoom-in box h-6 w-6 overflow-hidden rounded-full border-2 border-slate-200/70">
                                     <img
-                                        src="{{ Vite::asset($faker['photo']) }}"
+                                        src="#"
                                         alt="Tailwise - Admin Dashboard Template"
                                     >
                                 </div>
                                 <div class="truncate font-medium">
-                                    {{ $faker['name'] }}
+                                    gfdfg
                                 </div>
                                 <div class="hidden text-slate-500 sm:block">
-                                    {{ $faker['location'] }}
+                                   dfgfd
                                 </div>
                             </a>
-                        @endforeach
+                        
                     </div>
                 </div>
                 <div class="border-t border-dashed px-5 py-4">
@@ -179,7 +179,7 @@
                         </a>
                     </div>
                     <div class="mt-3.5 flex flex-col gap-1">
-                        @foreach ($departments->take(3) as $fakerKey => $faker)
+                     
                             <a
                                 class="flex items-center gap-2.5 rounded-md border border-transparent p-1 hover:border-slate-100 hover:bg-slate-50/80"
                                 href=""
@@ -199,13 +199,13 @@
                                     @endif
                                 </div>
                                 <div class="truncate font-medium">
-                                    {{ $faker['name'] }}
+                                  fhgfh
                                 </div>
                                 <div class="hidden text-slate-500 sm:block">
-                                    {{ $faker['location']['name'] }}
+                                  fghfgh
                                 </div>
                             </a>
-                        @endforeach
+                     
                     </div>
                 </div>
                 <div class="border-t border-dashed px-5 py-4">
@@ -221,7 +221,7 @@
                         </a>
                     </div>
                     <div class="mt-3.5 flex flex-col gap-1">
-                        @foreach ($products->take(3) as $fakerKey => $faker)
+                      
                             <a
                                 class="flex items-center gap-2.5 rounded-md border border-transparent p-1 hover:border-slate-100 hover:bg-slate-50/80"
                                 href=""
@@ -229,18 +229,18 @@
                                 <div
                                     class="image-fit zoom-in box h-6 w-6 overflow-hidden rounded-full border-2 border-slate-200/70">
                                     <img
-                                        src="{{ Vite::asset($faker['images'][0]['path']) }}"
+                                        src="fggfdg"
                                         alt="Tailwise - Admin Dashboard Template"
                                     >
                                 </div>
                                 <div class="truncate font-medium">
-                                    {{ $faker['name'] }}
+                                  fgh
                                 </div>
                                 <div class="hidden text-slate-500 sm:block">
-                                    {{ $faker['category']['name'] }}
+                                 ghfgh
                                 </div>
                             </a>
-                        @endforeach
+                      
                     </div>
                 </div>
             </div>

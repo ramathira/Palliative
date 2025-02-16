@@ -7,6 +7,12 @@ export default defineConfig({
         commonjsOptions: {
             include: ["tailwind.config.js", "node_modules/**"],
         },
+        rollupOptions: {
+            input: [
+                "resources/css/app.css",
+                "resources/js/app.js",
+            ],
+        },
     },
     optimizeDeps: {
         include: ["tailwind-config"],

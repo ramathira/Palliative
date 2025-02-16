@@ -80,9 +80,14 @@
                         <ul class="scrollable">
                             <!-- BEGIN: First Child -->
                             @foreach ($sideMenu as $menuKey => $menu) 
-                                @if (is_string($menu))
+                                {{-- @if (is_string($menu))
                                     <li class="side-menu__divider">
                                         {{ $menu }}
+                                    </li> --}}
+
+                                    @if ($menu['type']=='main_menu')
+                                    <li class="side-menu__divider">
+                                        {{ $menu['title'] }}
                                     </li>
                                 @else
                                     <li>
@@ -348,13 +353,13 @@
                                             />
                                             Profile Info
                                         </x-base.menu.item> --}}
-                                        <x-base.menu.item href="{{ route('login') }}">
-                                            <x-base.lucide
-                                                class="mr-2 h-4 w-4"
-                                                icon="Power"
-                                            />
-                                            Logout
-                                        </x-base.menu.item>
+                                        <form method="POST" action="{{ route('logout') }}">
+                                            @csrf
+                                            <button type="submit" class="flex items-center">
+                                                <x-base.lucide class="mr-2 h-4 w-4" icon="Power" />
+                                                Logout
+                                            </button>
+                                        </form>
                                     </x-base.menu.items>
                                 </x-base.menu>
                             </div>

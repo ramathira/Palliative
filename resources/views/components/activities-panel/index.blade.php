@@ -54,7 +54,7 @@
                                     </div>
                                     @if (isset($faker['uploadedFiles']))
                                         <div class="my-3.5 grid grid-cols-1 gap-4">
-                                            @foreach ($faker['uploadedFiles'] as $fakerKey => $fakerUploadedFiles)
+                                          
                                                 <div
                                                     class="flex items-center rounded-[0.6rem] border border-slate-200/80 bg-slate-50/70 py-4 pl-5 pr-2.5">
                                                     <x-base.file-icon
@@ -63,10 +63,10 @@
                                                     />
                                                     <div class="mr-auto sm:ml-3.5">
                                                         <div class="max-w-[8rem] truncate font-medium text-primary">
-                                                            {{ $fakerUploadedFiles['filename'] }}
+                                                          fdfd
                                                         </div>
                                                         <div class="mt-1 text-xs text-slate-500">
-                                                            {{ $fakerUploadedFiles['size'] }}
+                                                           sdfdf
                                                         </div>
                                                     </div>
                                                     <x-base.menu>
@@ -94,30 +94,30 @@
                                                         </x-base.menu.items>
                                                     </x-base.menu>
                                                 </div>
-                                            @endforeach
+                                           
                                         </div>
                                     @endif
-                                    @if (isset($faker['images']))
+                                    @if (1)
                                         <div class="my-3.5 w-40 rounded-[0.6rem] border bg-slate-50/80 p-1 sm:w-[80%]">
                                             <div class="grid grid-cols-3 overflow-hidden rounded-[0.6rem]">
                                                 <div
                                                     class="image-fit h-12 cursor-pointer overflow-hidden border border-slate-100 saturate-[.6] hover:saturate-100 sm:h-20">
                                                     <img
-                                                        src="{{ Vite::asset($faker['images'][0]) }}"
+                                                        src="gdgd"
                                                         alt="Tailwise - Admin Dashboard Template"
                                                     >
                                                 </div>
                                                 <div
                                                     class="image-fit h-12 cursor-pointer overflow-hidden border border-slate-100 saturate-[.6] hover:saturate-100 sm:h-20">
                                                     <img
-                                                        src="{{ Vite::asset($faker['images'][1]) }}"
+                                                        src="dfg"
                                                         alt="Tailwise - Admin Dashboard Template"
                                                     >
                                                 </div>
                                                 <div
                                                     class="image-fit h-12 cursor-pointer overflow-hidden border border-slate-100 saturate-[.6] hover:saturate-100 sm:h-20">
                                                     <img
-                                                        src="{{ Vite::asset($faker['images'][2]) }}"
+                                                        src="fgfd"
                                                         alt="Tailwise - Admin Dashboard Template"
                                                     >
                                                 </div>
@@ -125,7 +125,7 @@
                                         </div>
                                     @endif
                                     <div class="mt-1.5 text-xs text-slate-500">
-                                        {{ $faker['date'] }}
+                                      01-01-2000
                                     </div>
                                 </div>
                             </div>

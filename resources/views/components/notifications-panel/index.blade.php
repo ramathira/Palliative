@@ -26,7 +26,7 @@
             </x-base.slideover.title>
             <x-base.slideover.description class="p-0">
                 <div class="flex flex-col gap-0.5 p-3">
-                    @foreach ($activities as $fakerKey => $faker)
+                  
                         <a
                             class="flex items-center rounded-xl px-3 py-2.5 hover:bg-slate-100/80"
                             href=""
@@ -35,15 +35,15 @@
                                 <div
                                     class="image-fit h-11 w-11 overflow-hidden rounded-full border-2 border-slate-200/70">
                                     <img
-                                        src="{{ Vite::asset($users[0]['photo']) }}"
+                                        src="gdg"
                                         alt="Tailwise - Admin Dashboard Template"
                                     >
                                 </div>
                             </div>
                             <div class="sm:ml-5">
-                                <div class="font-medium">{{ $faker['activity'] }}</div>
+                                <div class="font-medium">fsdfds</div>
                                 <div class="mt-0.5 text-slate-500">
-                                    {{ $faker['activityDetails'] }}
+                                  sdfsdf
                                 </div>
                                 @if (isset($faker['images']))
                                     <div class="my-3.5 w-40 rounded-[0.6rem] border bg-slate-50/80 p-1 sm:w-56">
@@ -51,21 +51,21 @@
                                             <div
                                                 class="image-fit h-12 cursor-pointer overflow-hidden border border-slate-100 saturate-[.6] hover:saturate-100 sm:h-16">
                                                 <img
-                                                    src="{{ Vite::asset($faker['images'][0]) }}"
+                                                    src="fddf"
                                                     alt="Tailwise - Admin Dashboard Template"
                                                 >
                                             </div>
                                             <div
                                                 class="image-fit h-12 cursor-pointer overflow-hidden border border-slate-100 saturate-[.6] hover:saturate-100 sm:h-16">
                                                 <img
-                                                    src="{{ Vite::asset($faker['images'][1]) }}"
+                                                    src="sdf"
                                                     alt="Tailwise - Admin Dashboard Template"
                                                 >
                                             </div>
                                             <div
                                                 class="image-fit h-12 cursor-pointer overflow-hidden border border-slate-100 saturate-[.6] hover:saturate-100 sm:h-16">
                                                 <img
-                                                    src="{{ Vite::asset($faker['images'][2]) }}"
+                                                    src="sdfsdf"
                                                     alt="Tailwise - Admin Dashboard Template"
                                                 >
                                             </div>
@@ -73,7 +73,7 @@
                                     </div>
                                 @endif
                                 <div class="mt-1.5 text-xs text-slate-500">
-                                    {{ $faker['date'] }}
+                                 sdfsdf
                                 </div>
                             </div>
                             @if (mt_rand(0, 1) == 1)
@@ -82,7 +82,7 @@
                                 </div>
                             @endif
                         </a>
-                    @endforeach
+                  
                 </div>
             </x-base.slideover.description>
         </x-base.slideover.panel>

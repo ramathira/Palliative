@@ -170,6 +170,11 @@
                                 >
                                Ward
                                 </x-base.table.td>
+                                <x-base.table.td
+                                    class="border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500"
+                                >
+                               Subcentre
+                                </x-base.table.td>
                                    
                                    
                                    
@@ -182,7 +187,7 @@
                                 </x-base.table.tr>
                             </x-base.table.thead>
                             <x-base.table.tbody>
-                                @foreach ($ashas as $asha)
+                                @foreach ($ashas as $asha) 
                                     <x-base.table.tr class="[&_td]:last:border-b-0">
                                         <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
                                             <x-base.form-check.input type="checkbox" />
@@ -223,7 +228,22 @@
                                                         class="whitespace-nowrap font-medium"
                                                         href=""
                                                     > 
-                                                        {{  optional($asha->ward)->ward_name ?? '' }}
+                                                    {{ optional($asha->ward_details)->ward_name ?: 'No Ward Assigned' }}
+                                                    </a>
+                                                  
+                                                </div>
+                                            </div>
+                                        </x-base.table.td>
+
+                                        <x-base.table.td class="w-80 border-dashed py-4 dark:bg-darkmode-600">
+                                            <div class="flex items-center">
+                                               
+                                                <div class="ml-3.5">
+                                                    <a
+                                                        class="whitespace-nowrap font-medium"
+                                                        href=""
+                                                    > 
+                                                    {{ optional($asha->subcentre_details)->sub_centre ?: 'No Sub Centre Assigned' }}
                                                     </a>
                                                   
                                                 </div>

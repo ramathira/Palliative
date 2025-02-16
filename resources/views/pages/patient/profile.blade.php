@@ -155,74 +155,7 @@
                                             class="mb-5 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
                                             Disease details
                                         </div>
-                                        <div class="-my-3">
-                                            <div
-                                                class="relative overflow-hidden before:absolute before:inset-y-0 before:left-0 before:ml-[14px] before:w-px before:bg-slate-200/60 before:content-[''] before:dark:bg-darkmode-400">
-                                              
-                                                    <div @class([
-                                                        'mb-3 last:mb-0 relative',
-                                                        "first:before:content-[''] first:before:h-1/2 first:before:w-5 first:before:bg-white first:before:absolute",
-                                                        "last:after:content-[''] last:after:h-1/2 last:after:w-5 last:after:bg-white last:after:absolute last:after:bottom-0",
-                                                    ])>
-                                                        <div @class([
-                                                            'px-4 py-3 ml-8',
-                                                            "before:content-[''] before:ml-1 before:absolute before:w-5 before:h-5 before:bg-slate-200 before:rounded-full before:inset-y-0 before:my-auto before:left-0 before:dark:bg-darkmode-300 before:z-10",
-                                                            "after:content-[''] after:absolute after:w-1.5 after:h-1.5 after:bg-slate-500 after:rounded-full after:inset-y-0 after:my-auto after:left-0 after:ml-[11px] after:dark:bg-darkmode-200 after:z-10",
-                                                        ])>
-                                                            <a
-                                                                class="font-medium text-primary"
-                                                                href=""
-                                                            >
-                                                            {{ $patient_disease->diagnosis ?? '' }}
-                                                            </a>
-
-                                                            <div
-                                                                class="mt-1.5 flex flex-col gap-y-1.5 text-[0.8rem] leading-relaxed text-slate-500 sm:flex-row sm:items-center">
-                                                                {{ $patient_disease->diagnosed_date ?? '' }}
-                                                                <span @class([
-                                                                    'group flex items-center text-xs font-medium rounded-md sm:ml-2 border px-1.5 py-px mr-auto sm:mr-0',
-                                                                    '[&.primary]:text-primary [&.primary]:bg-primary/10 [&.primary]:border-primary/10',
-                                                                    '[&.success]:text-success [&.success]:bg-success/10 [&.success]:border-success/10',
-                                                                    '[&.warning]:text-warning [&.warning]:bg-warning/10 [&.warning]:border-warning/10',
-                                                                    '[&.info]:text-info [&.info]:bg-info/10 [&.info]:border-info/10',
-                                                                    ['primary', 'success', 'warning', 'info'][mt_rand(0, 3)],
-                                                                ])>
-                                                                    <span
-                                                                        class="mr-1.5 h-1.5 w-1.5 rounded-full group-[.info]:bg-info/80 group-[.primary]:bg-primary/80 group-[.success]:bg-success/80 group-[.warning]:bg-warning/80"
-                                                                    ></span>
-                                                                    <span class="-mt-px">
-                                                                        {{ $patient_disease->prior_condition ?? '' }}
-                                                                    </span>
-                                                                </span>
-                                                            </div> 
-                                                            <div
-                                                                class="mt-1.5 flex flex-col gap-y-1.5 text-[0.8rem] leading-relaxed text-slate-500 sm:flex-row sm:items-center">
-                                                                {{ $patient_disease->diagnosed_date ?? '' }}
-                                                                <span @class([
-                                                                    'group flex items-center text-xs font-medium rounded-md sm:ml-2 border px-1.5 py-px mr-auto sm:mr-0',
-                                                                    '[&.primary]:text-primary [&.primary]:bg-primary/10 [&.primary]:border-primary/10',
-                                                                    '[&.success]:text-success [&.success]:bg-success/10 [&.success]:border-success/10',
-                                                                    '[&.warning]:text-warning [&.warning]:bg-warning/10 [&.warning]:border-warning/10',
-                                                                    '[&.info]:text-info [&.info]:bg-info/10 [&.info]:border-info/10',
-                                                                    ['primary', 'success', 'warning', 'info'][mt_rand(0, 3)],
-                                                                ])>
-                                                                    <span
-                                                                        class="mr-1.5 h-1.5 w-1.5 rounded-full group-[.info]:bg-info/80 group-[.primary]:bg-primary/80 group-[.success]:bg-success/80 group-[.warning]:bg-warning/80"
-                                                                    ></span>
-                                                                    <span class="-mt-px">
-                                                                        {{ $patient_disease->prior_condition ?? '' }}
-                                                                    </span>
-                                                                </span>
-                                                            </div>                                                      
-                                                         
-                                                            <div class="mt-1.5 text-xs text-slate-500">
-                                                                 fgfg
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                               
-                                            </div>
-                                        </div>
+                                      
 
 
                                         <div class="-my-3">
@@ -249,7 +182,7 @@
                                                             "after:content-[''] after:absolute after:w-1.5 after:h-1.5 after:bg-slate-500 after:rounded-full after:inset-y-0 after:my-auto after:left-0 after:ml-[11px] after:dark:bg-darkmode-200 after:z-10",
                                                         ])>
                                                             Diagnosed Date:                                                          
-                                                            {{ \Carbon\Carbon::parse($patient->diagnosed_date)->format('d-M-Y') }}
+                                                           {{ $patient->diagnosed_date ? \Carbon\Carbon::parse($patient->diagnosed_date)->format('d-M-Y') : 'N/A' }}
                                                                                                                    
                                                         </div>                                                                                               
                                             </div>
@@ -271,10 +204,215 @@
                                                                                                                
                                                     </div>                                                                                               
                                             </div>
+
+                                            <div
+                                                class="relative overflow-hidden before:absolute before:inset-y-0 before:left-0 before:ml-[14px] before:w-px before:bg-slate-200/60 before:content-[''] before:dark:bg-darkmode-400">
+                                                     <div @class([
+                                                            'px-4 py-3 ml-8',
+                                                            "before:content-[''] before:ml-1 before:absolute before:w-5 before:h-5 before:bg-slate-200 before:rounded-full before:inset-y-0 before:my-auto before:left-0 before:dark:bg-darkmode-300 before:z-10",
+                                                            "after:content-[''] after:absolute after:w-1.5 after:h-1.5 after:bg-slate-500 after:rounded-full after:inset-y-0 after:my-auto after:left-0 after:ml-[11px] after:dark:bg-darkmode-200 after:z-10",
+                                                        ])>
+                                                           Treatment Availed From:                                                          
+                                                            {{ $patient_disease->treating_hospital ?? "NULL"}}
+                                                                                                                   
+                                                        </div>                                                                                               
+                                            </div>
+
+                                            <div
+                                                class="relative overflow-hidden before:absolute before:inset-y-0 before:left-0 before:ml-[14px] before:w-px before:bg-slate-200/60 before:content-[''] before:dark:bg-darkmode-400">
+                                                 <div @class([
+                                                        'px-4 py-3 ml-8',
+                                                        "before:content-[''] before:ml-1 before:absolute before:w-5 before:h-5 before:bg-slate-200 before:rounded-full before:inset-y-0 before:my-auto before:left-0 before:dark:bg-darkmode-300 before:z-10",
+                                                        "after:content-[''] after:absolute after:w-1.5 after:h-1.5 after:bg-slate-500 after:rounded-full after:inset-y-0 after:my-auto after:left-0 after:ml-[11px] after:dark:bg-darkmode-200 after:z-10",
+                                                    ])>
+                                                       Treating Doctor:                                                          
+                                                        {{ $patient_disease->doctor_name ?? "NULL" }}
+                                                                                                               
+                                                    </div>  
+                                                    
+                                                    
+                                                
+                                            </div>
+                                            
+                                            <div
+                                                class="relative overflow-hidden before:absolute before:inset-y-0 before:left-0 before:ml-[14px] before:w-px before:bg-slate-200/60 before:content-[''] before:dark:bg-darkmode-400">
+                                                 <div @class([
+                                                        'px-4 py-3 ml-8',
+                                                        "before:content-[''] before:ml-1 before:absolute before:w-5 before:h-5 before:bg-slate-200 before:rounded-full before:inset-y-0 before:my-auto before:left-0 before:dark:bg-darkmode-300 before:z-10",
+                                                        "after:content-[''] after:absolute after:w-1.5 after:h-1.5 after:bg-slate-500 after:rounded-full after:inset-y-0 after:my-auto after:left-0 after:ml-[11px] after:dark:bg-darkmode-200 after:z-10",
+                                                    ])>
+                                                       Treatment Type:                                                          
+                                                       {{ $patient_disease && $patient_disease->hospital_type == 1 ? 'Public' : 'Private' }}
+                                                                                                               
+                                                    </div>                                                  
+                                              </div>
+                                              @if($patient_disease && $patient_disease->allopathy)
+                                              <div
+                                              class="relative overflow-hidden before:absolute before:inset-y-0 before:left-0 before:ml-[14px] before:w-px before:bg-slate-200/60 before:content-[''] before:dark:bg-darkmode-400">
+                                                   <div @class([
+                                                          'px-4 py-3 ml-8',
+                                                          "before:content-[''] before:ml-1 before:absolute before:w-5 before:h-5 before:bg-slate-200 before:rounded-full before:inset-y-0 before:my-auto before:left-0 before:dark:bg-darkmode-300 before:z-10",
+                                                          "after:content-[''] after:absolute after:w-1.5 after:h-1.5 after:bg-slate-500 after:rounded-full after:inset-y-0 after:my-auto after:left-0 after:ml-[11px] after:dark:bg-darkmode-200 after:z-10",
+                                                      ])>
+                                                        Allopathy Treatment Details:                                                          
+                                                          <span class="group flex items-center text-xs font-medium rounded-md sm:ml-2 border px-1.5 py-px mr-auto sm:mr-0 text-warning bg-warning/10 border-warning/10">
+                                                              <span class="mr-1.5 h-1.5 w-1.5 rounded-full bg-warning/80"></span>
+                                                              <span class="-mt-px">
+                                                                  {{ $patient_disease->allopathy_details ?? '' }}
+                                                              </span>
+                                                          </span>
+                                                                                                                 
+                                                      </div>                                                                                               
+                                              </div>
+                                              @endif
+                                             
+                                              @if($patient_disease && $patient_disease->ayurveda)
+                                              <div
+                                              class="relative overflow-hidden before:absolute before:inset-y-0 before:left-0 before:ml-[14px] before:w-px before:bg-slate-200/60 before:content-[''] before:dark:bg-darkmode-400">
+                                                   <div @class([
+                                                          'px-4 py-3 ml-8',
+                                                          "before:content-[''] before:ml-1 before:absolute before:w-5 before:h-5 before:bg-slate-200 before:rounded-full before:inset-y-0 before:my-auto before:left-0 before:dark:bg-darkmode-300 before:z-10",
+                                                          "after:content-[''] after:absolute after:w-1.5 after:h-1.5 after:bg-slate-500 after:rounded-full after:inset-y-0 after:my-auto after:left-0 after:ml-[11px] after:dark:bg-darkmode-200 after:z-10",
+                                                      ])>
+                                                        Ayurveda Treatment Details:                                                          
+                                                          <span class="group flex items-center text-xs font-medium rounded-md sm:ml-2 border px-1.5 py-px mr-auto sm:mr-0 text-primary bg-primary/10 border-primary/10">
+                                                              <span class="mr-1.5 h-1.5 w-1.5 rounded-full bg-primary/80"></span>
+                                                              <span class="-mt-px">
+                                                                  {{ $patient_disease->ayurveda_details ?? '' }}
+                                                              </span>
+                                                          </span>
+                                                                                                                 
+                                                      </div>                                                                                               
+                                              </div>
+                                              @endif
+                                            
+                                              @if($patient_disease && $patient_disease->homeopathy)
+                                              <div
+                                              class="relative overflow-hidden before:absolute before:inset-y-0 before:left-0 before:ml-[14px] before:w-px before:bg-slate-200/60 before:content-[''] before:dark:bg-darkmode-400">
+                                                   <div @class([
+                                                          'px-4 py-3 ml-8',
+                                                          "before:content-[''] before:ml-1 before:absolute before:w-5 before:h-5 before:bg-slate-200 before:rounded-full before:inset-y-0 before:my-auto before:left-0 before:dark:bg-darkmode-300 before:z-10",
+                                                          "after:content-[''] after:absolute after:w-1.5 after:h-1.5 after:bg-slate-500 after:rounded-full after:inset-y-0 after:my-auto after:left-0 after:ml-[11px] after:dark:bg-darkmode-200 after:z-10",
+                                                      ])>
+                                                        Homeopathy Treatment Details:                                                          
+                                                          <span class="group flex items-center text-xs font-medium rounded-md sm:ml-2 border px-1.5 py-px mr-auto sm:mr-0 text-success bg-success/10 border-success/10">
+                                                              <span class="mr-1.5 h-1.5 w-1.5 rounded-full bg-success/80"></span>
+                                                              <span class="-mt-px">
+                                                                  {{ $patient_disease->homeopathy_details ?? '' }}
+                                                              </span>
+                                                          </span>
+                                                                                                                 
+                                                      </div>                                                                                               
+                                              </div>
+                                              @endif
+                                              <div
+                                              class="relative overflow-hidden before:absolute before:inset-y-0 before:left-0 before:ml-[14px] before:w-px before:bg-slate-200/60 before:content-[''] before:dark:bg-darkmode-400">
+                                                   <div @class([
+                                                          'px-4 py-3 ml-8',
+                                                          "before:content-[''] before:ml-1 before:absolute before:w-5 before:h-5 before:bg-slate-200 before:rounded-full before:inset-y-0 before:my-auto before:left-0 before:dark:bg-darkmode-300 before:z-10",
+                                                          "after:content-[''] after:absolute after:w-1.5 after:h-1.5 after:bg-slate-500 after:rounded-full after:inset-y-0 after:my-auto after:left-0 after:ml-[11px] after:dark:bg-darkmode-200 after:z-10",
+                                                      ])>
+                                                        Present Health Condition:                                                          
+                                                          <span class="group flex items-center text-xs font-medium rounded-md sm:ml-2 border px-1.5 py-px mr-auto sm:mr-0 text-danger bg-danger/10 border-danger/10">
+                                                              <span class="mr-1.5 h-1.5 w-1.5 rounded-full bg-danger/80"></span>
+                                                              <span class="-mt-px">
+                                                                  {{ $patient_disease->present_health_condition ?? '' }}
+                                                              </span>
+                                                          </span>
+                                                                                                                 
+                                                      </div>                                                                                               
+                                              </div>
+
                                          
                                         </div>
                                     </div>
-                                  
+
+
+                                    <div class="grid grid-cols-1 gap-x-6 gap-y-10 lg:grid-cols-2">
+                                        <div class="box box--stacked flex flex-col p-5">
+                                            <div
+                                                class="mb-5 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
+                                                Diagnosis
+                                            </div>
+                                            <div class="flex flex-col gap-5">
+                                            @foreach($patient_diagnosis as $diagnosis)
+                                                    <div class="flex items-center">
+                                                        <div class="relative h-12 w-12">
+                                                            <div
+                                                            class="flex h-full w-full items-center justify-center overflow-hidden rounded-full border-2 border-slate-200/40 bg-theme-1/5">
+                                                            <x-base.lucide
+                                                                class="h-4 w-4 fill-theme-1/10 text-theme-1"
+                                                                icon="Triangle"
+                                                            />
+                                                        </div>
+                                                          
+                                                        </div>
+                                                        <div class="ml-3.5">
+                                                            <div class="font-medium">
+                                                              {{   $diagnosis->diagnosis->diagnosis }} 
+                                                            </div>
+                                                            <div class="mt-0.5 text-xs text-slate-500">
+                                                                {{   $diagnosis->enteredon }} 
+                                                            </div>
+                                                        </div>
+                                                       
+                                                    </div>
+                                              @endforeach
+                                            </div>
+                                          
+                                        </div>
+
+                                        <div class="box box--stacked flex flex-col p-5">
+                                            <div
+                                                class="mb-5 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
+                                                Treatment Type
+                                            </div>
+                                            <div class="flex flex-col gap-5">
+                                            @foreach($patient_treatment_category as $patient_treatment_cat)
+                                                    <div class="flex items-center">
+                                                        <div class="relative h-12 w-12">
+                                                            <div
+                                                            class="flex h-full w-full items-center justify-center overflow-hidden rounded-full border-2 border-slate-200/40 bg-theme-1/5">
+                                                            <x-base.lucide
+                                                                class="h-4 w-4 fill-theme-1/10 text-theme-1"
+                                                                icon="Triangle"
+                                                            />
+                                                        </div>
+                                                          
+                                                        </div>
+                                                        <div class="ml-3.5">
+                                                            <div class="font-medium">
+                                                              {{   $patient_treatment_cat->treatment_type->treatment_type	 }} 
+                                                            </div>
+                                                      
+                                                    </div>
+                                              @endforeach
+                                            </div>
+                                          
+
+                                            <div
+                                            class="mb-5 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
+                                         &nbsp;
+                                            </div>
+                                           
+                                          
+                                                <div class="mt-3 flex items-center">
+                                                    <x-base.lucide
+                                                        class="mr-2 h-4 w-4 stroke-[1.3] text-slate-500"
+                                                        icon="Clock"
+                                                    />
+                                                    Comfort Devices used
+                                                    @foreach($patient_comfort_devices as $devices)
+                                                    <div
+                                                        class="ml-1 flex items-center rounded-md border border-success/10 bg-success/10 px-1.5 py-px text-xs font-medium text-success">
+                                                        <span class="-mt-px">{{ $devices->comfort_devices->comfort_device_name	 }}</span>
+                                                    </div>
+                                                    @endforeach
+                                                </div>
+                                            
+                                           
+                                        </div>
+                                    </div>                                      
                                     <div class="box box--stacked flex flex-col">
                                         <div class="p-5 font-medium">Medication
                                             <x-base.button
@@ -320,6 +458,11 @@
                                                     class="border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500"
                                                 >
                                                     Duration
+                                                </x-base.table.td>
+                                                <x-base.table.td
+                                                    class="border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500"
+                                                    >
+                                                    Timespan
                                                 </x-base.table.td>
                                                     <x-base.table.td
                                                         class="border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500"
@@ -404,7 +547,28 @@
                                             >
                                             <div class="ml-3.5">
                                                
-                                                    {{ $medicine->medication }}
+                                                    {{ $medicine->duration }}
+                                               
+                                               
+                                            </div>
+                                            </x-base.table.td>
+                                                <x-base.table.td
+                                                class="border-dashed py-4 dark:bg-darkmode-600"
+                                            >
+                                            <div class="ml-3.5">
+                                               
+                                                <?php
+                                                $timespan = "Not specified"; 
+                                                switch($medicine->timespan)
+                                                {
+                                                 CASE 1: $timespan="Days"; break;
+                                                 CASE 2: $timespan="Weeks"; break;
+                                                 CASE 3: $timespan="Months"; break;
+                                                }
+                                                 
+                                                 ?>
+                                                     {{  $timespan   }}
+                                                
                                                
                                                
                                             </div>
@@ -414,7 +578,7 @@
                                         >
                                         <div class="ml-3.5">
                                            
-                                                {{ $medicine->medication }}
+                                                {{ $medicine->medicine_mode->medicine_mode	 }}
                                            
                                            
                                         </div>
@@ -422,10 +586,13 @@
                                         <x-base.table.td
                                         class="border-dashed py-4 dark:bg-darkmode-600"
                                     >
-                                    <div class="ml-3.5">
-                                       
-                                            {{ $medicine->medication }}
-                                       
+                                    <div class="ml-3.5">                                      
+                                        <div
+                                        class="ml-1 flex items-center rounded-md border<?php if( $medicine->status == 1 ) { ?> border-success/10 bg-success/10  text-success <?php } else { ?> border-primary/10 bg-primary/10  text-primary <?php } ?> px-1.5 py-px text-xs font-medium ">
+                                        <span class="-mt-px"> {{ $medicine->status == 1 ? 'Active' : 'Inactive' }}</span>
+                                    </div>
+                                           
+                                  
                                        
                                     </div>
                                     </x-base.table.td>
@@ -434,7 +601,7 @@
                                 >
                                 <div class="ml-3.5">
                                    
-                                        {{ $medicine->medication }}
+                                        {{ $medicine->enteredon }}
                                    
                                    
                                 </div>
@@ -547,7 +714,7 @@
                                                         Ward Member:
                                                       
                                                         {{ $patient->locations->ward->wardMember->member_name ?? 'N/A' }}
-                                                        {{ "[ ".$patient->locations->ward->wardMember->contact_number." ]" ?? 'N/A' }}
+                                                        {{ "[ " . $patient->locations?->ward?->wardMember?->contact_number . " ]" ?? 'N/A' }}
                                                        
                                                     </div>
                                                     <div class="mt-3 flex items-center">
@@ -558,7 +725,8 @@
                                                         Asha Worker:
                                                        
                                                         {{ $patient->locations->ashaworker->asha_worker_name ?? 'N/A' }}
-                                                        {{ "[ ".$patient->locations->ashaworker->contact_number." ]" ?? 'N/A' }}
+                                                        {{ "[ " . ($patient->locations?->ashaworker?->contact_number ?? 'N/A') . " ]" }}
+                                                        
                                                       
                                                     </div>
                                                     <div class="mt-3 flex items-center">
@@ -600,65 +768,95 @@
                         id="example-4"
                         selected="{{ request()->query('page') === 'contacts' }}"
                     >
-                    <x-base.button
-                    class="ml-auto border-primary/50 px-4"
-                    variant="outline-primary"
-                    data-tw-toggle="modal"
-                    data-tw-target="#family_modal"
-                    href="#"
-                    as="a"
-                >
-                <x-base.lucide
-                    class="-ml-0.5 mr-2 h-4 w-4 stroke-[1.3]"
-                    icon="UserPlus"
-                />
-                Add New
-            </x-base.button>
-            @foreach($patient_family as $patient_family)
+                            <x-base.button
+                            class="ml-auto border-primary/50 px-4"
+                            variant="outline-primary"
+                            data-tw-toggle="modal"
+                            data-tw-target="#family_modal"
+                            href="#"
+                            as="a"
+                        >
+                            <x-base.lucide
+                                class="-ml-0.5 mr-2 h-4 w-4 stroke-[1.3]"
+                                icon="UserPlus"
+                            />
+                            Add New
+                        </x-base.button>
+           
                         <div class="mt-3.5 grid grid-cols-12 gap-x-6 gap-y-10">
+                            @foreach($patient_family as $patient_family)
+                        <div class="box box--stacked col-span-12 flex flex-col p-5 md:col-span-6 xl:col-span-4">
+                            <a
+                                class="text-[0.94rem] font-medium text-primary"
+                                href=""
+                            >
+                               {{ $patient_family->family_member_name }}
+                            </a>
+                            <div class="mb-5 mt-1 leading-relaxed text-slate-500">
+                                {{ $patient_family->relation }}
+                            </div>
                            
-                                <div class="box box--stacked col-span-12 flex flex-col p-5 md:col-span-6 xl:col-span-4">
-                                  
-                                   
-                                    
-                                    <div
-                                        class="mt-auto flex flex-col gap-3 border-t border-dashed border-slate-300/70 pt-5">
+                            <div
+                                class="mt-auto flex flex-col gap-3 border-t border-dashed border-slate-300/70 pt-5">
+                                <div class="flex items-center">
+                                    <div class="text-slate-500">Age:</div>                                   
+                                    <div class="ml-auto text-slate-500">
+                                        {{ $patient_family->age }}
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="text-slate-500">Gender:</div>
+                                    <div class="ml-auto">
                                         <div class="flex items-center">
-                                            <div class="text-slate-500">Name:</div>
-                                            <div class="ml-auto">
-                                                <div
-                                                    class="flex items-center rounded-md border border-success/10 bg-success/10 px-1.5 py-px text-xs text-success">
-                                                    <span class="-mt-px">{{ $patient_family->family_member_name }}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center">
-                                            <div class="text-slate-500"></div>
-                                            <div class="ml-auto">
-                                           
-                                        </div>
-                                        <div class="flex items-center">
-                                            <div class="text-slate-500">:</div>
-                                            <div class="ml-auto text-slate-500">
-                                              ghg
-                                            </div>
-                                        </div>
-                                     
-                                        <div class="flex items-center">
-                                            <div class="text-slate-500"></div>
-                                            <div class="ml-auto">
-                                                <a
-                                                    class="block w-40 truncate whitespace-nowrap text-right text-slate-500 underline decoration-slate-500/30 decoration-dotted underline-offset-[3px] md:w-52"
-                                                    href=""
-                                                >
-                                                   fgfg
-                                                </a>
-                                            </div>
+                                          
+                                            {{ $patient_family->gender == 1 ? 'Male' : ($patient_family->gender == 2 ? 'Female' : 'Other') }}
+
                                         </div>
                                     </div>
-                                </div>                             
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="text-slate-500">Staying with patient:</div>
+                                    <div class="ml-auto text-slate-500">                                       
+                                        {{ $patient_family->staying == 1 ? 'Yes' :  'No' }}
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="text-slate-500">Education:</div>
+                                    <div class="ml-auto text-slate-500">
+                                        {{ $patient_family->education }}
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="text-slate-500">Income:</div>
+                                    <div class="ml-auto text-slate-500">
+                                        Rs. {{ $patient_family->income }}
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="text-slate-500">Source of Income:</div>
+                                    <div class="ml-auto text-slate-500">
+                                        {{ $patient_family->source_income }}
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="text-slate-500">Income Category:</div> 
+                               
+
+                                    <div class="ml-auto">
+                                        <div
+                                            class="flex items-center rounded-md border {{ $patient_family->income_catogory == 1 ? 'border-success/10 bg-success/10 text-success' : 'border-danger/10 bg-danger/10 text-danger' }} px-1.5 py-px text-xs">
+                                            <span class="-mt-px">{{ $patient_family->income_cat }}</span>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                           
+                            </div>
+                           
                         </div>
                         @endforeach
+
+                        
                     </x-base.tab.panel>
                    
                 </x-base.tab.panels>
@@ -735,13 +933,15 @@
                 <option value="1">Father</option> 
                 <option value="2">Mother</option> 
                 <option value="3">Son</option> 
-                <option value="4">Daughter</option> 
+                <option value="4">Daughter</option>               
                 <option value="5">Wife</option> 
                 <option value="6">Husband</option> 
                 <option value="7">Brother</option> 
                 <option value="8">Sister</option> 
                 <option value="9">Grand son</option> 
                 <option value="10">Grand Daughter</option> 
+                <option value="11">Son-in-Law</option> 
+                <option value="12">Daughter-in-Law</option> 
                 </x-base.form-select>
 
                 <x-base.form-label for="modal-form-1">Staying with Patient</x-base.form-label>
@@ -859,6 +1059,14 @@
                  placeholder="Dose"
                  name="med_dose"
              />
+
+             <x-base.form-label for="modal-form-1">unit</x-base.form-label>
+             <x-base.form-select id="dose_unit" name="dose_unit">
+                <option value="">Select</option> 
+                <option value="1">mg</option> 
+                <option value="2">ml</option> 
+                <option value="3">gm</option> 
+           </x-base.form-select>
  
              <x-base.form-label for="modal-form-2">Frequency</x-base.form-label>
              <x-base.form-select id="med_frequency" name="med_frequency">
@@ -866,6 +1074,10 @@
                  <option value="1">Once</option> 
                  <option value="2">Twice</option> 
                  <option value="3">Thrice</option> 
+                 <option value="4">Four times</option> 
+                 <option value="5">Five times</option> 
+                 <option value="6">Six times</option> 
+                 <option value="7">Alternate Days</option> 
             </x-base.form-select>
 
             <x-base.form-label for="modal-form-2">Period</x-base.form-label>
@@ -881,7 +1093,7 @@
              <x-base.form-label for="modal-form-1">Duration</x-base.form-label>
              <x-base.form-input
                  id="modal-form-1"
-                 type="number"
+                 type="text"
                  placeholder="Duration"
                  name="duration"
              />

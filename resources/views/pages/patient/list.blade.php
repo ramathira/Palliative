@@ -18,114 +18,7 @@
                
                 <div class="box box--stacked flex flex-col">
                     <div class="flex flex-col gap-y-2 p-5 sm:flex-row sm:items-center">
-                        {{-- <div>
-                            <div class="relative">
-                                <x-base.lucide
-                                    class="absolute inset-y-0 left-0 z-10 my-auto ml-3 h-4 w-4 stroke-[1.3] text-slate-500"
-                                    icon="Search"
-                                />
-                                <x-base.form-input3
-                                    class="rounded-[0.5rem] pl-9 sm:w-64"
-                                    type="text"
-                                    placeholder="Search users..."
-                                />
-                            </div>
-                        </div> --}}
-                        {{-- <div class="flex flex-col gap-x-3 gap-y-2 sm:ml-auto sm:flex-row">
-                            <x-base.menu>
-                                <x-base.menu.button
-                                    class="w-full sm:w-auto"
-                                    as="x-base.button"
-                                    variant="outline-secondary"
-                                >
-                                    <x-base.lucide
-                                        class="mr-2 h-4 w-4 stroke-[1.3]"
-                                        icon="Download"
-                                    />
-                                    Export
-                                    <x-base.lucide
-                                        class="ml-2 h-4 w-4 stroke-[1.3]"
-                                        icon="ChevronDown"
-                                    />
-                                </x-base.menu.button>
-                                <x-base.menu.items class="w-40">
-                                    <x-base.menu.item>
-                                        <x-base.lucide
-                                            class="mr-2 h-4 w-4"
-                                            icon="FileBarChart"
-                                        />
-                                        PDF
-                                    </x-base.menu.item>
-                                    <x-base.menu.item>
-                                        <x-base.lucide
-                                            class="mr-2 h-4 w-4"
-                                            icon="FileBarChart"
-                                        />
-                                        CSV
-                                    </x-base.menu.item>
-                                </x-base.menu.items>
-                            </x-base.menu>
-                            <x-base.popover class="inline-block">
-                                <x-base.popover.button
-                                    class="w-full sm:w-auto"
-                                    as="x-base.button"
-                                    variant="outline-secondary"
-                                >
-                                    <x-base.lucide
-                                        class="mr-2 h-4 w-4 stroke-[1.3]"
-                                        icon="ArrowDownWideNarrow"
-                                    />
-                                    Filter
-                                    <span
-                                        class="ml-2 flex h-5 items-center justify-center rounded-full border bg-slate-100 px-1.5 text-xs font-medium"
-                                    >
-                                        3
-                                    </span>
-                                </x-base.popover.button>
-                                <x-base.popover.panel>
-                                    <div class="p-2">
-                                        <div>
-                                            <div class="text-left text-slate-500">
-                                                Position
-                                            </div>
-                                            <x-base.form-select class="mt-2 flex-1">
-                                                @foreach ($users->take(5) as $fakerKey => $faker)
-                                                    <option value="{{ $faker['position'] }}">
-                                                        {{ $faker['position'] }}
-                                                    </option>
-                                                @endforeach
-                                            </x-base.form-select>
-                                        </div>
-                                        <div class="mt-3">
-                                            <div class="text-left text-slate-500">
-                                                Department
-                                            </div>
-                                            <x-base.form-select class="mt-2 flex-1">
-                                                @foreach ($users->take(5) as $fakerKey => $faker)
-                                                    <option value="{{ $faker['department'] }}">
-                                                        {{ $faker['department'] }}
-                                                    </option>
-                                                @endforeach
-                                            </x-base.form-select>
-                                        </div>
-                                        <div class="mt-4 flex items-center">
-                                            <x-base.button
-                                                class="ml-auto w-32"
-                                                variant="secondary"
-                                            >
-                                                Close
-                                            </x-base.button>
-                                            <x-base.button
-                                                class="ml-2 w-32"
-                                                variant="primary"
-                                            >
-                                                Apply
-                                            </x-base.button>
-                                        </div>
-                                    </div>
-                                </x-base.popover.panel>
-                            </x-base.popover>
-                        </div> --}}
+                    
                     </div>
                     @if (session('success'))                    
                     <x-base.alert variant="success">
@@ -271,6 +164,9 @@
                                 @endforeach
                             </x-base.table.tbody>
                         </x-base.table>
+                    </div>
+                    <div class="mt-4">
+                        {{ $patients->links() }}
                     </div>
                     
                 </div>

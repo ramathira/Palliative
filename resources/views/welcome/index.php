@@ -10,7 +10,7 @@
   <!-- Favicon Icon -->
   <link rel="icon" href="assets/img/favicon.png">
   <!-- Site Title -->
-  <title>Palliative Care Program</title>
+  <title>Sparshamayi-Palliative Care Program</title>
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/fontawesome.min.css">
   <link rel="stylesheet" href="assets/css/animate.css">
@@ -43,7 +43,7 @@
         <div class="cs_main_header_in">
           <div class="cs_main_header_left">
             <a class="cs_site_branding" href="index.html">
-              <img src="assets/img/logo.png" alt="Logo" width="60" >
+              <img src="assets/img/logo.png" alt="Logo" width="100" >
             </a>
             <div class="cs_nav cs_fs_18 cs_semibold">
               <div class="cs_nav_list_wrap">
@@ -52,13 +52,14 @@
                   <li class="menu-item-has-children">
                     <a href="doctors.html">Palliative Care</a>
                     <ul>
-                      <li><a href="doctors.html">test</a></li>
-                      <li><a href="doctor-details.html">test</a></li>
+                      <li><a href="doctors.html">Home Care</a></li>
+                      <li><a href="doctor-details.html">Medication Support</a></li>
                     </ul>
                   </li>                
                  
                  
                   <li><a href="#">Contact</a></li>
+                  <li><a href="/login">Login</a></li>
                 </ul>
               </div>
             </div>
@@ -101,8 +102,8 @@
         <div class="cs_hero_content wow fadeInRight" data-wow-duration="0.9s" data-wow-delay="0.25s">
           <h3 class="cs_hero_title_mini cs_fs_18 cs_white_color cs_semibold">താങ്ങും തണലുമായി </h3>
           <h1 class="cs_hero_title cs_fs_72 cs_white_color">കൂടെയുണ്ട് കരകുളം </h1>
-          <p class="cs_hero_subtitle cs_fs_20 cs_medium cs_white_color cs_heading_font">Protect your smile and keep you
-            healthy.</p>
+          <p class="cs_hero_subtitle cs_fs_20 cs_medium cs_white_color cs_heading_font">Protect your smile and support your
+            health.</p>
           
         </div>
       </div>
@@ -115,7 +116,7 @@
       <div class="cs_hero_patientbox_content">
        
         <div class="cs_hero_patientbox_info">
-          <h3 class="cs_hero_patientbox_title cs_fs_24 cs_bold cs_white_color mb-0">150K+</h3>
+          <h3 class="cs_hero_patientbox_title cs_fs_24 cs_bold cs_white_color mb-0">231+</h3>
           <p class="cs_hero_patientbox_subtitle cs_white_color mb-0">Satisfied Patients</p>
         </div>
       </div>
@@ -138,7 +139,7 @@
       <div class="cs_height_50 cs_height_lg_40"></div>
       <div class="row cs_row_gap_30 cs_gap_y_30">
         <div class="col-xl-4 col-md-6">
-          <a href="department-details.html" class="cs_iconbox cs_style_1 cs_radius_10 position-relative w-100">
+          <a href="advanced-care" class="cs_iconbox cs_style_1 cs_radius_10 position-relative w-100">
             <div class="cs_iconbox_header">
               <div class="cs_iconbox_icon cs_center">
                 <img src="assets/img/icons/department_icon_1.svg" alt="Icon">
@@ -149,7 +150,7 @@
           </a>
         </div>
         <div class="col-xl-4 col-md-6">
-          <a href="department-details.html" class="cs_iconbox cs_style_1 cs_radius_10 position-relative w-100">
+          <a href="hospital-care" class="cs_iconbox cs_style_1 cs_radius_10 position-relative w-100">
             <div class="cs_iconbox_header">
               <div class="cs_iconbox_icon cs_center">
                 <img src="assets/img/icons/department_icon_2.svg" alt="Icon">
@@ -160,7 +161,7 @@
           </a>
         </div>
         <div class="col-xl-4 col-md-6">
-          <a href="department-details.html" class="cs_iconbox cs_style_1 cs_radius_10 position-relative w-100">
+          <a href="comfort-care" class="cs_iconbox cs_style_1 cs_radius_10 position-relative w-100">
             <div class="cs_iconbox_header">
               <div class="cs_iconbox_icon cs_center">
                 <img src="assets/img/icons/department_icon_3.svg" alt="Icon">
@@ -171,7 +172,7 @@
           </a>
         </div>
         <div class="col-xl-4 col-md-6">
-          <a href="department-details.html" class="cs_iconbox cs_style_1 cs_radius_10 position-relative w-100">
+          <a href="endoflife-care" class="cs_iconbox cs_style_1 cs_radius_10 position-relative w-100">
             <div class="cs_iconbox_header">
               <div class="cs_iconbox_icon cs_center">
                 <img src="assets/img/icons/department_icon_4.svg" alt="Icon">
@@ -182,7 +183,7 @@
           </a>
         </div>
         <div class="col-xl-4 col-md-6">
-          <a href="department-details.html" class="cs_iconbox cs_style_1 cs_radius_10 position-relative w-100">
+          <a href="grief-counselling" class="cs_iconbox cs_style_1 cs_radius_10 position-relative w-100">
             <div class="cs_iconbox_header">
               <div class="cs_iconbox_icon cs_center">
                 <img src="assets/img/icons/department_icon_5.svg" alt="Icon">
@@ -193,7 +194,7 @@
           </a>
         </div>
         <div class="col-xl-4 col-md-6">
-          <a href="department-details.html" class="cs_iconbox cs_style_1 cs_radius_10 position-relative w-100">
+          <a href="pain-management" class="cs_iconbox cs_style_1 cs_radius_10 position-relative w-100">
             <div class="cs_iconbox_header">
               <div class="cs_iconbox_icon cs_center">
                 <img src="assets/img/icons/department_icon_6.svg" alt="Icon">
@@ -209,15 +210,15 @@
   </section>
   <!-- End Department Section -->
   <!-- Start About Section -->
-  <!-- <section class="cs_about cs_style_1 position-relative" id="about">
+  <section class="cs_about cs_style_1 position-relative" id="about">
     <div class="cs_height_120 cs_height_lg_80"></div>
     <div class="container">
       <div class="row align-items-center cs_gap_y_40">
         <div class="col-lg-6">
           <div class="cs_about_thumbnail">
             <div class="cs_about_thumbnail_1">
-              <img src="assets/img/about_1.jpg" alt="Image">
-              <a href="https://www.youtube.com/embed/rRid6GCJtgc" class="cs_player_btn cs_style_1 cs_video_open">
+              <img src="assets/img/bottom_img.jpg" alt="Image">
+              <a href="#" class="cs_player_btn cs_style_1 cs_video_open">
                 <span class="cs_player_btn_icon cs_center">
                   <img src="assets/img/icons/player_icon.svg" alt="Icon">
                 </span>
@@ -234,7 +235,7 @@
             </div>
             <div class="cs_experience_box cs_center cs_accent_bg cs_radius_50">
               <p class="cs_experience_box_number cs_fs_48 cs_bold cs_white_color">30+</p>
-              <p class="cs_experience_box_title cs_fs_20 cs_medium cs_white_color">Experience</p>
+              <p class="cs_experience_box_title cs_fs_20 cs_medium cs_white_color">Years</p>
             </div>
           </div>
         </div>
@@ -242,11 +243,10 @@
           <div class="cs_about_content">
             <div class="cs_section_heading cs_style_1">
               <p class="cs_section_subtitle cs_accent_color cs_fs_18 cs_semibold cs_heading_font">About us</p>
-              <h2 class="cs_section_title cs_fs_48 mb-0">Advanced technology and <span
-                  class="cs_accent_color">Specialist Doctors.</span></h2>
+              <h2 class="cs_section_title cs_fs_48 mb-0">Caring Hands, Healing Hearts:<span
+                  class="cs_accent_color">Together for Palliative Care.</span></h2>
             </div>
-            <p class="cs_about_text">Adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Ut enim ad minim veniam, quis nostrud. Wiusmod tempor incididunt incididunt ut labore et dolore magna.</p>
+            <p class="cs_about_text">Palliative care is not just about easing pain; it’s about bringing comfort, dignity, and hope to those in need. Together, we can create a community where care and compassion uplift every life.</p>
             <ul class="cs_list cs_style_1 cs_mp0">
               <li>
                 <svg class="cs_accent_color" width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -254,7 +254,7 @@
                   <path d="M12.9999 16.1171C12.7439 16.1171 12.4879 16.0196 12.2929 15.8241C11.9024 15.4336 11.9024 14.8006 12.2929 14.4101L24.2929 2.41006C24.6829 2.01956 25.3169 2.01956 25.7069 2.41006C26.0974 2.80056 26.0974 3.43356 25.7069 3.82406L13.7069 15.8241C13.5119 16.0191 13.2559 16.1171 12.9999 16.1171Z" fill="currentColor"></path>
                   <path d="M13.0002 16.1174C12.7442 16.1174 12.4882 16.0199 12.2932 15.8244L8.05069 11.5819C7.66019 11.1914 7.66019 10.5584 8.05069 10.1679C8.44069 9.77737 9.07469 9.77737 9.46469 10.1679L13.7072 14.4104C14.0977 14.8009 14.0977 15.4339 13.7072 15.8244C13.5122 16.0194 13.2562 16.1174 13.0002 16.1174Z" fill="currentColor"></path>
                 </svg>
-                Top quality Technician team
+                Community Involvement
               </li>
               <li>
                 <svg class="cs_accent_color" width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -262,7 +262,7 @@
                   <path d="M12.9999 16.1171C12.7439 16.1171 12.4879 16.0196 12.2929 15.8241C11.9024 15.4336 11.9024 14.8006 12.2929 14.4101L24.2929 2.41006C24.6829 2.01956 25.3169 2.01956 25.7069 2.41006C26.0974 2.80056 26.0974 3.43356 25.7069 3.82406L13.7069 15.8241C13.5119 16.0191 13.2559 16.1171 12.9999 16.1171Z" fill="currentColor"></path>
                   <path d="M13.0002 16.1174C12.7442 16.1174 12.4882 16.0199 12.2932 15.8244L8.05069 11.5819C7.66019 11.1914 7.66019 10.5584 8.05069 10.1679C8.44069 9.77737 9.07469 9.77737 9.46469 10.1679L13.7072 14.4104C14.0977 14.8009 14.0977 15.4339 13.7072 15.8244C13.5122 16.0194 13.2562 16.1174 13.0002 16.1174Z" fill="currentColor"></path>
                 </svg>
-                World Class Reputed Hospital
+                Awareness and Training
               </li>
               <li>
                 <svg class="cs_accent_color" width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -270,10 +270,10 @@
                   <path d="M12.9999 16.1171C12.7439 16.1171 12.4879 16.0196 12.2929 15.8241C11.9024 15.4336 11.9024 14.8006 12.2929 14.4101L24.2929 2.41006C24.6829 2.01956 25.3169 2.01956 25.7069 2.41006C26.0974 2.80056 26.0974 3.43356 25.7069 3.82406L13.7069 15.8241C13.5119 16.0191 13.2559 16.1171 12.9999 16.1171Z" fill="currentColor"></path>
                   <path d="M13.0002 16.1174C12.7442 16.1174 12.4882 16.0199 12.2932 15.8244L8.05069 11.5819C7.66019 11.1914 7.66019 10.5584 8.05069 10.1679C8.44069 9.77737 9.07469 9.77737 9.46469 10.1679L13.7072 14.4104C14.0977 14.8009 14.0977 15.4339 13.7072 15.8244C13.5122 16.0194 13.2562 16.1174 13.0002 16.1174Z" fill="currentColor"></path>
                 </svg>
-                Discount on all Pathology & Radiology treatment
+                Patient-Centered Approach
               </li>
             </ul>
-            <a href="about.html" class="cs_btn cs_style_1 cs_fs_18 cs_semibold cs_accent_bg  cs_radius_100"><span class="cs_btn_text">Info More About</span></a>
+            <a href="about" class="cs_btn cs_style_1 cs_fs_18 cs_semibold cs_accent_bg  cs_radius_100"><span class="cs_btn_text">Info More About</span></a>
           </div>
         </div>
       </div>
@@ -294,7 +294,7 @@
       <img src="assets/img/about_shape_4.svg" alt="Shape Image">
     </div>
     <div class="cs_height_120 cs_height_lg_80"></div>
-  </section> -->
+  </section> 
   <!-- End About Section -->
   <!-- Start Casestudy Section -->
   <!-- <section class="cs_slider cs_style_1 cs_slider_gap_30">
@@ -397,14 +397,14 @@
       <div class="cs_pagination cs_style_1"></div>
     </div>
     <div class="cs_height_120 cs_height_lg_80"></div>
-  </section> -->
+  </section>
   <!-- End Casestudy Section -->
   <!-- Start Video Section -->
   <section class="cs_video_section cs_style_1 cs_accent_bg position-relative">
     <div class="container">
       <div class="cs_vider_wrapper cs_style_1">
        
-        <h2 class="cs_video_title">We are Provide All Medical Service <br>For Your <span class="cs_accent_color">Elderly</span> Needs.</h2>
+        <h2 class="cs_video_title">We Provide All Medical Service <br>For Your <span class="cs_accent_color">Elderly</span> Needs.</h2>
         <p class="cs_video_subtitle">Because every stage of life deserves compassion and respect.</p>
         <div class="cs_btns_group wow fadeInUp" data-wow-duration="0.9s" data-wow-delay="0.25s">
           <a href="#" class="cs_btn cs_style_1 cs_fs_18 cs_semibold cs_accent_bg  cs_radius_100">
@@ -437,8 +437,8 @@
       <div class="cs_section_heading cs_style_1 cs_type_1">
         <div class="cs_section_heading_right cs_white_color_8">Age is merely the number of years the world has been enjoying you. Every wrinkle tells a story of laughter, every gray hair is a crown of wisdom, and every step forward is a testament to resilience.</div>
         <div class="cs_section_heading_left">
-          <p class="cs_section_subtitle cs_white_color">Expertise</p>
-          <h2 class="cs_section_title cs_white_color">Behind every cared-for elder is a caregiver with patience and compassion.</h2>
+          <!-- <p class="cs_section_subtitle cs_white_color">Expertise</p>
+          <h2 class="cs_section_title cs_white_color">Behind every cared-for elder is a caregiver with patience and compassion.</h2> -->
         </div>
       </div>
       <div class="cs_height_50 cs_height_lg_40"></div>
@@ -461,9 +461,9 @@
                 <img src="assets/img/icons/service_icon_2.svg" alt="Icon">
               </div>
               <div class="cs_iconbox_text">
-                <h3 class="cs_iconbox_title cs_fs_24 cs_white_color"><a href="service-details.html">Radiology &
-                    Pathology Test</a></h3>
-                <p class="cs_iconbox_subtitle cs_white_color"> Accurate Diagnostics, Compassionate Care: Radiology and Pathology Services You Can Trust.</p>
+                <h3 class="cs_iconbox_title cs_fs_24 cs_white_color"><a href="service-details.html">Bio chemistry &
+                    Pathology Test, Executive Checkup </a></h3>
+                <p class="cs_iconbox_subtitle cs_white_color"> Accurate Diagnostics, Compassionate Care: Bio-chemistry and Pathology Services You Can Trust.</p>
                 
               </div>
             </div>
@@ -472,10 +472,9 @@
                 <img src="assets/img/icons/service_icon_3.svg" alt="Icon">
               </div>
               <div class="cs_iconbox_text">
-                <h3 class="cs_iconbox_title cs_fs_24 cs_white_color"><a href="service-details.html">Heart Beat
-                    Checkup</a>
+                <h3 class="cs_iconbox_title cs_fs_24 cs_white_color"><a href="service-details.html">Physiotherapy & Counselling services               </a>
                 </h3>
-                <p class="cs_iconbox_subtitle cs_white_color">Keeping Hearts Healthy </p>
+                <p class="cs_iconbox_subtitle cs_white_color">Keeping Your mind and Body Healthy </p>
                 
               </div>
             </div>
@@ -483,7 +482,7 @@
         </div>
         <div class="col-xl-7">
           <div class="cs_card_thumbnail wow fadeInRight" data-wow-duration="0.9s" data-wow-delay="0.25s">
-            <img src="assets/img/backgund.jpg" alt="Image">
+            <img src="assets/img/koodeundu.jpg" alt="Image">
           </div>
         </div>
       </div>
@@ -1186,9 +1185,9 @@
         </div>
         <div class="cs_footer_col">
           <div class="cs_footer_widget">
-            <h2 class="cs_footer_widget_title cs_fs_32 cs_white_color cs_bold">Family welfare centre Karakulam</h2>
+            <h2 class="cs_footer_widget_title cs_fs_32 cs_white_color cs_bold">Family health centre Karakulam</h2>
             <ul class="cs_footer_widget_menu cs_address">
-              <li>HXCG+CC4, Karakulam Mullassery Venkode Rd, Karakulam, Kerala 695564, India</li>
+              <li>Pallivila, Vattappara P. O, Kerala 695028, India</li>
               <li class="cs_fs_32 cs_bold cs_phone_number">
                 <div class="cs_height_20 cs_height_lg_20"></div>
                 <a href="tel:+444547800112">+91 472 258 7700</a>
@@ -1201,7 +1200,7 @@
     <div class="cs_footer_bottom cs_white_color">
       <div class="container">
         <div class="cs_footer_bottom_in">
-          <p class="cs_copyright mb-0">medixal© 2024. All Rights Reserved.</p>
+          <p class="cs_copyright mb-0">Sparshamayi © 2024. All Rights Reserved.</p>
           <ul class="cs_footer_widget_menu">
             <li><a href="#">Privacy &amp; Cookie Policy</a></li>
           </ul>

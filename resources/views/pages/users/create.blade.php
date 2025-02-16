@@ -82,7 +82,59 @@
                                     
                                     </div>
                                 </div>
-                            </div>   
+                            </div>  
+                            
+                            <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center" id="jhi_block" style="display:none">
+                                <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
+                                    <div class="text-left">
+                                        <div class="flex items-center">
+                                            <div class="font-medium">JHI</div>
+                                            <div
+                                                class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
+                                                Required
+                                            </div>
+                                        </div>
+                                    
+                                    </div>
+                                </div>
+                                <div class="mt-3 w-full flex-1 xl:mt-0">
+                                    <div class="flex flex-col items-center md:flex-row">
+                                        <x-base.form-select id="jhi-select" name="jhi">
+                                            <option value="">Select</option> 
+                                            </x-base.form-select>
+                                    
+                                        <x-input-error :messages="$errors->get('jhi')" class="mt-2" />
+                                            
+                                    
+                                    </div>
+                                </div>
+                            </div>  
+
+                            <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center" id="jphn_block" style="display:none">
+                                <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
+                                    <div class="text-left">
+                                        <div class="flex items-center">
+                                            <div class="font-medium">JPHN</div>
+                                            <div
+                                                class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
+                                                Required
+                                            </div>
+                                        </div>
+                                    
+                                    </div>
+                                </div>
+                                <div class="mt-3 w-full flex-1 xl:mt-0">
+                                    <div class="flex flex-col items-center md:flex-row">
+                                        <x-base.form-select id="jphn-select" name="jphn">
+                                            <option value="">Select</option> 
+                                            </x-base.form-select>
+                                    
+                                        <x-input-error :messages="$errors->get('jphn')" class="mt-2" />
+                                            
+                                    
+                                    </div>
+                                </div>
+                            </div>  
                         
                        
                         <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
@@ -254,36 +306,95 @@
 
 
         jQuery('#role-select').change(function () {
-        if (jQuery(this).val() == '10') { //  "MLSP"
-        jQuery('#mlsp_block').show();
-
-        jQuery.ajax({
-            url: '/get_all_mlsp',
-            type: 'GET',
-            dataType: 'json',
-            success: function (response) {
-                const $select = jQuery('#mlsp-select');
-    
-               
-                if ($select.length) {
-                    $select.empty().append('<option value="">Select</option>');
-    
-                    response.forEach(function (data) {
-                        $select.append('<option value="' + data.id + '">' + data.mlsp_name + '</option>');
+                if (jQuery(this).val() == '10') 
+                { 
+                    hide_all_blocks();
+                    //  "MLSP"
+                    jQuery('#mlsp_block').show();
+                    jQuery.ajax({
+                        url: '/get_all_mlsp',
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (response) {
+                            const $select = jQuery('#mlsp-select');  
+                            if ($select.length) {
+                                $select.empty().append('<option value="">Select</option>');    
+                                response.forEach(function (data) {
+                                    $select.append('<option value="' + data.id + '">' + data.mlsp_name + '</option>');
+                                });
+                            } else {
+                                console.error('Subcentre select element not found.');
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('Error fetching subcentres:', error);
+                        }
                     });
-                } else {
-                    console.error('Subcentre select element not found.');
                 }
-            },
-            error: function (xhr, status, error) {
-                console.error('Error fetching subcentres:', error);
-            }
-        });
-        } else {
-            jQuery('#mlsp_block').hide();
-        }
-    });
+                else if (jQuery(this).val() == '9') 
+                { //  "Jhi"
+                    hide_all_blocks();
+                    jQuery('#jhi_block').show();
+                   
+                    jQuery.ajax({
+                        url: '/get_all_jhis',
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (response) {
+                            const $select = jQuery('#jhi-select');  
+                            if ($select.length) {
+                                $select.empty().append('<option value="">Select</option>');    
+                                response.forEach(function (data) {
+                                    $select.append('<option value="' + data.id + '">' + data.jhi_name + '</option>');
+                                });
+                            } else {
+                                console.error('JHI select element not found.');
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('Error fetching subcentres:', error);
+                        }
+                    });
+                }
+
+                else if (jQuery(this).val() == '11') 
+                { //  "Jhi"
+                    hide_all_blocks();
+                    jQuery('#jphn_block').show();
+                   
+                    jQuery.ajax({
+                        url: '/get_all_jphns',
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (response) {
+                            const $select = jQuery('#jphn-select');  
+                            if ($select.length) {
+                                $select.empty().append('<option value="">Select</option>');    
+                                response.forEach(function (data) {
+                                    $select.append('<option value="' + data.id + '">' + data.jphn_name + '</option>');
+                                });
+                            } else {
+                                console.error('JHI select element not found.');
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('Error fetching subcentres:', error);
+                        }
+                    });
+                }
+                
+                 else {
+                    jQuery('#jphn_block').hide();
+                }
+            });
+
         });
 
+        function hide_all_blocks()
+        {
+            jQuery('#mlsp_block').hide();
+            jQuery('#jhi_block').hide();
+            jQuery('#jphn_block').hide();
+        }
     </script>
     @endpush

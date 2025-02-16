@@ -18,15 +18,15 @@ import dayGridPlugin from "@fullcalendar/daygrid";
                 center: "title",
                 right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
             },
-            initialDate: "2045-01-01",
+            initialDate: "2025-01-01",
             navLinks: true,
             editable: true,
             dayMaxEvents: true,
             events: [
                 {
                     title: "Vue Vixens Day",
-                    start: "2045-01-05",
-                    end: "2045-01-08",
+                    start: "2045-07-01",
+                    end: "2045-07-01",
                 },
                 {
                     title: "VueConfUS",

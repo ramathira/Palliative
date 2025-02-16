@@ -97,7 +97,10 @@
         ])>
             <div class="sticky top-0 z-10 flex-col justify-center hidden h-screen ml-16 lg:flex xl:ml-28 2xl:ml-36">
                 <div class="text-[2.6rem] font-medium leading-[1.4] text-white xl:text-5xl xl:leading-[1.2]">
-                    Palliative Care 
+                    സ്പർശമായി... 
+                </div>
+                <div class="text-[2.6rem] font-medium leading-[1.4] text-white xl:text-5xl xl:leading-[1.2]">
+                    A Holistic Palliative Care Programme
                 </div>
                 <div class="mt-5 text-base leading-relaxed text-white/70 xl:text-lg">
                 Supporting Lives with Compassion in Every Step of the Journey.

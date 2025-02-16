@@ -760,7 +760,7 @@
                                     <div
                                         class="w-full rounded-md border border-slate-300/60 bg-white px-3 py-2 shadow-sm first:rounded-b-none last:-mt-px last:rounded-t-none focus:z-10 first:md:rounded-r-none first:md:rounded-bl-md last:md:-ml-px last:md:mt-0 last:md:rounded-l-none last:md:rounded-tr-md [&:not(:first-child):not(:last-child)]:-mt-px [&:not(:first-child):not(:last-child)]:rounded-none [&:not(:first-child):not(:last-child)]:md:-ml-px [&:not(:first-child):not(:last-child)]:md:mt-0">
                                         <x-base.form-check>                                         
-                                            <input type="radio" id="checkbox-switch-private" name="treatment_type" value="1" >
+                                            <input type="radio" id="checkbox-switch-private" name="treatment_type" value="2" >
                                             <x-base.form-check.label for="checkbox-switch-private">
                                                 Private
                                             </x-base.form-check.label>
