@@ -1,7 +1,7 @@
 @extends('../themes/' . $activeTheme)
 
 @section('subhead')
-    <title>Sparshamayi-Palliative Care</title>
+    <title>Palliative Care</title>
 @endsection
 
 @section('subcontent')
@@ -16,10 +16,6 @@
                     "last:after:hidden after:content-[''] after:w-full after:bg-slate-300/60 after:h-[2px] after:ml-5 group-[.mode--light]:after:bg-slate-300/20",
                     "first:before:hidden before:content-[''] before:w-full before:bg-slate-300/60 before:h-[2px] before:mr-5 group-[.mode--light]:before:bg-slate-300/20",
                 ])>
-                @php
-                $flow_status_id = $flow_status_id ?? 0;  
-                $patient_id = $patient_id ?? '';  
-                @endphp
                     <div class="flex items-center">
                         <div
                             class="rounded-full border bg-white group-[.mode--light]:!border-white/[0.25] group-[.active]:bg-primary group-[.mode--light]:!bg-transparent group-[.active]:text-white group-[.mode--light]:!text-slate-200 [.group.mode--light_.group.active_&]:!border-white/[0.15] [.group.mode--light_.group.active_&]:!bg-white/[0.12]">
@@ -75,8 +71,8 @@
                         </div>
                     </div>
                 </div>
-            </div><?php // echo $flow_status_id; exit;?>
-            <div class="mt-7 step"  id="step-1"  @class(['hidden' => $flow_status_id != 0])>
+            </div>
+            <div class="mt-7 step"  id="step-1">
                 <div class="box box--stacked flex flex-col">
                     <div class="p-7">
                       
@@ -160,22 +156,50 @@
                             <div class="mt-3 w-full flex-1 xl:mt-0">
                                 <div class="flex flex-col items-center md:flex-row">
                                     <x-base.form-check class="mr-4">
-                                   
+                                        {{-- <x-base.form-check.input
+                                        id="checkbox-switch-1"
+                                        type="radio"
+                                        name="gender" 
+                                        value="1"
+                                        /> --}}
                                         <input type="radio" id="checkbox-switch-1" name="gender" value="1" >
                                         <x-base.form-check.label for="checkbox-switch-1">
                                             Male
                                         </x-base.form-check.label>
-                                    </x-base.form-check>                                 
+                                    </x-base.form-check>
+                                   
                                     
                                   
                                         <x-base.form-check class="mr-4">
-                                   
+                                            {{-- <x-base.form-check.input
+                                            id="checkbox-switch-2"
+                                            type="radio"
+                                            name="gender" 
+                                            value="2"
+                                            /> --}}
                                             <input type="radio" id="checkbox-switch-2" name="gender" value="2" >
                                             <x-base.form-check.label for="checkbox-switch-2">
                                                 Female
                                             </x-base.form-check.label>
                                         </x-base.form-check>
-                                      
+                                       
+
+                                        {{-- <x-base.form-check class="mr-4">
+                                            <x-base.form-check.input
+                                            id="checkbox-switch-3"
+                                            type="radio"
+                                            name="gender" 
+                                            value="3"
+                                            />
+                                            <x-base.form-check.label for="checkbox-switch-3">
+                                                Prefer Not to Say
+                                            </x-base.form-check.label>
+                                        </x-base.form-check> --}}
+                                    
+
+
+
+                                    
                                   
                                 </div>
                             </div>
@@ -209,15 +233,15 @@
                                
                             </div>
                         </div>
-
-                       
-                        
                         <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
                             <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
                                 <div class="text-left">
                                     <div class="flex items-center">
                                         <div class="font-medium">Aadhar No.</div>
-                                        
+                                        <div
+                                            class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
+                                            Required
+                                        </div>
                                     </div>
                                     <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
                                     ആധാർ നമ്പർ 
@@ -329,10 +353,9 @@
                    
                 </div>
             </div>
-            <div class="mt-7 step"  id="step-2" @class(['hidden' => $flow_status_id != 1])>
+            <div class="mt-7 step"  id="step-2" style="display: none;">
                 <div class="box box--stacked flex flex-col">
                     <div class="p-7">
-                        <input type="hidden" name="patient_id" id="hidden-patient-id" value="{{ $patient_id }}">
                     <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
                             <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
                                 <div class="text-left">
@@ -483,7 +506,6 @@
                                 </x-base.form-select>
                             </div>
                         </div>
-
                         <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
                             <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
                                 <div class="text-left">
@@ -505,7 +527,6 @@
                                 </x-base.form-select>
                             </div>
                         </div>
-
                         <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
                             <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
                                 <div class="text-left">
@@ -527,20 +548,28 @@
                                 </x-base.form-select>
                             </div>
                         </div>
-                       
-                        
 
                        
                       
                         
                     </div>
-                   
+                    <!-- <div class="flex border-t border-slate-200/80 px-7 py-5 md:justify-end">
+                        <x-base.button
+                            class="w-full border-primary/50 px-10 md:w-auto"
+                            variant="outline-primary"
+                        >
+                            <x-base.lucide
+                                class="-ml-2 mr-2 h-4 w-4 stroke-[1.3]"
+                                icon="Pocket"
+                            />
+                            Next
+                        </x-base.button>
+                    </div> -->
                 </div>
             </div>
-            <div class="mt-7 step" id="step-3" @class(['hidden' => $flow_status_id != 2])>
+            <div class="mt-7 step" id="step-3" style="display: none;">
                 <div class="box box--stacked flex flex-col">
                     <div class="p-7">
-                        <input type="hidden" name="patient_id" id="hidden-patient-id" value="{{ $patient_id }}">
 
                         <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
                             <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
@@ -568,150 +597,118 @@
                                 </x-base.preview>                                                   
                             </div>
                         </div> 
+                       
+                     
+                    <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
+                        <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
+                            <div class="text-left">
+                                <div class="flex items-center">
+                                    <div class="font-medium">Diagnosis details</div>
+                                    <div
+                                        class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
+                                        Required
+                                    </div>
+                                </div>
+                                <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
+                              Write with the help of Hospital Records
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3 w-full flex-1 xl:mt-0">
+                            <div class="flex flex-col items-center md:flex-row">
+                                <x-base.form-textarea
+                                class="-mb-1.5 resize-none rounded-xl pr-16"
+                                placeholder="Type disease details..."
+                                name="diagnosis_details"
+                                />                                   
+                            </div>                               
+                        </div>                        
+                    </div>    
+                    
+                   
 
-                        <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
+                    <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
                             <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
                                 <div class="text-left">
                                     <div class="flex items-center">
-                                        <div class="font-medium">Details from the onset of the disease</div>
+                                        <div class="font-medium">Disease Diagnosed Date</div>
                                         <div
                                             class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
                                             Required
                                         </div>
                                     </div>
                                     <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
-                                        രോഗം തുടങ്ങിയത് മുതലുള്ള കാര്യങ്ങൾ 
+                                        രോഗം കണ്ടെത്തിയ തീയതി 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-3 w-full flex-1 xl:mt-0">
+                               
+                               
+                                            <x-base.litepicker
+                                                class="mx-auto block"
+                                                data-single-mode="true"
+                                                 name="diagnosis_date"
+                                                 data-min-date="1924-01-01"                                               
+                                                 
+                                            />
+                                        
+                                       
+                            </div>
+                    </div>
+
+                    <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
+                        <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
+                            <div class="text-left">
+                                <div class="flex items-center">
+                                    <div class="font-medium">General Condition prior to Disease</div>
+                                    <div
+                                        class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
+                                        Required
+                                    </div>
+                                </div>
+                                <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
+                                    രോഗം വന്നതിനു മുമ്പുള്ള അവസ്ഥാ 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3 w-full flex-1 xl:mt-0">
+                            <div class="flex flex-col items-center md:flex-row">
+                                <x-base.form-textarea
+                                class="-mb-1.5 resize-none rounded-xl pr-16"
+                                placeholder="Type  details..."
+                                name="prior_condition"
+                                />                                   
+                            </div>                               
+                        </div>
+                    </div> 
+
+                    <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
+                            <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
+                                <div class="text-left">
+                                    <div class="flex items-center">
+                                        <div class="font-medium">Treatment Availed From</div>
+                                    </div>
+                                    <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
+                                  Hospital name
                                     </div>
                                 </div>
                             </div>
                             <div class="mt-3 w-full flex-1 xl:mt-0">
                                 <div class="flex flex-col items-center md:flex-row">
-                                    <x-base.form-textarea
-                                    class="-mb-1.5 resize-none rounded-xl pr-16"
-                                    placeholder="രോഗം തുടങ്ങിയത് മുതലുള്ള കാര്യങ്ങൾ "
-                                    name="details_from_disease"
-                                    />                                   
-                                </div>                               
-                            </div>                        
-                        </div> 
-                        
-                        <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
-                            <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
-                                <div class="text-left">
-                                    <div class="flex items-center">
-                                        <div class="font-medium">Treatment undertaken till now </div>
-                                        <div
-                                            class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
-                                            Required
-                                        </div>
-                                    </div>
-                                    <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
-                                        ഇതുവരെ നടത്തിയ ചികിത്സകൾ 
-                                    </div>
-                                </div>
-                            </div>
-                               
-                          
-                            <div class="mt-3 w-full flex-1 xl:mt-0">
-                                <x-base.preview>
-                                    <x-base.tom-select
-                                        class="w-full"
-                                        data-placeholder="Select Treatment Types"
-                                        multiple                       
-                                        name="treatment_till_now"
-                                        id="treatment-undertaken-select"
-                                    >                                                                                                          
-                                    </x-base.tom-select>
-                                </x-base.preview>
-                            </div>
-                        </div> 
-
-                        <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
-                            <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
-                                <div class="text-left">
-                                    <div class="flex items-center">
-                                        <div class="font-medium">Treatment Category </div>
-                                        <div
-                                            class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
-                                            Required
-                                        </div>
-                                    </div>
-                                    <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
-                                        ഇപ്പോൾ നടത്തുന്ന ചികിത്സകൾ 
-                                    </div>
-                                   
-                                </div>
-                            </div>
-                             <div class="mt-3 w-full flex-1 xl:mt-0">                                
-                                <x-base.preview>
-                                    <x-base.tom-select
-                                        class="w-full"
-                                        data-placeholder="Select Treatment Types"
-                                        multiple
-                                        name="treatment_category"
-                                        id="treatment-type-select"
-                                    >                                                                                                          
-                                    </x-base.tom-select>
-                                </x-base.preview>                                                   
-                            </div>
-                        </div>
-                       
-                     
-
-                    <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
-                        <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
-                            <div class="text-left">
-                                <div class="flex items-center">
-                                    <div class="font-medium">Understanding of the disease and its treatment by the patient </div>
-                                    <div
-                                        class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
-                                        Required
-                                    </div>
-                                </div>
-                                <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
-                                    അസുഖത്തെ കുറിച്ചും ചികിത്സയെ കുറിച്ചും രോഗിക്കുള്ള ധാരണ 
+                                    <x-base.form-input
+                                        class="first:rounded-b-none last:-mt-px last:rounded-t-none focus:z-10 first:md:rounded-r-none first:md:rounded-bl-md last:md:-ml-px last:md:mt-0 last:md:rounded-l-none last:md:rounded-tr-md [&:not(:first-child):not(:last-child)]:-mt-px [&:not(:first-child):not(:last-child)]:rounded-none [&:not(:first-child):not(:last-child)]:md:-ml-px [&:not(:first-child):not(:last-child)]:md:mt-0"
+                                        type="text"
+                                        placeholder="Hospital Name"
+                                        id="hospital_name"
+                                          name="hospital_name"
+                                        
+                                    />
+                                    
                                 </div>
                                
                             </div>
                         </div>
-                         <div class="mt-3 w-full flex-1 xl:mt-0">
-                            <x-base.form-select id="patient_understanding" name="patient_understanding">
-                            <option value="">Select</option> 
-                            <option value="1">  വ്യക്തമായ ധാരണ ഉണ്ട്     </option>
-                            <option value="2">  ഒട്ടും തന്നെ  ധാരണ ഇല്ല     </option>
-                            <option value="3">  കുറച്ചു മാത്രം അറിയാം     </option>   
-                            </x-base.form-select>
-                        </div>
-                    </div>
-
-                    <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
-                        <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
-                            <div class="text-left">
-                                <div class="flex items-center">
-                                    <div class="font-medium">Understanding of the disease and its treatment by the family </div>
-                                    <div
-                                        class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
-                                        Required
-                                    </div>
-                                </div>
-                                <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
-                                    അസുഖത്തെ കുറിച്ചും ചികിത്സയെ കുറിച്ചും കുടുംബത്തിനുള്ള ധാരണ  
-                                </div>
-                               
-                            </div>
-                        </div>
-                                                   
-                            <div class="mt-3 w-full flex-1 xl:mt-0">
-                                <x-base.form-select id="family_understanding" name="family_understanding">
-                                <option value="">Select</option> 
-                                <option value="1">  വ്യക്തമായ ധാരണ ഉണ്ട്     </option>
-                                <option value="2">  ഒട്ടും തന്നെ  ധാരണ ഇല്ല     </option>
-                                <option value="3">  കുറച്ചു മാത്രം അറിയാം     </option>   
-                                </x-base.form-select>
-                            </div>                                                 
-                       
-                    </div>
-
 
                         
 
@@ -719,12 +716,32 @@
                             <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
                                 <div class="text-left">
                                     <div class="flex items-center">
-                                        <div class="font-medium">Does the ward member aware of this patient?</div>
+                                        <div class="font-medium">Name of Doctor</div>
                                     </div>
                                     <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
                                     </div>
+                                </div>
+                            </div>
+                            <div class="mt-3 w-full flex-1 xl:mt-0">
+                                <div class="flex flex-col items-center md:flex-row">
+                                    <x-base.form-input
+                                    class="first:rounded-b-none last:-mt-px last:rounded-t-none focus:z-10 first:md:rounded-r-none first:md:rounded-bl-md last:md:-ml-px last:md:mt-0 last:md:rounded-l-none last:md:rounded-tr-md [&:not(:first-child):not(:last-child)]:-mt-px [&:not(:first-child):not(:last-child)]:rounded-none [&:not(:first-child):not(:last-child)]:md:-ml-px [&:not(:first-child):not(:last-child)]:md:mt-0"
+                                    type="text"
+                                    placeholder="Doctor's Name"
+                                    id="doctor_name"
+                                      name="doctor_name"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
+                            <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
+                                <div class="text-left">
+                                    <div class="flex items-center">
+                                        <div class="font-medium">Treament Type</div>
+                                    </div>
                                     <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
-                                        വാർഡ് മെമ്പറിനു ഈ രോഗിയെ കുറിച്ച് അറിഞ്ഞിട്ടുണ്ടോ ? 
                                     </div>
                                 </div>
                             </div>
@@ -734,18 +751,18 @@
                                         class="w-full rounded-md border border-slate-300/60 bg-white px-3 py-2 shadow-sm first:rounded-b-none last:-mt-px last:rounded-t-none focus:z-10 first:md:rounded-r-none first:md:rounded-bl-md last:md:-ml-px last:md:mt-0 last:md:rounded-l-none last:md:rounded-tr-md [&:not(:first-child):not(:last-child)]:-mt-px [&:not(:first-child):not(:last-child)]:rounded-none [&:not(:first-child):not(:last-child)]:md:-ml-px [&:not(:first-child):not(:last-child)]:md:mt-0">
                                         <x-base.form-check>
                                         
-                                            <input type="radio" id="checkbox-switch-ward" name="ward_member_aware" value="1" >
-                                            <x-base.form-check.label for="checkbox-switch-ward">
-                                                Yes 
+                                            <input type="radio" id="checkbox-switch-public" name="treatment_type" value="1" >
+                                            <x-base.form-check.label for="checkbox-switch-public">
+                                                Public 
                                             </x-base.form-check.label>
                                         </x-base.form-check>
                                     </div>
                                     <div
                                         class="w-full rounded-md border border-slate-300/60 bg-white px-3 py-2 shadow-sm first:rounded-b-none last:-mt-px last:rounded-t-none focus:z-10 first:md:rounded-r-none first:md:rounded-bl-md last:md:-ml-px last:md:mt-0 last:md:rounded-l-none last:md:rounded-tr-md [&:not(:first-child):not(:last-child)]:-mt-px [&:not(:first-child):not(:last-child)]:rounded-none [&:not(:first-child):not(:last-child)]:md:-ml-px [&:not(:first-child):not(:last-child)]:md:mt-0">
                                         <x-base.form-check>                                         
-                                            <input type="radio" id="checkbox-switch-member" name="ward_member_aware" value="2" >
-                                            <x-base.form-check.label for="checkbox-switch-member">
-                                                No
+                                            <input type="radio" id="checkbox-switch-private" name="treatment_type" value="2" >
+                                            <x-base.form-check.label for="checkbox-switch-private">
+                                                Private
                                             </x-base.form-check.label>
                                         </x-base.form-check>
                                     </div>                                   
@@ -753,211 +770,222 @@
                             </div>
                         </div>
 
-
-
-
-
-                    <div id="phy_dif_block" style="display:none">
-
-                        <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center" >
-                            <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
-                                <div class="text-left">
-                                    <div class="flex items-center">
-                                        <div class="font-medium">Physical Difficulties</div>
-                                    </div>
-                                    <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
-                                    </div>
-                                    <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
-                                        ശാരീരിക ബുദ്ധിമുട്ടുകൾ 
+                        <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
+                        <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
+                            <div class="text-left">
+                                <div class="flex items-center">
+                                    <div class="font-medium">Treatment Details</div>
+                                    <div
+                                        class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
+                                        Required
                                     </div>
                                 </div>
-                            </div>
-                            <div class="mt-3 w-full flex-1 xl:mt-0">
-                                <div class="flex flex-col items-center md:flex-row">
-
-                                    <x-base.table class="border">
-                                        <x-base.table.thead>
-                                            <x-base.table.tr>
-                                                <x-base.table.th
-                                                    class="whitespace-nowrap bg-slate-50 text-slate-500 dark:bg-darkmode-800"
-                                                >
-                                                Difficulty
-                                                </x-base.table.th>
-                                                <x-base.table.th
-                                                    class="whitespace-nowrap bg-slate-50 text-slate-500 dark:bg-darkmode-800"
-                                                >
-                                                    <div class="flex items-center">
-                                                        Duration
-                                                      
-                                                    </div>
-                                                </x-base.table.th>
-                                                <x-base.table.th
-                                                    class="whitespace-nowrap bg-slate-50 !px-2 text-slate-500 dark:bg-darkmode-800"
-                                                >
-                                                    Period
-                                                </x-base.table.th>
-                                                
-                                                <x-base.table.th
-                                                    class="whitespace-nowrap bg-slate-50 !pl-2 text-slate-500 dark:bg-darkmode-800"
-                                                >
-                                                    Enteredon
-                                                </x-base.table.th>
-                                            </x-base.table.tr>
-                                        </x-base.table.thead>
-                                        <tbody id="phy_diff_content">
-                                            
-                                        </tbody>      
-                                    </x-base.table>
-                                                                      
-                                </div> 
+                                <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
+                                    ചികിത്സാ വിവരങ്ങൾ 
+                                </div>
                             </div>
                         </div>
+                        <div class="mt-3 w-full flex-1 xl:mt-0">
+                            <div class="flex flex-col items-center md:flex-row">
+                            <x-base.preview>                                            
+                                            <div class="mt-3">                                              
+                                                <div class="flex flex-col mt-2 sm:flex-row">
+                                                    <x-base.form-check class="mr-2">
+                                                        <x-base.form-check.input
+                                                            id="checkbox-switch-4"
+                                                            type="checkbox"
+                                                             class="toggle-checkbox"
+                                                               data-target="#allopathy-textarea"
+                                                            value="1"
+                                                            name="allopathy"
+                                                        />
+                                                        <x-base.form-check.label for="checkbox-switch-4">
+                                                          Allopathy
+                                                        </x-base.form-check.label>
+                                                    </x-base.form-check>
+                                                    <x-base.form-check class="mt-2 mr-2 sm:mt-0">
+                                                        <x-base.form-check.input
+                                                            id="checkbox-switch-5"
+                                                            type="checkbox"
+                                                            value="1"
+                                                             class="toggle-checkbox"
+                                                              data-target="#ayurveda-textarea"
+                                                               name="ayurveda"
+                                                        />
+                                                        <x-base.form-check.label for="checkbox-switch-5">
+                                                          Ayurveda
+                                                        </x-base.form-check.label>
+                                                    </x-base.form-check>
+                                                    <x-base.form-check class="mt-2 mr-2 sm:mt-0">
+                                                        <x-base.form-check.input
+                                                            id="checkbox-switch-6"
+                                                            type="checkbox"
+                                                            value="1"
+                                                             class="toggle-checkbox"
+                                                              data-target="#homeopathy-textarea"
+                                                              name="homeopathy"
+                                                        />
+                                                        <x-base.form-check.label for="checkbox-switch-6">
+                                                           Homeopathy
+                                                        </x-base.form-check.label>
+                                                    </x-base.form-check>
+                                                </div>
+                                            </div>
+                                            
+                                          
+                                        </x-base.preview>                                 
+                            </div>                               
+                        </div>
+                    </div> 
+
+
+                    <!-- Textarea for Allopathy -->
+
+                    <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center ">
+                        <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
+                            <div class="text-left">
+                                                             
+                            </div>
+                        </div>
+                        <div class="mt-3 w-full flex-1 xl:mt-0">
+                            <div class="flex flex-col items-center md:flex-row">
+                                <x-base.form-textarea
+                                class="-mb-1.5 resize-none rounded-xl pr-16 hidden"
+                                placeholder="Enter details for allopathy treatment"
+                                name="allopathy_treatment"
+                                id="allopathy-textarea"
+                                />                                  
+                            </div>                               
+                        </div>                        
+                    </div>  
+                    <!-- Textarea for Ayurveda -->
+                    <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center ">
+                        <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
+                            <div class="text-left">
+                                <div class="flex items-center">
+                                                                      
+                                </div>                              
+                            </div>
+                        </div>
+                        <div class="mt-3 w-full flex-1 xl:mt-0">
+                            <div class="flex flex-col items-center md:flex-row">                               
+                                <x-base.form-textarea
+                                class="-mb-1.5 resize-none rounded-xl pr-16 hidden"
+                                placeholder="Enter details for ayurveda treatment"
+                                name="ayurveda_treatment"
+                                id="ayurveda-textarea"
+                                />                                  
+                            </div>                               
+                        </div>                        
+                    </div>  
+                    <!-- Textarea for Homeopathy -->
+                    <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center ">
+                        <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
+                          
+                        </div>
+                        <div class="mt-3 w-full flex-1 xl:mt-0">
+                            <div class="flex flex-col items-center md:flex-row">                               
+                                <x-base.form-textarea
+                                class="-mb-1.5 resize-none rounded-xl pr-16 hidden"
+                                placeholder="Enter details for homeopathy treatment"
+                                name="homeopathy_treatment"
+                                id="homeopathy-textarea"
+                                />                                  
+                            </div>                               
+                        </div>                        
                     </div>
 
 
-
-
-
-
-
-                        <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
-                            <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
-                                <div class="text-left">
-                                    <div class="flex items-center">
-                                        <div class="font-medium">Current Physical Difficulties </div>
-                                        <div
-                                            class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
-                                            Required
-                                        </div>
+                    <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
+                        <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
+                            <div class="text-left">
+                                <div class="flex items-center">
+                                    <div class="font-medium">Present Health Condition</div>
+                                    <div
+                                        class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
+                                        Required
                                     </div>
-                                    <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
-                                        രോഗിയുടെ ഇപ്പോഴത്തെ ശാരീരിക ബുദ്ധിമുട്ടുകൾ 
-                                    </div>
-                                   
+                                </div>
+                                <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
+                                    രോഗം വന്നതിനു ശേഷമുള്ള അവസ്ഥാ 
                                 </div>
                             </div>
-                             <div class="mt-3 w-full flex-1 xl:mt-0">                                
-                                     <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
-                                            <div class="text-left">
-                                                <div class="flex items-center">
-                                                    <div class="font-medium"> </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mt-3 w-full flex-1 xl:mt-0">
-                                            <div class="flex flex-col items-center md:flex-row">
-                                                <table id="dynamicTable" class="w-full border-collapse border border-slate-300">
-                                                    <thead>
-                                                        <tr>
-                                                            <th class="border border-slate-300 px-4 py-2">ബുദ്ധിമുട്ട് (Difficulty)</th>
-                                                            <th class="border border-slate-300 px-4 py-2">കാലയളവ് (Duration)</th>
-                                                            <th class="border border-slate-300 px-4 py-2">ദൈർഘ്യം (Period)</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td class="border border-slate-300 px-4 py-2">
-                                                                <input type="text" name="difficulty[]" class="w-full border border-slate-300 px-2 py-1">
-                                                            </td>
-                                                            <td class="border border-slate-300 px-4 py-2">
-                                                                <select name="duration[]" class="border rounded-md px-3 py-2 mr-4">
-                                                                    <option value="">Duration</option>
-                                                                    <option value="1">1</option>
-                                                                    <option value="2">2</option>
-                                                                    <option value="3">3</option>
-                                                                    <option value="4">4</option>
-                                                                    <option value="5">5</option>
-                                                                    <option value="6">6</option>
-                                                                    <option value="7">7</option>
-                                                                    <option value="8">8</option>
-                                                                    <option value="9">9</option>
-                                                                    <option value="10">10</option>
-                                                                    <option value="11">11</option>
-                                                                
-                                                                    </select>
-                                                                    
-                                                            </td>
-                                                            <td class="border border-slate-300 px-4 py-2">
-                                                                <select name="period[]" class="border rounded-md px-3 py-2 mr-4 ">
-                                                                    <option value="">Period</option>
-                                                                    <option value="1">days</option>
-                                                                    <option value="2">weeks</option>
-                                                                    <option value="3">months</option>
-                                                                    <option value="4">years</option>
-                                                                    </select>  </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                               <div className="flex flex-wrap items-center gap-2">
-                                                <x-base.button class="w-full border-primary/50  md:w-auto"
-                                                       variant="primary" id="addRowButton"  >   + </x-base.button>
-                                                </div>    
-                                            </div>
-                                            <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
-                                                (രോഗി പറയുന്ന / കൂട്ടിരിപ്പുകാർ പറയുന്ന ശാരീരികവും മാനസികവുമായ ബുദ്ധിമുട്ടുകൾ അതിന്റെ കാലയളവും കൂടി വ്യക്തമാക്കുക )
-                                                </div>
-                                        </div>
-                                                                                   
+                        </div>
+                        <div class="mt-3 w-full flex-1 xl:mt-0">
+                            <div class="flex flex-col items-center md:flex-row">
+                                <x-base.form-textarea
+                                class="-mb-1.5 resize-none rounded-xl pr-16"
+                                placeholder="Present Health Condition"
+                                name="present_condition"
+                                />                                   
+                            </div>                               
+                        </div>
+                    </div> 
+
+
+                    <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
+                        <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
+                            <div class="text-left">
+                                <div class="flex items-center">
+                                    <div class="font-medium">Treatment Category </div>
+                                    <div
+                                        class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
+                                        Required
+                                    </div>
+                                </div>
+                               
+                            </div>
+                        </div>
+                        {{-- <div class="mt-3 w-full flex-1 xl:mt-0">
+                            <x-base.form-select id="treatment-type-select" name="treatment_category"  >
+                            <option value="">Select treatment Type</option> 
+                            </x-base.form-select>
+                        </div> --}}
+
+                        <div class="mt-3 w-full flex-1 xl:mt-0">                                
+                            <x-base.preview>
+                                <x-base.tom-select
+                                    class="w-full"
+                                    data-placeholder="Select Treatment Types"
+                                    multiple
+                                    id="treatment-type-select"
+                                    name="treatment_category"
+                                >                                                                                                          
+                                </x-base.tom-select>
+                            </x-base.preview>                                                   
+                        </div>
+                    </div> 
+
+                    <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
+                        <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
+                            <div class="text-left">
+                                <div class="flex items-center">
+                                    <div class="font-medium">Comfort Devices </div>
+                                    <div
+                                        class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
+                                        Required
+                                    </div>
+                                </div>
+                               
                             </div>
                         </div>
 
-
-                        <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
-                            <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
-                                <div class="text-left">
-                                    <div class="flex items-center">
-                                        <div class="font-medium">Community Volunteer who collected information </div>
-                                        <div
-                                            class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
-                                            Required
-                                        </div>
-                                    </div>
-                                    <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
-                                        രോഗിയുടെ വിവരങ്ങൾ ശേഖരിച്ച വ്യക്തി   
-                                    </div>
-                                   
-                                </div>
-                            </div>
-                                                       
-                                <div class="mt-3 w-full flex-1 xl:mt-0">
-                                    <x-base.form-select id="data_collected" name="data_collected">
-                                    <option value="">Select</option> 
-                                    <option value="1">  Asha Worker    </option>
-                                    <option value="2"> JPHN     </option>
-                                    <option value="3">  JHI     </option> 
-                                    <option value="4">  MLSP     </option>   
-                                    </x-base.form-select>
-                                </div>                                                 
-                           
+                        <div class="mt-3 w-full flex-1 xl:mt-0">                                
+                            <x-base.preview>
+                                <x-base.tom-select
+                                    class="w-full"
+                                    data-placeholder="Select the Comfort Devices"
+                                    multiple
+                                    id="comfortdevices-select"
+                                    name="comfortdevices"
+                                >                                                                                                          
+                                </x-base.tom-select>
+                            </x-base.preview>                                                   
                         </div>
-
-                        <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
-                            <div class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
-                                <div class="text-left">
-                                    <div class="flex items-center">
-                                        <div class="font-medium">Community Volunteer who collected information </div>
-                                        <div
-                                            class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
-                                            Required
-                                        </div>
-                                    </div>
-                                    <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
-                                        രോഗിയുടെ വിവരങ്ങൾ ശേഖരിച്ച വ്യക്തി   
-                                    </div>
-                                   
-                                </div>
-                            </div>
-                                                       
-                                <div class="mt-3 w-full flex-1 xl:mt-0">
-                                    <x-base.form-select id="volunteer" name="volunteer">
-                                    <option value="">Select</option> 
-                                   
-                                    </x-base.form-select>
-                                </div>                                                 
-                           
-                        </div>
-
-
+                       
+                    </div>
+                  
+                     
 
 
                   
@@ -966,11 +994,25 @@
                
                 </div>
             </div>
-
+<!-- 
+            <div class="flex border-t border-slate-200/80 px-7 py-5 md:justify-end">
+        <button id="prev-button" class="hidden">Previous</button>
+        <button id="next-button">Next</button>
+    </div> -->
 
     <div class="box flex border-t border-slate-200/80 px-7 py-5 md:justify-end">
 
-
+    {{-- <x-base.button
+                            class="w-full border-primary/50 px-10 md:w-auto"
+                            variant="outline-primary"
+                           id="prev-button"
+                        >
+                            <x-base.lucide
+                                class="-ml-2 mr-2 h-4 w-4 stroke-[1.3]"
+                               
+                            />
+                          Previous
+                        </x-base.button> --}}
                         <x-base.button
                             class="w-full border-primary/50 px-10 md:w-auto"
                             variant="outline-primary"
@@ -994,14 +1036,13 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-    let flows_status_step={{ $flow_status_id }};
-    let currentStep = {{ $flow_status_id }};
+    let currentStep = 0;
     const steps = document.querySelectorAll(".step");
     const formData = {}; // Store data for all steps
-  
+
     // Initialize step visibility
     steps.forEach((step, index) => {
-        step.style.display = index === flows_status_step ? "block" : "none";
+        step.style.display = index === 0 ? "block" : "none";
     });
 
     // Event listener for "Next" button
@@ -1012,54 +1053,17 @@ document.addEventListener("DOMContentLoaded", function () {
         saveLocationStepData(currentStep);
         if(currentStep==2)
         saveDiagnosisStepData(currentStep);
-
-
-
-        if (currentStep === 1) { 
-            const patientId = document.getElementById("hidden-patient-id").value;  
-            jQuery.ajax({
-                url: '/get_patient_physical_difficulty',  
-                type: 'GET',  
-                data: {
-                    patient_id: patientId  
-                },
-                dataType: 'json',  
-                success: function(response) { 
-                   
-                    if (Array.isArray(response) && response.length > 0) {
-                        document.getElementById("phy_dif_block").style.display="block";
-                        const $tableBody = jQuery('#phy_diff_content');  
-                        $tableBody.empty();  
-
-                        response.forEach(function (item) {
-                    const row = `<tr>
-                                    <td class="border-r">${item.physical_difficulty}</td>
-                                    <td class="border-r">${item.duration}</td>
-                                    <td class="border-r">${item.period_label}</td>
-                                   
-                                    <td class="border-r">${item.created_at_date}</td>  
-                                </tr>`;
-
-                    // Append the created row to the table body
-                    $tableBody.append(row);
-                });
-                    } else {
-                        console.log('No data received or data format is incorrect');
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error fetching data:', error);
-                }
-            });
-        }
-
-
-
-
-
-
     });
- 
+
+    // Event listener for "Previous" button
+    // document.getElementById("prev-button").addEventListener("click", function () {
+    //     if (currentStep > 0) {
+    //         steps[currentStep].style.display = "none";
+    //         currentStep--;
+    //         steps[currentStep].style.display = "block";
+    //         updateButtons();
+    //     }
+    // });
 
     function saveBasicStepData(step) {
     const data = {};
@@ -1082,7 +1086,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-    fetch("/patient_basic_details_save_jphn", {
+    fetch("/save-patient-basic", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -1100,10 +1104,6 @@ document.addEventListener("DOMContentLoaded", function () {
             // 🔥 Save patient_id in formData for later use
             if (responseData.patient_id) {
                 formData.patient_id = responseData.patient_id; 
-                const hiddenField = document.getElementById("hidden-patient-id");
-                    if (hiddenField) {
-                        hiddenField.value = responseData.patient_id;
-                    }
             }
 
             if (currentStep < steps.length - 1) {
@@ -1206,38 +1206,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         .map(option => option.value);
                     data[input.name] = selectedOptions;
                     formData[input.name] = selectedOptions;
-                } 
-                
-              else  if (input.name === 'difficulty[]' ) { 
-                        const difficulties = Array.from(document.querySelectorAll('input[name="difficulty[]"]'))
-                    .map(input => input.value.trim())
-                    .filter(value => value !== ""); // Remove empty values
-
-                // If there are any non-empty values, save them to data and formData
-                if (difficulties.length > 0) {
-                    data[input.name] = difficulties;
-                    formData[input.name] = difficulties;
-                }
-            }
-             else  if (input.name === 'period[]') {
-                const selectedPeriods = Array.from(document.querySelectorAll('select[name="period[]"]'))
-                    .map(select => select.value.trim())
-                    .filter(value => value !== ""); 
-                if (selectedPeriods.length > 0) {
-                    data['period[]'] = selectedPeriods;
-                    formData['period[]'] = selectedPeriods;
-                }
-            }
-            else  if (input.name === 'duration[]' ) { 
-                const selectedDurations = Array.from(document.querySelectorAll('select[name="duration[]"]'))
-                    .map(select => select.value.trim())
-                    .filter(value => value !== ""); 
-                if (selectedDurations.length > 0) {
-                    data['duration[]'] = selectedDurations;
-                    formData['duration[]'] = selectedDurations;
-                }
-                }
-                else {
+                } else {
                 data[input.name] = input.value;
                 formData[input.name] = input.value;
             }
@@ -1250,7 +1219,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-    fetch("/save-patient-disease-jphn", {
+    fetch("/save-patient-disease", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -1274,7 +1243,7 @@ document.addEventListener("DOMContentLoaded", function () {
             } else {
               
          //       submitFormData(); 
-         window.location.replace('/patient_profile/'+formData.patient_id);
+         window.location.replace('/patient_list');
             }
         }
     })
@@ -1507,7 +1476,18 @@ $(document).ready(function() {
     type: 'GET',
     dataType: 'json',
     success: function (response) {
-  
+        // const $select = jQuery('#diagnosis-select');
+
+        // if ($select.length) {
+        //     // Clear existing options
+        //     $select[0].tomselect.clearOptions();
+            
+        //     response.forEach(function (data) {
+        //         $select[0].tomselect.addOption({ value: data.id, text: data.diagnosis });
+        //     });
+        // } else {
+        //     console.error('Diagnosis select element not found.');
+        // }
 
 
 
@@ -1532,32 +1512,32 @@ diagSelect.refreshOptions();
 
 
 
+// jQuery.ajax({
+//         url: '/get_treatment_types',
+//         type: 'GET',
+//         dataType: 'json',
+//         success: function (response) {
+//             const $select = jQuery('#treatment-type-select');
+
+           
+//             if ($select.length) {
+//                 $select.empty().append('<option value="">Select</option>');
+
+//                 response.forEach(function (data) {
+//                     $select.append('<option value="' + data.id + '">' + data.treatment_type + '</option>');
+//                 });
+//             } else {
+//                 console.error('Treament type select element not found.');
+//             }
+//         },
+//         error: function (xhr, status, error) {
+//             console.error('Error fetching treatment type:', error);
+//         }
+//     });
+
 
 
     jQuery.ajax({
-    url: '/get_treatment_types',
-    type: 'GET',
-    dataType: 'json',
-    success: function (response) {
-        const $select = jQuery('#treatment-undertaken-select');
-
-        if ($select.length) {
-            // Clear existing options
-            $select[0].tomselect.clearOptions();
-            
-            response.forEach(function (data) {
-                $select[0].tomselect.addOption({ value: data.id, text: data.treatment_type });
-            });
-        } else {
-            console.error('Treament type select element not found.');
-        }
-    },
-    error: function (xhr, status, error) {
-        console.error('Error fetching treatment type:', error);
-    }
-});
-
-jQuery.ajax({
     url: '/get_treatment_types',
     type: 'GET',
     dataType: 'json',
@@ -1581,7 +1561,28 @@ jQuery.ajax({
 });
 
 
+    jQuery.ajax({
+    url: '/get_comfort_devices',
+    type: 'GET',
+    dataType: 'json',
+    success: function (response) {
+        const $select = jQuery('#comfortdevices-select');
 
+        if ($select.length) {
+            // Clear existing options
+            $select[0].tomselect.clearOptions();
+            
+            response.forEach(function (data) {
+                $select[0].tomselect.addOption({ value: data.id, text: data.comfort_device_name });
+            });
+        } else {
+            console.error('Comfort select element not found.');
+        }
+    },
+    error: function (xhr, status, error) {
+        console.error('Error fetching diagnosis:', error);
+    }
+});
 
 
 
@@ -1615,233 +1616,6 @@ jQuery.ajax({
         }
     });
 });
-
-
-
-
-document.getElementById('addRowButton').addEventListener('click', function () {
-        // Reference the table body
-        const tableBody = document.querySelector('#dynamicTable tbody');
-        
-        // Create a new row
-        const newRow = document.createElement('tr');
-        
-        // Add cells for Difficulty, Period, and Duration
-        newRow.innerHTML = `
-            <td class="border border-slate-300 px-4 py-2">
-                <input type="text" name="difficulty[]" class="w-full border border-slate-300 px-2 py-1">
-            </td>
-            <td class="border border-slate-300 px-4 py-2">
-                <select name="duration[]" class="border rounded-md px-3 py-2 mr-4">
-                                                        <option value="">Duration</option>
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                        <option value="5">5</option>
-                                                        <option value="6">6</option>
-                                                        <option value="7">7</option>
-                                                        <option value="8">8</option>
-                                                        <option value="9">9</option>
-                                                        <option value="10">10</option>
-                                                        <option value="11">11</option>
-                                                    
-                                                        </select>
-            </td>
-            <td class="border border-slate-300 px-4 py-2">
-                <select name="period[]" class="border rounded-md px-3 py-2 mr-4 ">
-                                                        <option value="">Period</option>
-                                                        <option value="1">days</option>
-                                                        <option value="2">weeks</option>
-                                                        <option value="3">months</option>
-                                                        <option value="4">years</option>
-                                                        </select>
-            </td>
-        `;
-
-        // Append the new row to the table
-        tableBody.appendChild(newRow);
-    });
-
-
-
-
-
-    jQuery('#data_collected').change(function() {
-        var selected_id = $(this).val();        
-        if (selected_id) {
-            const patientId = document.getElementById("hidden-patient-id").value;          
-            if (selected_id==1) {           
-                 
-
-
-
-                jQuery.ajax({
-                    url: '/get-ward-of-patient/' + patientId, 
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function(response) {              
-                        if (response.error) {
-                         console.error(response.error);
-                        }
-                        else {
-                            const ward_id = response.id;
-
-                            jQuery.ajax({
-                                url: '/get_asha_in_ward/' + ward_id, 
-                                type: 'GET',
-                                dataType: 'json',
-                                success: function(response) {                                
-                                    jQuery('#volunteer').empty();
-                                    jQuery('#volunteer').append('<option value="">Select Asha worker</option>');                            
-                                    response.forEach(function(ashaworker) { 
-                                        jQuery('#volunteer').append('<option value="' + ashaworker.id + '">' + ashaworker.asha_worker_name + '</option>');
-                                    });
-                                    },
-                                    error: function(xhr, status, error) {
-                                        console.error("Error fetching wards: " + error);
-                                    }
-                                });
-
-                           
-                        }
-                    
-                    },
-                    error: function(xhr, status, error) {
-                        console.error("Error fetching asha worker details: " + error);
-                    }
-                });
-
-            }
-
-          else  if (selected_id==2) {
-               
-           
-               jQuery.ajax({
-                   url: '/get-subcentre-of-patient/' + patientId, 
-                   type: 'GET',
-                   dataType: 'json',
-                   success: function(response) {              
-                       if (response.error) {
-                        console.error(response.error);
-                       }
-                       else {
-                           const sub_centre_id = response.id;
-
-                           jQuery.ajax({
-                               url: '/get_jphns_of_subcentres/' + sub_centre_id, 
-                               type: 'GET',
-                               dataType: 'json',
-                               success: function(response) {                                
-                                   jQuery('#volunteer').empty();
-                                   jQuery('#volunteer').append('<option value="">Select JPHN</option>');                            
-                                   response.forEach(function(jphn) { 
-                                       jQuery('#volunteer').append('<option value="' + jphn.id + '">' + jphn.jphn_name + '</option>');
-                                   });
-                                   },
-                                   error: function(xhr, status, error) {
-                                       console.error("Error fetching JPHNs: " + error);
-                                   }
-                               });
-
-                          
-                       }
-                   
-                   },
-                   error: function(xhr, status, error) {
-                       console.error("Error fetching asha worker details: " + error);
-                   }
-               });
-
-           }
-
-           else  if (selected_id==3) {
-               
-           
-               jQuery.ajax({
-                   url: '/get-subcentre-of-patient/' + patientId, 
-                   type: 'GET',
-                   dataType: 'json',
-                   success: function(response) {              
-                       if (response.error) {
-                        console.error(response.error);
-                       }
-                       else {
-                           const sub_centre_id = response.id;
-
-                           jQuery.ajax({
-                               url: '/get_jhis_of_subcentres/' + sub_centre_id, 
-                               type: 'GET',
-                               dataType: 'json',
-                               success: function(response) {                                
-                                   jQuery('#volunteer').empty();
-                                   jQuery('#volunteer').append('<option value="">Select JHI</option>');                            
-                                   response.forEach(function(jhi) { 
-                                       jQuery('#volunteer').append('<option value="' + jhi.id + '">' + jhi.	jhi_name + '</option>');
-                                   });
-                                   },
-                                   error: function(xhr, status, error) {
-                                       console.error("Error fetching JHIs: " + error);
-                                   }
-                               });
-                          
-                       }
-                   
-                   },
-                   error: function(xhr, status, error) {
-                       console.error("Error fetching asha worker details: " + error);
-                   }
-               });
-
-           }
-
-           else if (selected_id==4) {
-               
-           
-               jQuery.ajax({
-                   url: '/get-subcentre-of-patient/' + patientId, 
-                   type: 'GET',
-                   dataType: 'json',
-                   success: function(response) {              
-                       if (response.error) {
-                        console.error(response.error);
-                       }
-                       else {
-                           const sub_centre_id = response.id;
-
-                           jQuery.ajax({
-                               url: '/get_mlps_of_subcentres/' + sub_centre_id, 
-                               type: 'GET',
-                               dataType: 'json',
-                               success: function(response) {                                
-                                   jQuery('#volunteer').empty();
-                                   jQuery('#volunteer').append('<option value="">Select MLSP</option>');                            
-                                   response.forEach(function(jhi) { 
-                                       jQuery('#volunteer').append('<option value="' + jhi.id + '">' + jhi.	mlsp_name + '</option>');
-                                   });
-                                   },
-                                   error: function(xhr, status, error) {
-                                       console.error("Error fetching JHIs: " + error);
-                                   }
-                               });
-                          
-                       }
-                   
-                   },
-                   error: function(xhr, status, error) {
-                       console.error("Error fetching asha worker details: " + error);
-                   }
-               });
-
-           }
-            
-                  
-        } else {
-         
-            $('#awc-worker-select').empty();
-          
-        }
-    });
 
 
 

@@ -26,6 +26,7 @@
 @import "./components/_scrollbar-hidden.css";
 @import "./components/_typing-dots.css";
 @import "./components/_zoom-in.css";
+@import 'datatables.net-dt/css/dataTables.dataTables.min';
 
 /*
  |--------------------------------------------------------------------------
@@ -42,3 +43,4 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+

@@ -25,149 +25,23 @@
                         {{ session('success') }}
                     </x-base.alert>
                 @endif
-                    <div class="overflow-auto xl:overflow-visible">
-                       
-                        <x-base.table class="border-b border-slate-200/60">
-                            <x-base.table.thead>
-                                <x-base.table.tr>
-                                    <x-base.table.td
-                                        class="w-5 border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500"
-                                    >
-                                        <x-base.form-check.input type="checkbox" />
-                                    </x-base.table.td>
-                                    <x-base.table.td
-                                        class="border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500"
-                                    >
-                                  First Name
-                                    </x-base.table.td>
-                                    <x-base.table.td
-                                    class="border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500"
-                                >
-                                Second Name
-                                </x-base.table.td>
-                                <x-base.table.td
-                                    class="border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500"
-                                >
-                              Dob
-                                </x-base.table.td>
-                                <x-base.table.td
-                                class="border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500"
-                            >
-                          Gender
-                            </x-base.table.td>
-                                   
-                                   
-                                   
-                                    <x-base.table.td
-                                        class="w-20 border-t border-slate-200/60 bg-slate-50 py-4 text-center font-medium text-slate-500"
-                                    >
-                                        Action
-                                    </x-base.table.td>
-                                </x-base.table.tr>
-                            </x-base.table.thead>
-                            <x-base.table.tbody>
-                                @foreach ($patients as $patient)
-                                    <x-base.table.tr class="[&_td]:last:border-b-0">
-                                        <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
-                                            <x-base.form-check.input type="checkbox" />
-                                        </x-base.table.td>
-                                        <x-base.table.td class="w-80 border-dashed py-4 dark:bg-darkmode-600">
-                                            <div class="flex items-center">
-                                               
-                                                <div class="ml-3.5">
-                                                    <a
-                                                        class="whitespace-nowrap font-medium"
-                                                        href="/patient_profile/{{ $patient['id'] }}"
-                                                    >
-                                                        {{ $patient['first_name'] }}
-                                                    </a>
-                                                  
-                                                </div>
-                                            </div>
-                                        </x-base.table.td>
-                                        <x-base.table.td class="w-80 border-dashed py-4 dark:bg-darkmode-600">
-                                            <div class="flex items-center">
-                                               
-                                                <div class="ml-3.5">
-                                                    <a
-                                                        class="whitespace-nowrap font-medium"
-                                                        href=""
-                                                    > 
-                                                    {{  $patient->second_name  }}
-                                                    </a>
-                                                  
-                                                </div>
-                                            </div>
-                                        </x-base.table.td>
-                                        <x-base.table.td class="w-80 border-dashed py-4 dark:bg-darkmode-600">
-                                            <div class="flex items-center">
-                                               
-                                                <div class="ml-3.5">
-                                                    <a
-                                                        class="whitespace-nowrap font-medium"
-                                                        href=""
-                                                    > 
-                                                    {{ \Carbon\Carbon::parse($patient->dob)->format('d-M-Y') }}
-                                                    </a>
-                                                  
-                                                </div>
-                                            </div>
-                                        </x-base.table.td>
-                                        <x-base.table.td class="w-80 border-dashed py-4 dark:bg-darkmode-600">
-                                            <div class="flex items-center">
-                                               
-                                                <div class="ml-3.5">
-                                                    <a
-                                                        class="whitespace-nowrap font-medium"
-                                                        href=""
-                                                    > 
-                                                        {{   ($patient->gender===1)? "Male":"Female"  }}
-                                                       
-                                                    </a>
-                                                  
-                                                </div>
-                                            </div>
-                                        </x-base.table.td>
-                                       
-                                       
-                                     
-                                        <x-base.table.td class="relative border-dashed py-4 dark:bg-darkmode-600">
-                                            <div class="flex items-center justify-center">
-                                                <x-base.menu class="h-5">
-                                                    <x-base.menu.button class="h-5 w-5 text-slate-500">
-                                                        <x-base.lucide
-                                                            class="h-5 w-5 fill-slate-400/70 stroke-slate-400/70"
-                                                            icon="MoreVertical"
-                                                        />
-                                                    </x-base.menu.button>
-                                                    <x-base.menu.items class="w-40">
-                                                        <x-base.menu.item :href="route('ward_members.member_edit', $patient->id)">
-                                                            <x-base.lucide
-                                                                class="mr-2 h-4 w-4"
-                                                                icon="CheckSquare"
-                                                            />
-                                                            Edit
-                                                        </x-base.menu.item>
-                                                        <x-base.menu.item 
-                                                            class="text-danger delete-permission"
-                                                            data-id="{{ $patient->id }}"
-                                                            href="javascript:void(0);">
-                                                            <x-base.lucide class="mr-2 h-4 w-4" icon="Trash2" />
-                                                            Delete
-                                                        </x-base.menu.item>
-                                                        
-                                                    </x-base.menu.items>
-                                                </x-base.menu>
-                                            </div>
-                                        </x-base.table.td>
-                                    </x-base.table.tr>
-                                @endforeach
-                            </x-base.table.tbody>
-                        </x-base.table>
+                    <div class="overflow-auto xl:overflow-visible">                      
+                        <table id="patients-table" class="display" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Dob</th>
+                                    <th>Phone No.</th>
+                                    @if($list_type == 'pink_pending' || $list_type == 'blue_pending' || $list_type == 'white_pending')
+                                        <th>Action</th>
+                                    @endif
+                                </tr>
+                            </thead>
+                            <tbody></tbody> 
+                        </table>
                     </div>
-                    <div class="mt-4">
-                        {{ $patients->links() }}
-                    </div>
+                    
                     
                 </div>
             </div>
@@ -177,42 +51,86 @@
 
 @push('custom-scripts')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+{{-- @vite(['resources/js/app.js', 'resources/css/app.css']) --}}
+<link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.css" />  
+<script src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
 <script>
-// $(document).ready(function() { 
-//     // When the delete button is clicked
-//     $('.delete-permission').click(function(e) { 
-//         e.preventDefault();
 
-//         // Get the ID of the permission
-//         var permissionId = $(this).data('id');
-        
-//         // Show confirmation popup
-//         if (confirm('Are you sure you want to delete this permission?')) {
-//             // Send AJAX request to delete the permission
-//             $.ajax({
-//                 url: '/permissions/' + permissionId,  // Adjust the URL if necessary
-//                 method: 'DELETE',
-//                 data: {
-//                     _token: '{{ csrf_token() }}',  // CSRF token for security
-//                 },
-//                 success: function(response) {
-//                     if (response.success) {
-//                         // Remove the permission from the DOM
-//                         $('#permission-item-' + permissionId).remove();  // Make sure the element has the correct ID
-//                         alert(response.message);  // Show success message
-//                     } else {
-//                         alert('Error: ' + response.message);  // Show error message if permission deletion failed
-//                     }
-//                 },
-//                 error: function(xhr, status, error) {
-//                     // Handle errors in AJAX request
-//                     alert('Error: ' + error);
-//                 }
-//             });
-//         }
-//     });
-// });
-
+jQuery(document).ready(function() {
+    jQuery('#patients-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: 'getPatientsList',
+                    type: 'GET',
+                    data: function(d)
+                    {
+                        d.list_type="{{ $list_type }}"
+                    }
+                },
+                columns: [
+                        {  
+                            data: null,
+                            render: function(data, type, row) {
+                                return `<a href="/patient_profile/${data.id}" >${data.patient_code}</a>`;
+                            }
+                        },
+                        { data: 'name' },                  
+                        { data: 'dob' },
+                        { data: 'phone_no' },
+                            @if($list_type=='pink_pending')
+                            { 
+                                data: null,
+                                render: function(data, type, row) {
+                                    return `  <x-base.button class="w-24" variant="primary"><a href="/edit_patient/${data.id}" class="btn btn-sm primary">Proceed</a></x-base.button>`;
+                                },
+                                orderable: false, 
+                                searchable: false  
+                            }                           
+                          
+                           
+                            @elseif( $list_type=='blue_pending')
+                            { 
+                                data: null,
+                                render: function(data, type, row) {
+                                    return `  <x-base.button class="w-24" variant="primary"><a href="/patient_blue_form/${data.id}" class="btn btn-sm primary">Proceed</a></x-base.button>`;
+                                },
+                                orderable: false, 
+                                searchable: false  
+                            }  
+                            @elseif( $list_type=='white_pending')
+                            { 
+                                data: null,
+                                render: function(data, type, row) {
+                                    return `  <x-base.button class="w-24" variant="primary"><a href="/edit_white_form/${data.id}" class="btn btn-sm primary">Proceed</a></x-base.button>`;
+                                },
+                                orderable: false, 
+                                searchable: false  
+                            }                          
+                          
+                            @endif
+                    ],
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print' 
+                ],
+                pageLength: 10,
+                language: {
+                    info: "Showing _START_ to _END_ of _TOTAL_ entries",  // Customize the info text
+                    infoFiltered: "",  // Remove the "filtered from X total entries" text
+                    search: "Search:",  // Customize the search label
+                    lengthMenu: "Show _MENU_ entries",  // Customize the entries per page label
+                },
+                paging: true,
+                lengthChange: true,
+                searching: true,
+                ordering: true,
+                stateSave: true, 
+                drawCallback: function(settings) {
+                    console.log("Draw callback triggered");
+                }
+            });
+        });
 
 </script>
 @endpush

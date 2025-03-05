@@ -57,7 +57,116 @@ class SideMenu {
                 'title' => "PATIENT MANAGEMENT",  
                 'permission' => 'patient-management',  
                 'type' => "main_menu",  
-            ],  
+            ],             
+
+            [  
+                'type' => "sub_menu", 
+                'icon' => "Users", 
+                'permission' => 'patient-jphn',   
+                'title' => "Pink Form",  
+                'sub_menu' => [  
+                    [
+                        'icon' => "plus",
+                       'route_name' => "register_new_patient_jphn",
+                        'params' => [],
+                        'title' => "Add a Patient",
+                        'permission' => 'register-patient-jphn',  
+                        'type' => "sub_menu",           
+                    ], 
+                    [  
+                        'icon' => "Newspaper",  
+                        'route_name' => "pink_pending.list",  
+                        'params' => [],  
+                        'title' => "Pending",  
+                        'permission' => 'pending-pink-list', 
+                        'type' => "sub_menu",  
+                    ],  
+                    [  
+                        'icon' => "Newspaper",  
+                        'route_name' => "pink_completed.list",  
+                        'params' => [],  
+                        'title' => "Completed",  
+                        'permission' => 'pending-pink-list', 
+                        'type' => "sub_menu",  
+                    ],                    
+                ],  
+            ], 
+
+            [  
+                'type' => "sub_menu", 
+                'icon' => "Users", 
+                'permission' => 'patient-jphn',   
+                'title' => "Blue Form",  
+                'sub_menu' => [                      
+                    [
+                        'icon' => "List",
+                       'route_name' => "blue_pending.list",
+                        'params' => [],
+                        'title' => "Pending",
+                        'permission' => 'pending-blue-form',     
+                        'type' => "sub_menu",       
+                    ], 
+                    'sub_menu' =>                       
+                    [
+                        'icon' => "List",
+                       'route_name' => "blue_completed.list",
+                        'params' => [],
+                        'title' => "Completed",
+                        'permission' => 'pending-blue-form',     
+                        'type' => "sub_menu",       
+                    ],                      
+                ],  
+            ], 
+            [  
+                'type' => "sub_menu", 
+                'icon' => "Users", 
+                'permission' => 'patient-classify',   
+                'title' => "Classify",  
+                'sub_menu' => [                      
+                    [
+                        'icon' => "List",
+                       'route_name' => "classify_pending.list",
+                        'params' => [],
+                        'title' => "Pending",
+                        'permission' => 'classify-pending',     
+                        'type' => "sub_menu",       
+                    ], 
+                    'sub_menu' =>                       
+                    [
+                        'icon' => "List",
+                       'route_name' => "classify_completed.list",
+                        'params' => [],
+                        'title' => "Completed",
+                        'permission' => 'classify-completed',     
+                        'type' => "sub_menu",       
+                    ],                      
+                ],  
+            ], 
+
+            [  
+                'type' => "sub_menu", 
+                'icon' => "Users", 
+                'permission' => 'patient-mlsp',   
+                'title' => "White Form",  
+                'sub_menu' => [                      
+                    [
+                        'icon' => "List",
+                        'route_name' => "white_pending.list",
+                        'params' => [],
+                        'title' => "Pending",
+                        'permission' => 'patient-add', 
+                        'type' => "sub_menu",       
+                    ],  
+                    [
+                        'icon' => "List",
+                        'route_name' => "white_completed.list",
+                        'params' => [],
+                        'title' => "Completed",
+                        'permission' => 'patient-add', 
+                        'type' => "sub_menu",       
+                    ],                     
+                ],  
+            ],
             [  
                 'type' => "sub_menu", 
                 'icon' => "Users", 
@@ -90,14 +199,7 @@ class SideMenu {
                     ],  
                 ],  
             ],  
-            [
-                'icon' => "plus",
-               'route_name' => "register_new_patient_jphn",
-                'params' => [],
-                'title' => "Register New Patient",
-                'permission' => 'register-patient-jphn',  
-                'type' => "sub_menu",           
-            ],
+            
            
             [
                 'icon' => "List",
@@ -107,6 +209,7 @@ class SideMenu {
                 'permission' => 'assesment-checklist',     
                 'type' => "sub_menu",       
             ],
+            
 
              //Palliative Nurse
              [  

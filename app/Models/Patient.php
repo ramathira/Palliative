@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 class Patient extends Model
 {
     protected $table = 'patient_master';
-    protected $fillable = ['first_name','patient_code','second_name','dob','gender','phone_no','aadhar','status','enteredby'];
+    protected $fillable = ['first_name','patient_code','second_name','dob','gender','phone_no','aadhar','status','enteredby','flow_status_id'];
 
 
     protected static function boot()

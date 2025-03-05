@@ -29,11 +29,24 @@
                 </div>
                 <div class="rounded-[0.6rem] bg-slate-50 pb-6 pt-12">
                     <div class="flex items-center justify-center text-xl font-medium">
-                        {{ $patient['first_name']." ".$patient['second_name']  }}
-                        <x-base.lucide
-                            class="ml-2 h-5 w-5 fill-blue-500/30 text-blue-500"
-                            icon="BadgeCheck"
-                        />
+                        {{ $patient['first_name']." ".$patient['second_name']  }}                     
+                        
+                        @if($patient->class)
+                            @php
+                                $variant = ($patient->class == 1) ? 'soft-warning' : 'soft-pending';
+                                $text = ($patient->class == 1) ? 'Home Bound' : 'Bed Ridden';
+                            @endphp
+                        
+                            <x-base.button
+                                class="w-24"
+                                variant="{{ $variant }}"
+                                rounded
+                                size="sm"
+                            >
+                                {{ $text }}
+                            </x-base.button>
+                        @endif
+
                     </div>
                     <div class="mt-2.5 flex flex-col items-center justify-center gap-x-5 gap-y-2 sm:flex-row">
                         <div class="flex items-center text-slate-500">
@@ -78,9 +91,36 @@
                                 Profile
                             </x-base.tab.button>
                         </x-base.tab>
-                        
-                      
                         <x-base.tab
+                            class="bg-slate-50 first:rounded-l-[0.6rem] last:rounded-r-[0.6rem] [&[aria-selected='true']_button]:text-current"
+                            id="example-2-tab"
+                            selected="{{ request()->query('page') === 'family' }}"
+                        >
+                            <x-base.tab.button
+                                class="flex w-full items-center justify-center whitespace-nowrap rounded-[0.6rem] py-2.5 text-[0.94rem] text-slate-500 xl:w-40"
+                                as="button"
+                            >
+                                Family
+                                <span
+                                    class="ml-2 flex h-5 items-center justify-center rounded-full border border-theme-1/10 bg-theme-1/10 px-1.5 text-xs font-medium text-theme-1/70"
+                                >
+                                    7
+                                </span>
+                            </x-base.tab.button>
+                        </x-base.tab>
+                        {{-- <x-base.tab
+                            class="bg-slate-50 first:rounded-l-[0.6rem] last:rounded-r-[0.6rem] [&[aria-selected='true']_button]:text-current"
+                            id="example-3-tab"
+                            selected="{{ request()->query('page') === 'achievements' }}"
+                        >
+                            <x-base.tab.button
+                                class="flex w-full items-center justify-center whitespace-nowrap rounded-[0.6rem] py-2.5 text-[0.94rem] text-slate-500 xl:w-40"
+                                as="button"
+                            >
+                                Achievements
+                            </x-base.tab.button>
+                        </x-base.tab> --}}
+                        {{-- <x-base.tab
                             class="bg-slate-50 first:rounded-l-[0.6rem] last:rounded-r-[0.6rem] [&[aria-selected='true']_button]:text-current"
                             id="example-4-tab"
                             selected="{{ request()->query('page') === 'contacts' }}"
@@ -89,22 +129,30 @@
                                 class="flex w-full items-center justify-center whitespace-nowrap rounded-[0.6rem] py-2.5 text-[0.94rem] text-slate-500 xl:w-40"
                                 as="button"
                             >
-                                Family Members
+                                Contacts
                                 <span
                                     class="ml-2 flex h-5 items-center justify-center rounded-full border border-theme-1/10 bg-theme-1/10 px-1.5 text-xs font-medium text-theme-1/70"
                                 >
                                     5
                                 </span>
                             </x-base.tab.button>
-                        </x-base.tab>
-                       
+                        </x-base.tab> --}}
+                        {{-- <x-base.tab
+                            class="bg-slate-50 first:rounded-l-[0.6rem] last:rounded-r-[0.6rem] [&[aria-selected='true']_button]:text-current"
+                            id="example-5-tab"
+                            selected="{{ request()->query('page') === 'default' }}"
+                        >
+                            <x-base.tab.button
+                                class="flex w-full items-center justify-center whitespace-nowrap rounded-[0.6rem] py-2.5 text-[0.94rem] text-slate-500 xl:w-40"
+                                as="button"
+                            >
+                                Default
+                            </x-base.tab.button>
+                        </x-base.tab> --}}
                     </x-base.tab.list>
                     <div class="flex items-center gap-3 2xl:ml-auto">
-                        <x-base.menu class="mr-auto 2xl:mr-0">
-                          
-                           
-                        </x-base.menu>
                         
+                       
                         <x-base.menu>
                             <x-base.menu.button
                                 class="rounded-[0.6rem] bg-white py-3 text-[0.94rem]"
@@ -123,21 +171,9 @@
                                     <x-base.lucide
                                         class="mr-2 h-4 w-4"
                                         icon="Settings"
-                                    /> Settings
+                                    /> Delete
                                 </x-base.menu.item>
-                                <x-base.menu.item>
-                                    <x-base.lucide
-                                        class="mr-2 h-4 w-4"
-                                        icon="Contact"
-                                    /> Contacts
-                                </x-base.menu.item>
-                                <x-base.menu.item class="text-danger">
-                                    <x-base.lucide
-                                        class="mr-2 h-4 w-4"
-                                        icon="Lock"
-                                    />
-                                    Lock Account
-                                </x-base.menu.item>
+                                
                             </x-base.menu.items>
                         </x-base.menu>
                     </div>
@@ -150,184 +186,181 @@
                         <div class="mt-3.5 grid grid-cols-12 gap-x-6 gap-y-7">
                             <div class="col-span-12 xl:col-span-8">
                                 <div class="flex flex-col gap-y-7">
-                                    <div class="box box--stacked flex flex-col p-5">
-                                        <div
-                                            class="mb-5 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
-                                            Disease details
-                                        </div>
-                                      
-
-
-                                        <div class="-my-3">
+                                   @if($patient_disease)
+                                        <div class="box box--stacked flex flex-col p-5">
                                             <div
+                                                class="mb-5 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
+                                                Disease details
+                                            </div>
+                                            <div class="-my-3">
+                                                <div
+                                                    class="relative overflow-hidden before:absolute before:inset-y-0 before:left-0 before:ml-[14px] before:w-px before:bg-slate-200/60 before:content-[''] before:dark:bg-darkmode-400">
+                                                        <div @class([
+                                                                'px-4 py-3 ml-8',
+                                                                "before:content-[''] before:ml-1 before:absolute before:w-5 before:h-5 before:bg-slate-200 before:rounded-full before:inset-y-0 before:my-auto before:left-0 before:dark:bg-darkmode-300 before:z-10",
+                                                                "after:content-[''] after:absolute after:w-1.5 after:h-1.5 after:bg-slate-500 after:rounded-full after:inset-y-0 after:my-auto after:left-0 after:ml-[11px] after:dark:bg-darkmode-200 after:z-10",
+                                                            ])>
+                                                                <a
+                                                                    class="font-medium text-primary"
+                                                                    href=""
+                                                                >
+                                                                {{ $patient_disease->diagnosis ?? '' }}
+                                                                </a>                                                          
+                                                            </div>                                                                                               
+                                                </div>
+                                                <div
+                                                    class="relative overflow-hidden before:absolute before:inset-y-0 before:left-0 before:ml-[14px] before:w-px before:bg-slate-200/60 before:content-[''] before:dark:bg-darkmode-400">
+                                                        <div @class([
+                                                                'px-4 py-3 ml-8',
+                                                                "before:content-[''] before:ml-1 before:absolute before:w-5 before:h-5 before:bg-slate-200 before:rounded-full before:inset-y-0 before:my-auto before:left-0 before:dark:bg-darkmode-300 before:z-10",
+                                                                "after:content-[''] after:absolute after:w-1.5 after:h-1.5 after:bg-slate-500 after:rounded-full after:inset-y-0 after:my-auto after:left-0 after:ml-[11px] after:dark:bg-darkmode-200 after:z-10",
+                                                            ])>
+                                                                Diagnosed Date:                                                          
+                                                            {{ $patient->diagnosed_date ? \Carbon\Carbon::parse($patient->diagnosed_date)->format('d-M-Y') : 'N/A' }}
+                                                                                                                    
+                                                            </div>                                                                                               
+                                                </div>
+
+                                                <div
                                                 class="relative overflow-hidden before:absolute before:inset-y-0 before:left-0 before:ml-[14px] before:w-px before:bg-slate-200/60 before:content-[''] before:dark:bg-darkmode-400">
-                                                     <div @class([
+                                                    <div @class([
                                                             'px-4 py-3 ml-8',
                                                             "before:content-[''] before:ml-1 before:absolute before:w-5 before:h-5 before:bg-slate-200 before:rounded-full before:inset-y-0 before:my-auto before:left-0 before:dark:bg-darkmode-300 before:z-10",
                                                             "after:content-[''] after:absolute after:w-1.5 after:h-1.5 after:bg-slate-500 after:rounded-full after:inset-y-0 after:my-auto after:left-0 after:ml-[11px] after:dark:bg-darkmode-200 after:z-10",
                                                         ])>
-                                                            <a
-                                                                class="font-medium text-primary"
-                                                                href=""
-                                                            >
-                                                            {{ $patient_disease->diagnosis ?? '' }}
-                                                            </a>                                                          
-                                                        </div>                                                                                               
-                                            </div>
-                                            <div
-                                                class="relative overflow-hidden before:absolute before:inset-y-0 before:left-0 before:ml-[14px] before:w-px before:bg-slate-200/60 before:content-[''] before:dark:bg-darkmode-400">
-                                                     <div @class([
-                                                            'px-4 py-3 ml-8',
-                                                            "before:content-[''] before:ml-1 before:absolute before:w-5 before:h-5 before:bg-slate-200 before:rounded-full before:inset-y-0 before:my-auto before:left-0 before:dark:bg-darkmode-300 before:z-10",
-                                                            "after:content-[''] after:absolute after:w-1.5 after:h-1.5 after:bg-slate-500 after:rounded-full after:inset-y-0 after:my-auto after:left-0 after:ml-[11px] after:dark:bg-darkmode-200 after:z-10",
-                                                        ])>
-                                                            Diagnosed Date:                                                          
-                                                           {{ $patient->diagnosed_date ? \Carbon\Carbon::parse($patient->diagnosed_date)->format('d-M-Y') : 'N/A' }}
-                                                                                                                   
-                                                        </div>                                                                                               
-                                            </div>
-
-                                            <div
-                                            class="relative overflow-hidden before:absolute before:inset-y-0 before:left-0 before:ml-[14px] before:w-px before:bg-slate-200/60 before:content-[''] before:dark:bg-darkmode-400">
-                                                 <div @class([
-                                                        'px-4 py-3 ml-8',
-                                                        "before:content-[''] before:ml-1 before:absolute before:w-5 before:h-5 before:bg-slate-200 before:rounded-full before:inset-y-0 before:my-auto before:left-0 before:dark:bg-darkmode-300 before:z-10",
-                                                        "after:content-[''] after:absolute after:w-1.5 after:h-1.5 after:bg-slate-500 after:rounded-full after:inset-y-0 after:my-auto after:left-0 after:ml-[11px] after:dark:bg-darkmode-200 after:z-10",
-                                                    ])>
-                                                        Prior Condition:                                                          
-                                                        <span class="group flex items-center text-xs font-medium rounded-md sm:ml-2 border px-1.5 py-px mr-auto sm:mr-0 text-info bg-info/10 border-info/10">
-                                                            <span class="mr-1.5 h-1.5 w-1.5 rounded-full bg-info/80"></span>
-                                                            <span class="-mt-px">
-                                                                {{ $patient_disease->prior_condition ?? '' }}
+                                                            Prior Condition:                                                          
+                                                            <span class="group flex items-center text-xs font-medium rounded-md sm:ml-2 border px-1.5 py-px mr-auto sm:mr-0 text-info bg-info/10 border-info/10">
+                                                                <span class="mr-1.5 h-1.5 w-1.5 rounded-full bg-info/80"></span>
+                                                                <span class="-mt-px">
+                                                                    {{ $patient_disease->prior_condition ?? '' }}
+                                                                </span>
                                                             </span>
-                                                        </span>
-                                                                                                               
-                                                    </div>                                                                                               
-                                            </div>
+                                                                                                                
+                                                        </div>                                                                                               
+                                                </div>
 
-                                            <div
-                                                class="relative overflow-hidden before:absolute before:inset-y-0 before:left-0 before:ml-[14px] before:w-px before:bg-slate-200/60 before:content-[''] before:dark:bg-darkmode-400">
-                                                     <div @class([
+                                                <div
+                                                    class="relative overflow-hidden before:absolute before:inset-y-0 before:left-0 before:ml-[14px] before:w-px before:bg-slate-200/60 before:content-[''] before:dark:bg-darkmode-400">
+                                                        <div @class([
+                                                                'px-4 py-3 ml-8',
+                                                                "before:content-[''] before:ml-1 before:absolute before:w-5 before:h-5 before:bg-slate-200 before:rounded-full before:inset-y-0 before:my-auto before:left-0 before:dark:bg-darkmode-300 before:z-10",
+                                                                "after:content-[''] after:absolute after:w-1.5 after:h-1.5 after:bg-slate-500 after:rounded-full after:inset-y-0 after:my-auto after:left-0 after:ml-[11px] after:dark:bg-darkmode-200 after:z-10",
+                                                            ])>
+                                                            Treatment Availed From:                                                          
+                                                                {{ $patient_disease->treating_hospital ?? "NULL"}}
+                                                                                                                    
+                                                            </div>                                                                                               
+                                                </div>
+
+                                                <div
+                                                    class="relative overflow-hidden before:absolute before:inset-y-0 before:left-0 before:ml-[14px] before:w-px before:bg-slate-200/60 before:content-[''] before:dark:bg-darkmode-400">
+                                                    <div @class([
                                                             'px-4 py-3 ml-8',
                                                             "before:content-[''] before:ml-1 before:absolute before:w-5 before:h-5 before:bg-slate-200 before:rounded-full before:inset-y-0 before:my-auto before:left-0 before:dark:bg-darkmode-300 before:z-10",
                                                             "after:content-[''] after:absolute after:w-1.5 after:h-1.5 after:bg-slate-500 after:rounded-full after:inset-y-0 after:my-auto after:left-0 after:ml-[11px] after:dark:bg-darkmode-200 after:z-10",
                                                         ])>
-                                                           Treatment Availed From:                                                          
-                                                            {{ $patient_disease->treating_hospital ?? "NULL"}}
-                                                                                                                   
-                                                        </div>                                                                                               
-                                            </div>
-
-                                            <div
-                                                class="relative overflow-hidden before:absolute before:inset-y-0 before:left-0 before:ml-[14px] before:w-px before:bg-slate-200/60 before:content-[''] before:dark:bg-darkmode-400">
-                                                 <div @class([
-                                                        'px-4 py-3 ml-8',
-                                                        "before:content-[''] before:ml-1 before:absolute before:w-5 before:h-5 before:bg-slate-200 before:rounded-full before:inset-y-0 before:my-auto before:left-0 before:dark:bg-darkmode-300 before:z-10",
-                                                        "after:content-[''] after:absolute after:w-1.5 after:h-1.5 after:bg-slate-500 after:rounded-full after:inset-y-0 after:my-auto after:left-0 after:ml-[11px] after:dark:bg-darkmode-200 after:z-10",
-                                                    ])>
-                                                       Treating Doctor:                                                          
-                                                        {{ $patient_disease->doctor_name ?? "NULL" }}
-                                                                                                               
-                                                    </div>  
+                                                        Treating Doctor:                                                          
+                                                            {{ $patient_disease->doctor_name ?? "NULL" }}
+                                                                                                                
+                                                        </div>  
+                                                        
+                                                        
                                                     
-                                                    
+                                                </div>
                                                 
-                                            </div>
-                                            
-                                            <div
+                                                <div
+                                                    class="relative overflow-hidden before:absolute before:inset-y-0 before:left-0 before:ml-[14px] before:w-px before:bg-slate-200/60 before:content-[''] before:dark:bg-darkmode-400">
+                                                    <div @class([
+                                                            'px-4 py-3 ml-8',
+                                                            "before:content-[''] before:ml-1 before:absolute before:w-5 before:h-5 before:bg-slate-200 before:rounded-full before:inset-y-0 before:my-auto before:left-0 before:dark:bg-darkmode-300 before:z-10",
+                                                            "after:content-[''] after:absolute after:w-1.5 after:h-1.5 after:bg-slate-500 after:rounded-full after:inset-y-0 after:my-auto after:left-0 after:ml-[11px] after:dark:bg-darkmode-200 after:z-10",
+                                                        ])>
+                                                        Treatment Type:                                                          
+                                                        {{ $patient_disease && $patient_disease->hospital_type == 1 ? 'Public' : 'Private' }}
+                                                                                                                
+                                                        </div>                                                  
+                                                </div>
+                                                @if($patient_disease && $patient_disease->allopathy)
+                                                <div
                                                 class="relative overflow-hidden before:absolute before:inset-y-0 before:left-0 before:ml-[14px] before:w-px before:bg-slate-200/60 before:content-[''] before:dark:bg-darkmode-400">
-                                                 <div @class([
-                                                        'px-4 py-3 ml-8',
-                                                        "before:content-[''] before:ml-1 before:absolute before:w-5 before:h-5 before:bg-slate-200 before:rounded-full before:inset-y-0 before:my-auto before:left-0 before:dark:bg-darkmode-300 before:z-10",
-                                                        "after:content-[''] after:absolute after:w-1.5 after:h-1.5 after:bg-slate-500 after:rounded-full after:inset-y-0 after:my-auto after:left-0 after:ml-[11px] after:dark:bg-darkmode-200 after:z-10",
-                                                    ])>
-                                                       Treatment Type:                                                          
-                                                       {{ $patient_disease && $patient_disease->hospital_type == 1 ? 'Public' : 'Private' }}
-                                                                                                               
-                                                    </div>                                                  
-                                              </div>
-                                              @if($patient_disease && $patient_disease->allopathy)
-                                              <div
-                                              class="relative overflow-hidden before:absolute before:inset-y-0 before:left-0 before:ml-[14px] before:w-px before:bg-slate-200/60 before:content-[''] before:dark:bg-darkmode-400">
-                                                   <div @class([
-                                                          'px-4 py-3 ml-8',
-                                                          "before:content-[''] before:ml-1 before:absolute before:w-5 before:h-5 before:bg-slate-200 before:rounded-full before:inset-y-0 before:my-auto before:left-0 before:dark:bg-darkmode-300 before:z-10",
-                                                          "after:content-[''] after:absolute after:w-1.5 after:h-1.5 after:bg-slate-500 after:rounded-full after:inset-y-0 after:my-auto after:left-0 after:ml-[11px] after:dark:bg-darkmode-200 after:z-10",
-                                                      ])>
-                                                        Allopathy Treatment Details:                                                          
-                                                          <span class="group flex items-center text-xs font-medium rounded-md sm:ml-2 border px-1.5 py-px mr-auto sm:mr-0 text-warning bg-warning/10 border-warning/10">
-                                                              <span class="mr-1.5 h-1.5 w-1.5 rounded-full bg-warning/80"></span>
-                                                              <span class="-mt-px">
-                                                                  {{ $patient_disease->allopathy_details ?? '' }}
-                                                              </span>
-                                                          </span>
-                                                                                                                 
-                                                      </div>                                                                                               
-                                              </div>
-                                              @endif
-                                             
-                                              @if($patient_disease && $patient_disease->ayurveda)
-                                              <div
-                                              class="relative overflow-hidden before:absolute before:inset-y-0 before:left-0 before:ml-[14px] before:w-px before:bg-slate-200/60 before:content-[''] before:dark:bg-darkmode-400">
-                                                   <div @class([
-                                                          'px-4 py-3 ml-8',
-                                                          "before:content-[''] before:ml-1 before:absolute before:w-5 before:h-5 before:bg-slate-200 before:rounded-full before:inset-y-0 before:my-auto before:left-0 before:dark:bg-darkmode-300 before:z-10",
-                                                          "after:content-[''] after:absolute after:w-1.5 after:h-1.5 after:bg-slate-500 after:rounded-full after:inset-y-0 after:my-auto after:left-0 after:ml-[11px] after:dark:bg-darkmode-200 after:z-10",
-                                                      ])>
-                                                        Ayurveda Treatment Details:                                                          
-                                                          <span class="group flex items-center text-xs font-medium rounded-md sm:ml-2 border px-1.5 py-px mr-auto sm:mr-0 text-primary bg-primary/10 border-primary/10">
-                                                              <span class="mr-1.5 h-1.5 w-1.5 rounded-full bg-primary/80"></span>
-                                                              <span class="-mt-px">
-                                                                  {{ $patient_disease->ayurveda_details ?? '' }}
-                                                              </span>
-                                                          </span>
-                                                                                                                 
-                                                      </div>                                                                                               
-                                              </div>
-                                              @endif
+                                                    <div @class([
+                                                            'px-4 py-3 ml-8',
+                                                            "before:content-[''] before:ml-1 before:absolute before:w-5 before:h-5 before:bg-slate-200 before:rounded-full before:inset-y-0 before:my-auto before:left-0 before:dark:bg-darkmode-300 before:z-10",
+                                                            "after:content-[''] after:absolute after:w-1.5 after:h-1.5 after:bg-slate-500 after:rounded-full after:inset-y-0 after:my-auto after:left-0 after:ml-[11px] after:dark:bg-darkmode-200 after:z-10",
+                                                        ])>
+                                                            Allopathy Treatment Details:                                                          
+                                                            <span class="group flex items-center text-xs font-medium rounded-md sm:ml-2 border px-1.5 py-px mr-auto sm:mr-0 text-warning bg-warning/10 border-warning/10">
+                                                                <span class="mr-1.5 h-1.5 w-1.5 rounded-full bg-warning/80"></span>
+                                                                <span class="-mt-px">
+                                                                    {{ $patient_disease->allopathy_details ?? '' }}
+                                                                </span>
+                                                            </span>
+                                                                                                                    
+                                                        </div>                                                                                               
+                                                </div>
+                                                @endif
+                                                
+                                                @if($patient_disease && $patient_disease->ayurveda)
+                                                <div
+                                                class="relative overflow-hidden before:absolute before:inset-y-0 before:left-0 before:ml-[14px] before:w-px before:bg-slate-200/60 before:content-[''] before:dark:bg-darkmode-400">
+                                                    <div @class([
+                                                            'px-4 py-3 ml-8',
+                                                            "before:content-[''] before:ml-1 before:absolute before:w-5 before:h-5 before:bg-slate-200 before:rounded-full before:inset-y-0 before:my-auto before:left-0 before:dark:bg-darkmode-300 before:z-10",
+                                                            "after:content-[''] after:absolute after:w-1.5 after:h-1.5 after:bg-slate-500 after:rounded-full after:inset-y-0 after:my-auto after:left-0 after:ml-[11px] after:dark:bg-darkmode-200 after:z-10",
+                                                        ])>
+                                                            Ayurveda Treatment Details:                                                          
+                                                            <span class="group flex items-center text-xs font-medium rounded-md sm:ml-2 border px-1.5 py-px mr-auto sm:mr-0 text-primary bg-primary/10 border-primary/10">
+                                                                <span class="mr-1.5 h-1.5 w-1.5 rounded-full bg-primary/80"></span>
+                                                                <span class="-mt-px">
+                                                                    {{ $patient_disease->ayurveda_details ?? '' }}
+                                                                </span>
+                                                            </span>
+                                                                                                                    
+                                                        </div>                                                                                               
+                                                </div>
+                                                @endif
+                                                
+                                                @if($patient_disease && $patient_disease->homeopathy)
+                                                <div
+                                                class="relative overflow-hidden before:absolute before:inset-y-0 before:left-0 before:ml-[14px] before:w-px before:bg-slate-200/60 before:content-[''] before:dark:bg-darkmode-400">
+                                                    <div @class([
+                                                            'px-4 py-3 ml-8',
+                                                            "before:content-[''] before:ml-1 before:absolute before:w-5 before:h-5 before:bg-slate-200 before:rounded-full before:inset-y-0 before:my-auto before:left-0 before:dark:bg-darkmode-300 before:z-10",
+                                                            "after:content-[''] after:absolute after:w-1.5 after:h-1.5 after:bg-slate-500 after:rounded-full after:inset-y-0 after:my-auto after:left-0 after:ml-[11px] after:dark:bg-darkmode-200 after:z-10",
+                                                        ])>
+                                                            Homeopathy Treatment Details:                                                          
+                                                            <span class="group flex items-center text-xs font-medium rounded-md sm:ml-2 border px-1.5 py-px mr-auto sm:mr-0 text-success bg-success/10 border-success/10">
+                                                                <span class="mr-1.5 h-1.5 w-1.5 rounded-full bg-success/80"></span>
+                                                                <span class="-mt-px">
+                                                                    {{ $patient_disease->homeopathy_details ?? '' }}
+                                                                </span>
+                                                            </span>
+                                                                                                                    
+                                                        </div>                                                                                               
+                                                </div>
+                                                @endif
+                                                <div
+                                                class="relative overflow-hidden before:absolute before:inset-y-0 before:left-0 before:ml-[14px] before:w-px before:bg-slate-200/60 before:content-[''] before:dark:bg-darkmode-400">
+                                                    <div @class([
+                                                            'px-4 py-3 ml-8',
+                                                            "before:content-[''] before:ml-1 before:absolute before:w-5 before:h-5 before:bg-slate-200 before:rounded-full before:inset-y-0 before:my-auto before:left-0 before:dark:bg-darkmode-300 before:z-10",
+                                                            "after:content-[''] after:absolute after:w-1.5 after:h-1.5 after:bg-slate-500 after:rounded-full after:inset-y-0 after:my-auto after:left-0 after:ml-[11px] after:dark:bg-darkmode-200 after:z-10",
+                                                        ])>
+                                                            Present Health Condition:                                                          
+                                                            <span class="group flex items-center text-xs font-medium rounded-md sm:ml-2 border px-1.5 py-px mr-auto sm:mr-0 text-danger bg-danger/10 border-danger/10">
+                                                                <span class="mr-1.5 h-1.5 w-1.5 rounded-full bg-danger/80"></span>
+                                                                <span class="-mt-px">
+                                                                    {{ $patient_disease->present_health_condition ?? '' }}
+                                                                </span>
+                                                            </span>
+                                                                                                                    
+                                                        </div>                                                                                               
+                                                </div>
+
                                             
-                                              @if($patient_disease && $patient_disease->homeopathy)
-                                              <div
-                                              class="relative overflow-hidden before:absolute before:inset-y-0 before:left-0 before:ml-[14px] before:w-px before:bg-slate-200/60 before:content-[''] before:dark:bg-darkmode-400">
-                                                   <div @class([
-                                                          'px-4 py-3 ml-8',
-                                                          "before:content-[''] before:ml-1 before:absolute before:w-5 before:h-5 before:bg-slate-200 before:rounded-full before:inset-y-0 before:my-auto before:left-0 before:dark:bg-darkmode-300 before:z-10",
-                                                          "after:content-[''] after:absolute after:w-1.5 after:h-1.5 after:bg-slate-500 after:rounded-full after:inset-y-0 after:my-auto after:left-0 after:ml-[11px] after:dark:bg-darkmode-200 after:z-10",
-                                                      ])>
-                                                        Homeopathy Treatment Details:                                                          
-                                                          <span class="group flex items-center text-xs font-medium rounded-md sm:ml-2 border px-1.5 py-px mr-auto sm:mr-0 text-success bg-success/10 border-success/10">
-                                                              <span class="mr-1.5 h-1.5 w-1.5 rounded-full bg-success/80"></span>
-                                                              <span class="-mt-px">
-                                                                  {{ $patient_disease->homeopathy_details ?? '' }}
-                                                              </span>
-                                                          </span>
-                                                                                                                 
-                                                      </div>                                                                                               
-                                              </div>
-                                              @endif
-                                              <div
-                                              class="relative overflow-hidden before:absolute before:inset-y-0 before:left-0 before:ml-[14px] before:w-px before:bg-slate-200/60 before:content-[''] before:dark:bg-darkmode-400">
-                                                   <div @class([
-                                                          'px-4 py-3 ml-8',
-                                                          "before:content-[''] before:ml-1 before:absolute before:w-5 before:h-5 before:bg-slate-200 before:rounded-full before:inset-y-0 before:my-auto before:left-0 before:dark:bg-darkmode-300 before:z-10",
-                                                          "after:content-[''] after:absolute after:w-1.5 after:h-1.5 after:bg-slate-500 after:rounded-full after:inset-y-0 after:my-auto after:left-0 after:ml-[11px] after:dark:bg-darkmode-200 after:z-10",
-                                                      ])>
-                                                        Present Health Condition:                                                          
-                                                          <span class="group flex items-center text-xs font-medium rounded-md sm:ml-2 border px-1.5 py-px mr-auto sm:mr-0 text-danger bg-danger/10 border-danger/10">
-                                                              <span class="mr-1.5 h-1.5 w-1.5 rounded-full bg-danger/80"></span>
-                                                              <span class="-mt-px">
-                                                                  {{ $patient_disease->present_health_condition ?? '' }}
-                                                              </span>
-                                                          </span>
-                                                                                                                 
-                                                      </div>                                                                                               
-                                              </div>
-
-                                         
+                                            </div>
                                         </div>
-                                    </div>
-
-
+                                    @endif
                                     <div class="grid grid-cols-1 gap-x-6 gap-y-10 lg:grid-cols-2">
                                         <div class="box box--stacked flex flex-col p-5">
                                             <div
@@ -358,17 +391,15 @@
                                                        
                                                     </div>
                                               @endforeach
-                                            </div>
-                                          
+                                            </div>                                          
                                         </div>
-
                                         <div class="box box--stacked flex flex-col p-5">
                                             <div
                                                 class="mb-5 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
                                                 Treatment Type
                                             </div>
                                             <div class="flex flex-col gap-5">
-                                            @foreach($patient_treatment_category as $patient_treatment_cat)
+                                                @foreach($patient_treatment_category as $patient_treatment_cat)
                                                     <div class="flex items-center">
                                                         <div class="relative h-12 w-12">
                                                             <div
@@ -377,61 +408,132 @@
                                                                 class="h-4 w-4 fill-theme-1/10 text-theme-1"
                                                                 icon="Triangle"
                                                             />
-                                                        </div>
-                                                          
+                                                            </div>                                                          
                                                         </div>
                                                         <div class="ml-3.5">
                                                             <div class="font-medium">
                                                               {{   $patient_treatment_cat->treatment_type->treatment_type	 }} 
-                                                            </div>
-                                                      
+                                                            </div>                                                      
+                                                        </div>
                                                     </div>
-                                              @endforeach
-                                            </div>
-                                          
-
-                                            <div
-                                            class="mb-5 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
-                                         &nbsp;
-                                            </div>
-                                           
-                                          
-                                                <div class="mt-3 flex items-center">
-                                                    <x-base.lucide
-                                                        class="mr-2 h-4 w-4 stroke-[1.3] text-slate-500"
-                                                        icon="Clock"
-                                                    />
-                                                    Comfort Devices used
+                                                @endforeach                                             
+                                            </div> 
+                                            @if($patient_comfort_devices)      
+                                                <div
+                                                class="mb-5 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
+                                                Comfort Devices used
+                                                </div>
+                                                <div class="flex flex-col gap-5">
                                                     @foreach($patient_comfort_devices as $devices)
                                                     <div
                                                         class="ml-1 flex items-center rounded-md border border-success/10 bg-success/10 px-1.5 py-px text-xs font-medium text-success">
                                                         <span class="-mt-px">{{ $devices->comfort_devices->comfort_device_name	 }}</span>
                                                     </div>
-                                                    @endforeach
+                                                    @endforeach                                          
+                                                </div> 
+                                            @endif   
+
+                                        </div>
+                                        <div class="box box--stacked flex flex-col p-5">
+                                            <div
+                                                class="mb-5 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
+                                               Past Treatments
+                                            </div>
+                                            <div class="flex flex-col gap-5">
+                                                @foreach($patient_past_treatment_category as $patient_treatment_cat)
+                                                <div class="flex items-center">
+                                                    <div class="relative h-12 w-12">
+                                                        <div
+                                                        class="flex h-full w-full items-center justify-center overflow-hidden rounded-full border-2 border-slate-200/40 bg-theme-1/5">
+                                                        <x-base.lucide
+                                                            class="h-4 w-4 fill-theme-1/10 text-theme-1"
+                                                            icon="Triangle"
+                                                        />
+                                                        </div>                                                          
+                                                    </div>
+                                                    <div class="ml-3.5">
+                                                        <div class="font-medium">
+                                                          {{   $patient_treatment_cat->treatment_type->treatment_type	 }} 
+                                                        </div>                                                      
+                                                    </div>
                                                 </div>
-                                            
+                                            @endforeach  
+                                            </div>                                          
+                                        </div>
+                                        @if($patient_intial_diagnosis)
+                                        <div class="p-5 box box--stacked">
+                                            <div class="mb-5 flex items-center gap-3.5 border-b border-dashed pb-5">
+                                                <div>
+                                                    <div
+                                                        class="image-fit h-14 w-14 overflow-hidden rounded-full border-[3px] border-slate-200/70">
+                                                     
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="max-w-[9rem] truncate text-base font-medium md:max-w-none">
+                                                        Intially Collected Details
+                                                    </div>
+                                                    
+                                                </div>
+                                               
+                                            </div>
+                                            <div class="flex items-center">
+                                                <x-base.lucide
+                                                    class="mr-2 h-4 w-4 stroke-[1.3] text-slate-500"
+                                                    icon="Clipboard"
+                                                />                                                       
+                                                Details from the onset of the disease:   {{$patient_intial_diagnosis->details_from_disease}}
+                                              
+                                            </div>
+                                            <div class="flex items-center">
+                                                <x-base.lucide
+                                                    class="mr-2 h-4 w-4 stroke-[1.3] text-slate-500"
+                                                    icon="Clipboard"
+                                                />                                                       
+                                                Understanding of the disease:   {{$patient_intial_diagnosis->undertanding_abt_disease}}
+                                              
+                                            </div>
+                                            <div class="flex items-center">
+                                                <x-base.lucide
+                                                    class="mr-2 h-4 w-4 stroke-[1.3] text-slate-500"
+                                                    icon="Clipboard"
+                                                />                                                       
+                                                Family's Understanding of the disease:   {{$patient_intial_diagnosis->family_abt_disease}}
+                                              
+                                            </div>
+                                            <div class="flex items-center">
+                                                <x-base.lucide
+                                                    class="mr-2 h-4 w-4 stroke-[1.3] text-slate-500"
+                                                    icon="Clipboard"
+                                                />                                                       
+                                                  {{$patient_intial_diagnosis->ward_member_aware}}
+                                              
+                                            </div>
+                                            <div class="flex items-center">
+                                                <x-base.lucide
+                                                    class="mr-2 h-4 w-4 stroke-[1.3] text-slate-500"
+                                                    icon="Clipboard"
+                                                />                                                       
+                                               Volunteer:   {{$patient_intial_diagnosis->volunteer_type}} 
+                                              
+                                            </div>
+                                            <div class="flex items-center">
+                                                <x-base.lucide
+                                                    class="mr-2 h-4 w-4 stroke-[1.3] text-slate-500"
+                                                    icon="Clipboard"
+                                                />                                                       
+                                                 Entered by: {{$patient_intial_diagnosis->volunteer_type}} 
+                                              
+                                            </div>
                                            
+                                          
                                         </div>
-                                    </div>                                      
+                                        @endif
+                                    </div>
                                     <div class="box box--stacked flex flex-col">
-                                        <div class="p-5 font-medium">Medication
-                                            <x-base.button
-                                            class="ml-auto border-primary/50 px-4"
-                                            variant="outline-primary"
-                                            data-tw-toggle="modal"
-                                            data-tw-target="#medication_modal"
-                                            href="#"
-                                            as="a"
-                                        >
-                                            <x-base.lucide
-                                                class="-ml-0.5 mr-2 h-4 w-4 stroke-[1.3]"
-                                                icon="FilePlus"
-                                            />
-                                            Add
-                                        </x-base.button>
-                                        </div>
-                                        <div class="overflow-auto xl:overflow-visible">
-                                            <x-base.table class="border-b border-dashed border-slate-200/80">
+                                        <div class="p-5 font-medium">Medication</div>
+                                        <div class="overflow-x-auto xl:overflow-hidden">
+                                            <x-base.table class="border-b border-dashed border-slate-200/80 max-w-full">
                                                 <x-base.table.thead>
                                                     <x-base.table.tr>
                                                         <x-base.table.td
@@ -613,32 +715,36 @@
                                                 </x-base.table.tbody>
                                             </x-base.table>
                                         </div>
-                                      
+                                       
                                     </div>
                                 </div>
                             </div>
                             <div class="relative col-span-12 row-start-1 xl:col-span-4 xl:col-start-9">
                                 <div class="sticky top-[6.2rem] flex flex-col gap-y-7">
                                     <div class="box box--stacked flex flex-col p-5">
-                                        <div>Complete your profile (83%)</div>
+                                                                            
+                                        
+                                        <div id="profile-status-text" ></div>
                                         <div class="mt-3.5 flex h-2">
-                                            <div
-                                                class="h-full w-[60%] border border-primary/50 bg-primary/50 first:rounded-l last:rounded-r">
-                                            </div>
-                                            <div
-                                                class="h-full w-[40%] border border-slate-300 bg-slate-100 first:rounded-l last:rounded-r">
-                                            </div>
+                                            <div id="progress-bar" class="h-full border border-primary/50 bg-primary/50 first:rounded-l last:rounded-r"></div>
+                                            <div class="h-full w-[100%] border border-slate-300 bg-slate-100 first:rounded-l last:rounded-r"></div>
                                         </div>
-                                        <x-base.button
-                                            class="mt-5 w-full border-primary/20 bg-white text-primary hover:bg-primary/20"
+                                        @if($patient->flow_status_id==6)
+                                            <x-base.button
+                                            class="mt-5 w-full"
                                             variant="primary"
-                                        >
-                                            <x-base.lucide
-                                                class="mr-2 h-4 w-4 stroke-[1.3]"
-                                                icon="Inbox"
-                                            />
-                                            Profile Settings
-                                        </x-base.button>
+                                            data-tw-toggle="modal"
+                                            data-tw-target="#classify_modal"
+                                            href="#"
+                                            as="a"
+                                            >
+                                                <x-base.lucide
+                                                    class="mr-2 h-4 w-4 stroke-[1.3]"
+                                                    icon="Inbox"
+                                                />
+                                                    Classify
+                                            </x-base.button>
+                                    @endif
                                     </div>
                                     <div class="box box--stacked flex flex-col p-5">
                                         <div
@@ -762,13 +868,11 @@
                             </div>
                         </div>
                     </x-base.tab.panel>
-                   
-                   
                     <x-base.tab.panel
-                        id="example-4"
-                        selected="{{ request()->query('page') === 'contacts' }}"
+                        id="example-2"
+                        selected="{{ request()->query('page') === 'family' }}"                        
                     >
-                            <x-base.button
+                    <x-base.button
                             class="ml-auto border-primary/50 px-4"
                             variant="outline-primary"
                             data-tw-toggle="modal"
@@ -782,338 +886,935 @@
                             />
                             Add New
                         </x-base.button>
-           
                         <div class="mt-3.5 grid grid-cols-12 gap-x-6 gap-y-10">
                             @foreach($patient_family as $patient_family)
-                        <div class="box box--stacked col-span-12 flex flex-col p-5 md:col-span-6 xl:col-span-4">
-                            <a
-                                class="text-[0.94rem] font-medium text-primary"
-                                href=""
-                            >
-                               {{ $patient_family->family_member_name }}
-                            </a>
-                            <div class="mb-5 mt-1 leading-relaxed text-slate-500">
-                                {{ $patient_family->relation }}
-                            </div>
-                           
-                            <div
-                                class="mt-auto flex flex-col gap-3 border-t border-dashed border-slate-300/70 pt-5">
-                                <div class="flex items-center">
-                                    <div class="text-slate-500">Age:</div>                                   
-                                    <div class="ml-auto text-slate-500">
-                                        {{ $patient_family->age }}
-                                    </div>
+                            <div class="box box--stacked col-span-12 flex flex-col p-5 md:col-span-6 xl:col-span-4">
+                                <a
+                                    class="text-[0.94rem] font-medium text-primary"
+                                    href=""
+                                >
+                                   {{ $patient_family->family_member_name }}
+                                </a>
+                                <div class="mb-5 mt-1 leading-relaxed text-slate-500">
+                                    {{ $patient_family->relation }}
                                 </div>
-                                <div class="flex items-center">
-                                    <div class="text-slate-500">Gender:</div>
-                                    <div class="ml-auto">
-                                        <div class="flex items-center">
-                                          
-                                            {{ $patient_family->gender == 1 ? 'Male' : ($patient_family->gender == 2 ? 'Female' : 'Other') }}
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex items-center">
-                                    <div class="text-slate-500">Staying with patient:</div>
-                                    <div class="ml-auto text-slate-500">                                       
-                                        {{ $patient_family->staying == 1 ? 'Yes' :  'No' }}
-                                    </div>
-                                </div>
-                                <div class="flex items-center">
-                                    <div class="text-slate-500">Education:</div>
-                                    <div class="ml-auto text-slate-500">
-                                        {{ $patient_family->education }}
-                                    </div>
-                                </div>
-                                <div class="flex items-center">
-                                    <div class="text-slate-500">Income:</div>
-                                    <div class="ml-auto text-slate-500">
-                                        Rs. {{ $patient_family->income }}
-                                    </div>
-                                </div>
-                                <div class="flex items-center">
-                                    <div class="text-slate-500">Source of Income:</div>
-                                    <div class="ml-auto text-slate-500">
-                                        {{ $patient_family->source_income }}
-                                    </div>
-                                </div>
-                                <div class="flex items-center">
-                                    <div class="text-slate-500">Income Category:</div> 
                                
-
-                                    <div class="ml-auto">
-                                        <div
-                                            class="flex items-center rounded-md border {{ $patient_family->income_catogory == 1 ? 'border-success/10 bg-success/10 text-success' : 'border-danger/10 bg-danger/10 text-danger' }} px-1.5 py-px text-xs">
-                                            <span class="-mt-px">{{ $patient_family->income_cat }}</span>
+                                <div
+                                    class="mt-auto flex flex-col gap-3 border-t border-dashed border-slate-300/70 pt-5">
+                                    <div class="flex items-center">
+                                        <div class="text-slate-500">Age:</div>                                   
+                                        <div class="ml-auto text-slate-500">
+                                            {{ $patient_family->age }}
                                         </div>
-                                        
                                     </div>
+                                    <div class="flex items-center">
+                                        <div class="text-slate-500">Gender:</div>
+                                        <div class="ml-auto">
+                                            <div class="flex items-center">
+                                              
+                                                {{ $patient_family->gender == 1 ? 'Male' : ($patient_family->gender == 2 ? 'Female' : 'Other') }}
+    
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="text-slate-500">Staying with patient:</div>
+                                        <div class="ml-auto text-slate-500">                                       
+                                            {{ $patient_family->staying == 1 ? 'Yes' :  'No' }}
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="text-slate-500">Education:</div>
+                                        <div class="ml-auto text-slate-500">
+                                            {{ $patient_family->education }}
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="text-slate-500">Income:</div>
+                                        <div class="ml-auto text-slate-500">
+                                            Rs. {{ $patient_family->income }}
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="text-slate-500">Source of Income:</div>
+                                        <div class="ml-auto text-slate-500">
+                                            {{ $patient_family->source_income }}
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="text-slate-500">Income Category:</div> 
+                                   
+    
+                                        <div class="ml-auto">
+                                            <div
+                                                class="flex items-center rounded-md border {{ $patient_family->income_catogory == 1 ? 'border-success/10 bg-success/10 text-success' : 'border-danger/10 bg-danger/10 text-danger' }} px-1.5 py-px text-xs">
+                                                <span class="-mt-px">{{ $patient_family->income_cat }}</span>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                               
                                 </div>
-                           
+                               
                             </div>
+                            @endforeach
+                              
+                               
+                                
                            
                         </div>
-                        @endforeach
-
-                        
                     </x-base.tab.panel>
-                   
+                    {{-- <x-base.tab.panel
+                        id="example-3"
+                        selected="{{ request()->query('page') === 'achievements' }}"
+                    >
+                        <div class="mt-3.5 grid grid-cols-12 gap-x-6 gap-y-10">
+                          
+                                <div class="box box--stacked col-span-12 flex flex-col md:col-span-6 xl:col-span-4">
+                                    <div class="ml-5 mt-5 flex">
+                                        <span
+                                            class="mr-auto flex items-center rounded-md border border-success/10 bg-success/10 px-2 py-0.5 text-xs font-medium text-success"
+                                        >
+                                            <span class="-mt-px">category</span>
+                                        </span>
+                                    </div>
+                                    <x-base.menu class="absolute right-0 top-0 mr-5 mt-5">
+                                        <x-base.menu.button class="h-5 w-5 text-slate-500">
+                                            <x-base.lucide
+                                                class="h-5 w-5 fill-slate-400/70 stroke-slate-400/70"
+                                                icon="MoreVertical"
+                                            />
+                                        </x-base.menu.button>
+                                        <x-base.menu.items class="w-40">
+                                            <x-base.menu.item>
+                                                <x-base.lucide
+                                                    class="mr-2 h-4 w-4"
+                                                    icon="Copy"
+                                                /> Copy
+                                                Link
+                                            </x-base.menu.item>
+                                            <x-base.menu.item>
+                                                <x-base.lucide
+                                                    class="mr-2 h-4 w-4"
+                                                    icon="Trash"
+                                                />
+                                                Delete
+                                            </x-base.menu.item>
+                                        </x-base.menu.items>
+                                    </x-base.menu>
+                                    <div class="mt-5 flex flex-col items-center px-5 pb-10">
+                                        <div class="relative h-[72px] w-[72px]">
+                                            <div
+                                                class="flex h-full w-full items-center justify-center overflow-hidden rounded-full border border-slate-200/70 bg-theme-1/5">
+                                                <x-base.lucide
+                                                    class="h-6 w-6 fill-theme-1/10 stroke-[0.7] text-theme-1"
+                                                    icon=""
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="mt-3 text-[0.94rem] font-medium text-primary">
+                                            title
+                                        </div>
+                                        <div class="mt-1.5 text-center text-slate-500">
+                                            description
+                                        </div>
+                                        <div class="mt-5 text-xs uppercase text-slate-400">
+                                            Collaborators
+                                        </div>
+                                        <div class="mt-3 flex justify-center">
+                                            <div class="image-fit zoom-in h-10 w-10">
+                                                <x-base.tippy
+                                                    class="rounded-full border-2 border-white"
+                                                    src=""
+                                                    alt="Tailwise - Admin Dashboard Template"
+                                                    as="img"
+                                                    content="name"
+                                                />
+                                            </div>
+                                            <div class="image-fit zoom-in -ml-3 h-10 w-10">
+                                                <x-base.tippy
+                                                    class="rounded-full border-2 border-white"
+                                                    src=""
+                                                    alt="Tailwise - Admin Dashboard Template"
+                                                    as="img"
+                                                    content="name"
+                                                />
+                                            </div>
+                                            <div class="image-fit zoom-in -ml-3 h-10 w-10">
+                                                <x-base.tippy
+                                                    class="rounded-full border-2 border-white"
+                                                    src=""
+                                                    alt="Tailwise - Admin Dashboard Template"
+                                                    as="img"
+                                                    content="name"
+                                                />
+                                            </div>
+                                            <div class="image-fit zoom-in -ml-3 h-10 w-10">
+                                                <x-base.tippy
+                                                    class="rounded-full border-2 border-white"
+                                                    src=""
+                                                    alt="Tailwise - Admin Dashboard Template"
+                                                    as="img"
+                                                    content="name"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex border-t border-slate-200/80">
+                                        <div class="flex flex-1 flex-col items-center py-3">
+                                            <div class="text-base font-medium">
+                                               level
+                                            </div>
+                                            <div class="text-slate-500">Level</div>
+                                        </div>
+                                        <div class="flex flex-1 flex-col items-center border-x border-slate-200/80 py-3">
+                                            <div class="text-base font-medium">
+                                                duration
+                                            </div>
+                                            <div class="text-slate-500">Duration</div>
+                                        </div>
+                                        <div class="flex flex-1 flex-col items-center py-3">
+                                            <div class="text-base font-medium">
+                                             score
+                                            </div>
+                                            <div class="text-slate-500">Score</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="box box--stacked col-span-12 flex flex-col md:col-span-6 xl:col-span-4">
+                                    <div class="ml-5 mt-5 flex">
+                                        <span
+                                            class="mr-auto flex items-center rounded-md border border-success/10 bg-success/10 px-2 py-0.5 text-xs font-medium text-success"
+                                        >
+                                            <span class="-mt-px">category</span>
+                                        </span>
+                                    </div>
+                                    <x-base.menu class="absolute right-0 top-0 mr-5 mt-5">
+                                        <x-base.menu.button class="h-5 w-5 text-slate-500">
+                                            <x-base.lucide
+                                                class="h-5 w-5 fill-slate-400/70 stroke-slate-400/70"
+                                                icon="MoreVertical"
+                                            />
+                                        </x-base.menu.button>
+                                        <x-base.menu.items class="w-40">
+                                            <x-base.menu.item>
+                                                <x-base.lucide
+                                                    class="mr-2 h-4 w-4"
+                                                    icon="Copy"
+                                                /> Copy
+                                                Link
+                                            </x-base.menu.item>
+                                            <x-base.menu.item>
+                                                <x-base.lucide
+                                                    class="mr-2 h-4 w-4"
+                                                    icon="Trash"
+                                                />
+                                                Delete
+                                            </x-base.menu.item>
+                                        </x-base.menu.items>
+                                    </x-base.menu>
+                                    <div class="mt-5 flex flex-col items-center px-5 pb-10">
+                                        <div class="relative h-[72px] w-[72px]">
+                                            <div
+                                                class="flex h-full w-full items-center justify-center overflow-hidden rounded-full border border-slate-200/70 bg-theme-1/5">
+                                                <x-base.lucide
+                                                    class="h-6 w-6 fill-theme-1/10 stroke-[0.7] text-theme-1"
+                                                    icon=""
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="mt-3 text-[0.94rem] font-medium text-primary">
+                                            title
+                                        </div>
+                                        <div class="mt-1.5 text-center text-slate-500">
+                                            description
+                                        </div>
+                                        <div class="mt-5 text-xs uppercase text-slate-400">
+                                            Collaborators
+                                        </div>
+                                        <div class="mt-3 flex justify-center">
+                                            <div class="image-fit zoom-in h-10 w-10">
+                                                <x-base.tippy
+                                                    class="rounded-full border-2 border-white"
+                                                    src=""
+                                                    alt="Tailwise - Admin Dashboard Template"
+                                                    as="img"
+                                                    content="name"
+                                                />
+                                            </div>
+                                            <div class="image-fit zoom-in -ml-3 h-10 w-10">
+                                                <x-base.tippy
+                                                    class="rounded-full border-2 border-white"
+                                                    src=""
+                                                    alt="Tailwise - Admin Dashboard Template"
+                                                    as="img"
+                                                    content="name"
+                                                />
+                                            </div>
+                                            <div class="image-fit zoom-in -ml-3 h-10 w-10">
+                                                <x-base.tippy
+                                                    class="rounded-full border-2 border-white"
+                                                    src=""
+                                                    alt="Tailwise - Admin Dashboard Template"
+                                                    as="img"
+                                                    content="name"
+                                                />
+                                            </div>
+                                            <div class="image-fit zoom-in -ml-3 h-10 w-10">
+                                                <x-base.tippy
+                                                    class="rounded-full border-2 border-white"
+                                                    src=""
+                                                    alt="Tailwise - Admin Dashboard Template"
+                                                    as="img"
+                                                    content="name"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex border-t border-slate-200/80">
+                                        <div class="flex flex-1 flex-col items-center py-3">
+                                            <div class="text-base font-medium">
+                                               level
+                                            </div>
+                                            <div class="text-slate-500">Level</div>
+                                        </div>
+                                        <div class="flex flex-1 flex-col items-center border-x border-slate-200/80 py-3">
+                                            <div class="text-base font-medium">
+                                                duration
+                                            </div>
+                                            <div class="text-slate-500">Duration</div>
+                                        </div>
+                                        <div class="flex flex-1 flex-col items-center py-3">
+                                            <div class="text-base font-medium">
+                                             score
+                                            </div>
+                                            <div class="text-slate-500">Score</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="box box--stacked col-span-12 flex flex-col md:col-span-6 xl:col-span-4">
+                                    <div class="ml-5 mt-5 flex">
+                                        <span
+                                            class="mr-auto flex items-center rounded-md border border-success/10 bg-success/10 px-2 py-0.5 text-xs font-medium text-success"
+                                        >
+                                            <span class="-mt-px">category</span>
+                                        </span>
+                                    </div>
+                                    <x-base.menu class="absolute right-0 top-0 mr-5 mt-5">
+                                        <x-base.menu.button class="h-5 w-5 text-slate-500">
+                                            <x-base.lucide
+                                                class="h-5 w-5 fill-slate-400/70 stroke-slate-400/70"
+                                                icon="MoreVertical"
+                                            />
+                                        </x-base.menu.button>
+                                        <x-base.menu.items class="w-40">
+                                            <x-base.menu.item>
+                                                <x-base.lucide
+                                                    class="mr-2 h-4 w-4"
+                                                    icon="Copy"
+                                                /> Copy
+                                                Link
+                                            </x-base.menu.item>
+                                            <x-base.menu.item>
+                                                <x-base.lucide
+                                                    class="mr-2 h-4 w-4"
+                                                    icon="Trash"
+                                                />
+                                                Delete
+                                            </x-base.menu.item>
+                                        </x-base.menu.items>
+                                    </x-base.menu>
+                                    <div class="mt-5 flex flex-col items-center px-5 pb-10">
+                                        <div class="relative h-[72px] w-[72px]">
+                                            <div
+                                                class="flex h-full w-full items-center justify-center overflow-hidden rounded-full border border-slate-200/70 bg-theme-1/5">
+                                                <x-base.lucide
+                                                    class="h-6 w-6 fill-theme-1/10 stroke-[0.7] text-theme-1"
+                                                    icon=""
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="mt-3 text-[0.94rem] font-medium text-primary">
+                                            title
+                                        </div>
+                                        <div class="mt-1.5 text-center text-slate-500">
+                                            description
+                                        </div>
+                                        <div class="mt-5 text-xs uppercase text-slate-400">
+                                            Collaborators
+                                        </div>
+                                        <div class="mt-3 flex justify-center">
+                                            <div class="image-fit zoom-in h-10 w-10">
+                                                <x-base.tippy
+                                                    class="rounded-full border-2 border-white"
+                                                    src=""
+                                                    alt="Tailwise - Admin Dashboard Template"
+                                                    as="img"
+                                                    content="name"
+                                                />
+                                            </div>
+                                            <div class="image-fit zoom-in -ml-3 h-10 w-10">
+                                                <x-base.tippy
+                                                    class="rounded-full border-2 border-white"
+                                                    src=""
+                                                    alt="Tailwise - Admin Dashboard Template"
+                                                    as="img"
+                                                    content="name"
+                                                />
+                                            </div>
+                                            <div class="image-fit zoom-in -ml-3 h-10 w-10">
+                                                <x-base.tippy
+                                                    class="rounded-full border-2 border-white"
+                                                    src=""
+                                                    alt="Tailwise - Admin Dashboard Template"
+                                                    as="img"
+                                                    content="name"
+                                                />
+                                            </div>
+                                            <div class="image-fit zoom-in -ml-3 h-10 w-10">
+                                                <x-base.tippy
+                                                    class="rounded-full border-2 border-white"
+                                                    src=""
+                                                    alt="Tailwise - Admin Dashboard Template"
+                                                    as="img"
+                                                    content="name"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex border-t border-slate-200/80">
+                                        <div class="flex flex-1 flex-col items-center py-3">
+                                            <div class="text-base font-medium">
+                                               level
+                                            </div>
+                                            <div class="text-slate-500">Level</div>
+                                        </div>
+                                        <div class="flex flex-1 flex-col items-center border-x border-slate-200/80 py-3">
+                                            <div class="text-base font-medium">
+                                                duration
+                                            </div>
+                                            <div class="text-slate-500">Duration</div>
+                                        </div>
+                                        <div class="flex flex-1 flex-col items-center py-3">
+                                            <div class="text-base font-medium">
+                                             score
+                                            </div>
+                                            <div class="text-slate-500">Score</div>
+                                        </div>
+                                    </div>
+                                </div>
+                          
+                        </div>
+                    </x-base.tab.panel> --}}
+                    {{-- <x-base.tab.panel
+                        id="example-4"
+                        selected="{{ request()->query('page') === 'contacts' }}"
+                    >
+                        <div class="mt-3.5 grid grid-cols-12 gap-x-6 gap-y-10">
+                           
+                                <div class="box box--stacked col-span-12 flex flex-col md:col-span-6 xl:col-span-4">
+                                    <x-base.menu class="absolute right-0 top-0 mr-5 mt-5">
+                                        <x-base.menu.button class="h-5 w-5 text-slate-500">
+                                            <x-base.lucide
+                                                class="h-5 w-5 fill-slate-400/70 stroke-slate-400/70"
+                                                icon="MoreVertical"
+                                            />
+                                        </x-base.menu.button>
+                                        <x-base.menu.items class="w-40">
+                                            <x-base.menu.item>
+                                                <x-base.lucide
+                                                    class="mr-2 h-4 w-4"
+                                                    icon="Copy"
+                                                /> Copy
+                                                Link
+                                            </x-base.menu.item>
+                                            <x-base.menu.item>
+                                                <x-base.lucide
+                                                    class="mr-2 h-4 w-4"
+                                                    icon="Trash"
+                                                />
+                                                Delete
+                                            </x-base.menu.item>
+                                        </x-base.menu.items>
+                                    </x-base.menu>
+                                    <div class="mt-10 flex flex-col items-center px-5 pb-10">
+                                        <div
+                                            class="image-fit h-[72px] w-[72px] overflow-hidden rounded-full border-[3px] border-slate-200/70">
+                                            <img
+                                                src=""
+                                                alt="Tailwise - Admin Dashboard Template"
+                                            >
+                                        </div>
+                                        <div class="mt-3 text-[0.94rem] font-medium text-primary">
+                                            name
+                                        </div>
+                                        <div class="mt-2 flex items-center justify-center gap-3">
+                                            <div class="flex items-center text-slate-500">
+                                                <x-base.lucide
+                                                    class="mr-1.5 h-3.5 w-3.5 stroke-[1.3]"
+                                                    icon="Hotel"
+                                                />
+                                                location
+                                            </div>
+                                            <div class="flex items-center text-slate-500">
+                                                <x-base.lucide
+                                                    class="mr-1.5 h-3.5 w-3.5 stroke-[1.3]"
+                                                    icon="Calendar"
+                                                />
+                                               joinedDate
+                                            </div>
+                                        </div>
+                                        <div class="mt-5 flex flex-wrap items-center justify-center gap-2 sm:flex-row">
+                                            <span
+                                                class="flex items-center rounded-md border border-primary/10 bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary"
+                                            >
+                                                <span class="-mt-px truncate">
+                                                    department
+                                                </span>
+                                            </span>
+                                            <span
+                                                class="flex items-center rounded-md border border-primary/10 bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary"
+                                            >
+                                                <span class="-mt-px truncate">
+                                                 position
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center border-t border-slate-200/80 px-5 py-4">
+                                        <div class="text-slate-500">
+                                            {{ mt_rand(20, 100) }}+ Connections
+                                        </div>
+                                        @if (mt_rand(0, 1))
+                                            <x-base.button
+                                                class="ml-auto border-primary/50 px-4"
+                                                variant="outline-primary"
+                                            >
+                                                <x-base.lucide
+                                                    class="-ml-0.5 mr-2 h-4 w-4 stroke-[1.3]"
+                                                    icon="UserPlus"
+                                                />
+                                                Connect
+                                            </x-base.button>
+                                        @else
+                                            <x-base.button
+                                                class="ml-auto px-4"
+                                                variant="primary"
+                                            >
+                                                <x-base.lucide
+                                                    class="-ml-0.5 mr-2 h-4 w-4 stroke-[1.3]"
+                                                    icon="Check"
+                                                />
+                                                Connected
+                                            </x-base.button>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="box box--stacked col-span-12 flex flex-col md:col-span-6 xl:col-span-4">
+                                    <x-base.menu class="absolute right-0 top-0 mr-5 mt-5">
+                                        <x-base.menu.button class="h-5 w-5 text-slate-500">
+                                            <x-base.lucide
+                                                class="h-5 w-5 fill-slate-400/70 stroke-slate-400/70"
+                                                icon="MoreVertical"
+                                            />
+                                        </x-base.menu.button>
+                                        <x-base.menu.items class="w-40">
+                                            <x-base.menu.item>
+                                                <x-base.lucide
+                                                    class="mr-2 h-4 w-4"
+                                                    icon="Copy"
+                                                /> Copy
+                                                Link
+                                            </x-base.menu.item>
+                                            <x-base.menu.item>
+                                                <x-base.lucide
+                                                    class="mr-2 h-4 w-4"
+                                                    icon="Trash"
+                                                />
+                                                Delete
+                                            </x-base.menu.item>
+                                        </x-base.menu.items>
+                                    </x-base.menu>
+                                    <div class="mt-10 flex flex-col items-center px-5 pb-10">
+                                        <div
+                                            class="image-fit h-[72px] w-[72px] overflow-hidden rounded-full border-[3px] border-slate-200/70">
+                                            <img
+                                                src=""
+                                                alt="Tailwise - Admin Dashboard Template"
+                                            >
+                                        </div>
+                                        <div class="mt-3 text-[0.94rem] font-medium text-primary">
+                                            name
+                                        </div>
+                                        <div class="mt-2 flex items-center justify-center gap-3">
+                                            <div class="flex items-center text-slate-500">
+                                                <x-base.lucide
+                                                    class="mr-1.5 h-3.5 w-3.5 stroke-[1.3]"
+                                                    icon="Hotel"
+                                                />
+                                                location
+                                            </div>
+                                            <div class="flex items-center text-slate-500">
+                                                <x-base.lucide
+                                                    class="mr-1.5 h-3.5 w-3.5 stroke-[1.3]"
+                                                    icon="Calendar"
+                                                />
+                                               joinedDate
+                                            </div>
+                                        </div>
+                                        <div class="mt-5 flex flex-wrap items-center justify-center gap-2 sm:flex-row">
+                                            <span
+                                                class="flex items-center rounded-md border border-primary/10 bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary"
+                                            >
+                                                <span class="-mt-px truncate">
+                                                    department
+                                                </span>
+                                            </span>
+                                            <span
+                                                class="flex items-center rounded-md border border-primary/10 bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary"
+                                            >
+                                                <span class="-mt-px truncate">
+                                                 position
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center border-t border-slate-200/80 px-5 py-4">
+                                        <div class="text-slate-500">
+                                            {{ mt_rand(20, 100) }}+ Connections
+                                        </div>
+                                        @if (mt_rand(0, 1))
+                                            <x-base.button
+                                                class="ml-auto border-primary/50 px-4"
+                                                variant="outline-primary"
+                                            >
+                                                <x-base.lucide
+                                                    class="-ml-0.5 mr-2 h-4 w-4 stroke-[1.3]"
+                                                    icon="UserPlus"
+                                                />
+                                                Connect
+                                            </x-base.button>
+                                        @else
+                                            <x-base.button
+                                                class="ml-auto px-4"
+                                                variant="primary"
+                                            >
+                                                <x-base.lucide
+                                                    class="-ml-0.5 mr-2 h-4 w-4 stroke-[1.3]"
+                                                    icon="Check"
+                                                />
+                                                Connected
+                                            </x-base.button>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="box box--stacked col-span-12 flex flex-col md:col-span-6 xl:col-span-4">
+                                    <x-base.menu class="absolute right-0 top-0 mr-5 mt-5">
+                                        <x-base.menu.button class="h-5 w-5 text-slate-500">
+                                            <x-base.lucide
+                                                class="h-5 w-5 fill-slate-400/70 stroke-slate-400/70"
+                                                icon="MoreVertical"
+                                            />
+                                        </x-base.menu.button>
+                                        <x-base.menu.items class="w-40">
+                                            <x-base.menu.item>
+                                                <x-base.lucide
+                                                    class="mr-2 h-4 w-4"
+                                                    icon="Copy"
+                                                /> Copy
+                                                Link
+                                            </x-base.menu.item>
+                                            <x-base.menu.item>
+                                                <x-base.lucide
+                                                    class="mr-2 h-4 w-4"
+                                                    icon="Trash"
+                                                />
+                                                Delete
+                                            </x-base.menu.item>
+                                        </x-base.menu.items>
+                                    </x-base.menu>
+                                    <div class="mt-10 flex flex-col items-center px-5 pb-10">
+                                        <div
+                                            class="image-fit h-[72px] w-[72px] overflow-hidden rounded-full border-[3px] border-slate-200/70">
+                                            <img
+                                                src=""
+                                                alt="Tailwise - Admin Dashboard Template"
+                                            >
+                                        </div>
+                                        <div class="mt-3 text-[0.94rem] font-medium text-primary">
+                                            name
+                                        </div>
+                                        <div class="mt-2 flex items-center justify-center gap-3">
+                                            <div class="flex items-center text-slate-500">
+                                                <x-base.lucide
+                                                    class="mr-1.5 h-3.5 w-3.5 stroke-[1.3]"
+                                                    icon="Hotel"
+                                                />
+                                                location
+                                            </div>
+                                            <div class="flex items-center text-slate-500">
+                                                <x-base.lucide
+                                                    class="mr-1.5 h-3.5 w-3.5 stroke-[1.3]"
+                                                    icon="Calendar"
+                                                />
+                                               joinedDate
+                                            </div>
+                                        </div>
+                                        <div class="mt-5 flex flex-wrap items-center justify-center gap-2 sm:flex-row">
+                                            <span
+                                                class="flex items-center rounded-md border border-primary/10 bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary"
+                                            >
+                                                <span class="-mt-px truncate">
+                                                    department
+                                                </span>
+                                            </span>
+                                            <span
+                                                class="flex items-center rounded-md border border-primary/10 bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary"
+                                            >
+                                                <span class="-mt-px truncate">
+                                                 position
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center border-t border-slate-200/80 px-5 py-4">
+                                        <div class="text-slate-500">
+                                            {{ mt_rand(20, 100) }}+ Connections
+                                        </div>
+                                        @if (mt_rand(0, 1))
+                                            <x-base.button
+                                                class="ml-auto border-primary/50 px-4"
+                                                variant="outline-primary"
+                                            >
+                                                <x-base.lucide
+                                                    class="-ml-0.5 mr-2 h-4 w-4 stroke-[1.3]"
+                                                    icon="UserPlus"
+                                                />
+                                                Connect
+                                            </x-base.button>
+                                        @else
+                                            <x-base.button
+                                                class="ml-auto px-4"
+                                                variant="primary"
+                                            >
+                                                <x-base.lucide
+                                                    class="-ml-0.5 mr-2 h-4 w-4 stroke-[1.3]"
+                                                    icon="Check"
+                                                />
+                                                Connected
+                                            </x-base.button>
+                                        @endif
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    </x-base.tab.panel> --}}
+                    {{-- <x-base.tab.panel
+                        id="example-5"
+                        selected="{{ request()->query('page') === 'default' }}"
+                    >
+                        <div class="box box--stacked mt-3.5 flex flex-col items-center py-14">
+                            <x-base.lucide
+                                class="h-24 w-24 fill-primary/5 stroke-[0.3] text-primary/70"
+                                icon="FileLock2"
+                            />
+                            <div class="mt-5 text-base font-medium">
+                                Two-Factor Authentication (2FA)
+                            </div>
+                            <div class="mt-1 px-10 text-center text-slate-500">
+                                Enhance your account security by enabling Two-Factor
+                                Authentication in the settings.
+                            </div>
+                            <x-base.button
+                                class="mt-6"
+                                variant="primary"
+                            >
+                                <x-base.lucide
+                                    class="-ml-0.5 mr-2 h-4 w-4 stroke-[1.3]"
+                                    icon="Lock"
+                                />
+                                Enable Now
+                            </x-base.button>
+                        </div>
+                    </x-base.tab.panel> --}}
                 </x-base.tab.panels>
             </x-base.tab.group>
         </div>
     </div>
 
-    <!-- BEGIN: Large Modal Content -->
-  <x-base.dialog
-  id="family_modal"
-  size="lg"
->
-  <x-base.dialog.panel class="p-10 text-center">
-    <x-base.dialog.title>
-        <h2 class="mr-auto text-base font-medium">
-            Add a Family Member
-        </h2>      
-    </x-base.dialog.title>
-    <form method="POST" action="{{ route('patient_family_save') }}">
-        @csrf
-      
-    <x-base.dialog.description class=" grid-cols-12 ">
-        <x-base.form-input
-        id="modal-form-1"
-        type="hidden"
-        placeholder="Name"
-        name="patient_id"
-        value="{{ $patient->id }}"
-    />
+        <!-- BEGIN: Large Modal Content -->
+        <x-base.dialog
+            id="family_modal"
+            size="lg"
+            >
+            <x-base.dialog.panel class="p-10 text-center">
+            <x-base.dialog.title>
+                <h2 class="mr-auto text-base font-medium">
+                Add a Family Member
+                </h2>      
+            </x-base.dialog.title>
+            <form method="POST" action="{{ route('patient_family_save') }}">
+                @csrf
+                <x-base.dialog.description class=" grid-cols-12 ">
+                    <x-base.form-input
+                        id="modal-form-1"
+                        type="hidden"
+                        placeholder="Name"
+                        name="patient_id"
+                        value="{{ $patient->id }}"
+                    />
 
-        <div class="col-span-12 sm:col-span-6">
-            <x-base.form-label for="modal-form-1">Family Member Name</x-base.form-label>
-            <x-base.form-input
-                id="modal-form-1"
-                type="text"
-                placeholder="Name"
-                name="family_member_name"
-            />
+                    <div class="col-span-12 sm:col-span-6">
+                        <x-base.form-label for="modal-form-1">Family Member Name</x-base.form-label>
+                        <x-base.form-input
+                            id="modal-form-1"
+                            type="text"
+                            placeholder="Name"
+                            name="family_member_name"
+                        />
+                        <x-base.form-label for="modal-dob">Date of Birth</x-base.form-label>
+                        <x-base.litepicker
+                            class="mx-auto block"
+                            data-single-mode="true"
+                            name="dob"                                                
+                            data-min-date="1924-01-01"           
+                            data-default-date="1980-01-01" 
+                            id="modal-id"           
+                        />
+                        <x-base.form-label for="modal-form-1">Gender</x-base.form-label>
+                        <x-base.form-check class="mr-4">
+                            <input type="radio" id="checkbox-switch-1" name="gender" value="1" >
+                            <x-base.form-check.label for="checkbox-switch-1">
+                                Male
+                            </x-base.form-check.label>
+                        </x-base.form-check>
+                        <x-base.form-check class="mr-4">
+                            <input type="radio" id="checkbox-switch-2" name="gender" value="2" >
+                            <x-base.form-check.label for="checkbox-switch-3">
+                                Female
+                            </x-base.form-check.label>
+                        </x-base.form-check>
+                        <x-base.form-label for="modal-form-1">Contact No</x-base.form-label>
+                        <x-base.form-input
+                        id="modal-form-1"
+                        type="text"
+                        placeholder="Phone no"
+                        name="contact_no"
+                        />
 
-            <x-base.form-label for="modal-dob">Date of Birth</x-base.form-label>
-            <x-base.litepicker
-            class="mx-auto block"
-            data-single-mode="true"
-            name="dob"                                                
-            data-min-date="1924-01-01"           
-            data-default-date="1980-01-01" 
-            id="modal-id"           
-            />
+                        <x-base.form-label for="modal-form-1">Relation with Patient</x-base.form-label>
+                        <x-base.form-select id="patient_relation" name="patient_relation">
+                            <option value="">Select</option> 
+                            <option value="1">Father</option> 
+                            <option value="2">Mother</option> 
+                            <option value="3">Son</option> 
+                            <option value="4">Daughter</option>               
+                            <option value="5">Wife</option> 
+                            <option value="6">Husband</option> 
+                            <option value="7">Brother</option> 
+                            <option value="8">Sister</option> 
+                            <option value="9">Grand son</option> 
+                            <option value="10">Grand Daughter</option> 
+                            <option value="11">Son-in-Law</option> 
+                            <option value="12">Daughter-in-Law</option> 
+                        </x-base.form-select>
+                        <x-base.form-label for="modal-form-1">Staying with Patient</x-base.form-label>
+                        <x-base.form-check class="mr-4">
+                            <input type="radio" id="checkbox-switch-1" name="staying" value="1" >
+                        <x-base.form-check.label for="checkbox-switch-staying">
+                            Yes
+                        </x-base.form-check.label>
+                        </x-base.form-check>
+                        <x-base.form-check class="mr-4">
+                            <input type="radio" id="checkbox-switch-2" name="staying" value="2" >
+                            <x-base.form-check.label for="checkbox-switch-staying">
+                            No
+                            </x-base.form-check.label>
+                        </x-base.form-check>
+                        <x-base.form-label for="modal-form-1">Education</x-base.form-label>
+                            <x-base.form-input
+                            id="modal-form-1"
+                            type="text"
+                            placeholder="Education"
+                            name="education"
+                            />
+                        <x-base.form-label for="modal-form-1">Monthly income</x-base.form-label>
+                        <x-base.form-input
+                        id="modal-form-1"
+                        type="text"
+                        placeholder="Monthly income"
+                        name="income"
+                        />
+                        <x-base.form-label for="modal-form-1">Source of Income</x-base.form-label>
+                        <x-base.form-select id="source_income" name="source_income">
+                            <option value="">Select</option> 
+                            <option value="1">Agriculture</option> 
+                            <option value="2">Job</option> 
+                            <option value="3">Pension</option> 
+                            <option value="4">Others</option> 
+                            <option value="5">Nil</option> 
+                        </x-base.form-select>
 
-            <x-base.form-label for="modal-form-1">Gender</x-base.form-label>
-            <x-base.form-check class="mr-4">
-                <input type="radio" id="checkbox-switch-1" name="gender" value="1" >
-                <x-base.form-check.label for="checkbox-switch-1">
-                    Male
-                </x-base.form-check.label>
-            </x-base.form-check>
-            <x-base.form-check class="mr-4">
-                <input type="radio" id="checkbox-switch-2" name="gender" value="2" >
-                <x-base.form-check.label for="checkbox-switch-3">
-                    Female
-                </x-base.form-check.label>
-            </x-base.form-check>
-            <x-base.form-label for="modal-form-1">Contact No</x-base.form-label>
-            <x-base.form-input
-                id="modal-form-1"
-                type="text"
-                placeholder="Phone no"
-                name="contact_no"
-            />
-
-            <x-base.form-label for="modal-form-1">Relation with Patient</x-base.form-label>
-            <x-base.form-select id="patient_relation" name="patient_relation">
-                <option value="">Select</option> 
-                <option value="1">Father</option> 
-                <option value="2">Mother</option> 
-                <option value="3">Son</option> 
-                <option value="4">Daughter</option>               
-                <option value="5">Wife</option> 
-                <option value="6">Husband</option> 
-                <option value="7">Brother</option> 
-                <option value="8">Sister</option> 
-                <option value="9">Grand son</option> 
-                <option value="10">Grand Daughter</option> 
-                <option value="11">Son-in-Law</option> 
-                <option value="12">Daughter-in-Law</option> 
-                </x-base.form-select>
-
-                <x-base.form-label for="modal-form-1">Staying with Patient</x-base.form-label>
-                <x-base.form-check class="mr-4">
-                    <input type="radio" id="checkbox-switch-1" name="staying" value="1" >
-                    <x-base.form-check.label for="checkbox-switch-staying">
-                        Yes
-                    </x-base.form-check.label>
-                </x-base.form-check>
-                <x-base.form-check class="mr-4">
-                    <input type="radio" id="checkbox-switch-2" name="staying" value="2" >
-                    <x-base.form-check.label for="checkbox-switch-staying">
-                        No
-                    </x-base.form-check.label>
-                </x-base.form-check>
-
-            <x-base.form-label for="modal-form-1">Education</x-base.form-label>
-            <x-base.form-input
-                id="modal-form-1"
-                type="text"
-                placeholder="Education"
-                name="education"
-            />
-            <x-base.form-label for="modal-form-1">Monthly income</x-base.form-label>
-            <x-base.form-input
-                id="modal-form-1"
-                type="text"
-                placeholder="Monthly income"
-                name="income"
-            />
-            <x-base.form-label for="modal-form-1">Source of Income</x-base.form-label>
-            <x-base.form-select id="source_income" name="source_income">
-                <option value="">Select</option> 
-                <option value="1">Agriculture</option> 
-                <option value="2">Job</option> 
-                <option value="3">Pension</option> 
-                <option value="4">Others</option> 
-                <option value="5">Nil</option> 
-                </x-base.form-select>
-
-                <x-base.form-label for="modal-form-1">Category</x-base.form-label>
-            <x-base.form-select id="income_catogory" name="income_catogory">
-                <option value="">Select</option> 
-                <option value="1">APL</option> 
-                <option value="2">BPL</option> 
-                <option value="3">AAY</option> 
-                <option value="4">Others</option> 
-                <option value="5">Nil</option> 
-                </x-base.form-select>
-        </div> 
-    
-    </x-base.dialog.description>
-    <x-base.dialog.footer>
-        <x-base.button
-            class="mr-1 w-20"
-            data-tw-dismiss="modal"
-            type="button"
-            variant="outline-secondary"
-        >
-            Cancel
-        </x-base.button>
-        <x-base.button
-            class="w-20"
-            type="submit"
-            variant="primary"
-        >
-            Submit
-        </x-base.button>
-    </x-base.dialog.footer>
-</form>
-  </x-base.dialog.panel>
-</x-base.dialog>
+                        <x-base.form-label for="modal-form-1">Category</x-base.form-label>
+                        <x-base.form-select id="income_catogory" name="income_catogory">
+                            <option value="">Select</option> 
+                            <option value="1">APL</option> 
+                            <option value="2">BPL</option> 
+                            <option value="3">AAY</option> 
+                            <option value="4">Others</option> 
+                            <option value="5">Nil</option> 
+                        </x-base.form-select>
+                    </div> 
+                </x-base.dialog.description>
+                <x-base.dialog.footer>
+                    <x-base.button
+                        class="mr-1 w-20"
+                        data-tw-dismiss="modal"
+                        type="button"
+                        variant="outline-secondary"
+                        >
+                        Cancel
+                    </x-base.button>
+                    <x-base.button
+                        class="w-20"
+                        type="submit"
+                        variant="primary"
+                        >
+                        Submit
+                    </x-base.button>
+                </x-base.dialog.footer>
+            </form>
+        </x-base.dialog.panel>
+    </x-base.dialog>
 <!-- END: Large Modal Content -->
 
 
-   <!-- BEGIN: Medication Modal -->
-   <x-base.dialog
-   id="medication_modal"
-   size="lg"
- >
-   <x-base.dialog.panel class="p-10 text-center">
-     <x-base.dialog.title>
-         <h2 class="mr-auto text-base font-medium">
-            Medication Details
-         </h2>      
-     </x-base.dialog.title>
-     <form method="POST" action="{{ route('patient_medicine_save') }}">
-         @csrf
-       
+
+ <!-- BEGIN: Large Modal Content -->
+ <x-base.dialog  id="classify_modal"  size="lg" >
+    <x-base.dialog.panel class="p-10 text-center">
+    <x-base.dialog.title>
+        <h2 class="mr-auto text-base font-medium">
+       Classify the patient-  {{ $patient->first_name }}  {{ $patient->last_name }}  {{ $patient->patient_code }}
+        </h2>      
+    </x-base.dialog.title>
+    <form method="POST" action="{{ route('patient_classify_save') }}">
+     @csrf
      <x-base.dialog.description class="grid-cols-12 ">
          <x-base.form-input
-         id="modal-form-1"
-         type="hidden"
-         placeholder="Name"
-         name="patient_id"
-         value="{{ $patient->id }}"
-     />
- 
+             id="modal-form-1"
+             type="hidden"            
+             name="patient_id"
+             value="{{ $patient->id }}"
+         />
          <div class="col-span-12 sm:col-span-6">
-            <x-base.form-label for="modal-form-2">Medicine</x-base.form-label>
-             <x-base.form-select id="medicine_name" name="medicine_name">
-                 <option value="">Select</option>                 
-            </x-base.form-select>    
-
-            <x-base.form-label for="modal-form-2">Type</x-base.form-label>
-            <x-base.form-select id="medicine_type" name="medicine_type">
-                <option value="">Select</option>               
-           </x-base.form-select>    
- 
-            
-             <x-base.form-label for="modal-form-1">Dose</x-base.form-label>
-             <x-base.form-input
-                 id="modal-form-1"
-                 type="number"
-                 placeholder="Dose"
-                 name="med_dose"
-             />
-
-             <x-base.form-label for="modal-form-1">unit</x-base.form-label>
-             <x-base.form-select id="dose_unit" name="dose_unit">
-                <option value="">Select</option> 
-                <option value="1">mg</option> 
-                <option value="2">ml</option> 
-                <option value="3">gm</option> 
-           </x-base.form-select>
- 
-             <x-base.form-label for="modal-form-2">Frequency</x-base.form-label>
-             <x-base.form-select id="med_frequency" name="med_frequency">
+             <x-base.form-label for="modal-form-1">Classify</x-base.form-label>        
+            <x-base.form-select id="classify" name="classify">
                  <option value="">Select</option> 
-                 <option value="1">Once</option> 
-                 <option value="2">Twice</option> 
-                 <option value="3">Thrice</option> 
-                 <option value="4">Four times</option> 
-                 <option value="5">Five times</option> 
-                 <option value="6">Six times</option> 
-                 <option value="7">Alternate Days</option> 
-            </x-base.form-select>
-
-            <x-base.form-label for="modal-form-2">Period</x-base.form-label>
-             <x-base.form-select id="med_period" name="med_period">
-                 <option value="">Select</option> 
-                 <option value="1">Daily</option> 
-                 <option value="2">Weekly</option> 
-                 <option value="3">Monthly</option> 
-            </x-base.form-select>             
- 
-          
-           
-             <x-base.form-label for="modal-form-1">Duration</x-base.form-label>
-             <x-base.form-input
-                 id="modal-form-1"
-                 type="text"
-                 placeholder="Duration"
-                 name="duration"
-             />
- 
-                 <x-base.form-label for="modal-form-1">Timespan</x-base.form-label>
-             <x-base.form-select id="timespan" name="timespan">
-                 <option value="">Select</option> 
-                 <option value="1">Days</option> 
-                 <option value="2">Weeks</option> 
-                 <option value="3">Months</option> 
-                 <option value="4">Years</option>                 
-                 </x-base.form-select>
-
-                 <x-base.form-label for="modal-form-1">Route</x-base.form-label>
-                <x-base.form-select id="medicine_mode" name="medicine_mode">   
-                    <option value="">Select</option>                                
-                </x-base.form-select>
-                   
+                 <option value="1">Home Bound</option> 
+                 <option value="2">Bed Ridden</option>                
+             </x-base.form-select>          
          </div> 
-     
      </x-base.dialog.description>
      <x-base.dialog.footer>
          <x-base.button
@@ -1121,115 +1822,49 @@
              data-tw-dismiss="modal"
              type="button"
              variant="outline-secondary"
-         >
+             >
              Cancel
          </x-base.button>
          <x-base.button
              class="w-20"
              type="submit"
              variant="primary"
-         >
+             >
              Submit
          </x-base.button>
      </x-base.dialog.footer>
  </form>
-   </x-base.dialog.panel>
- </x-base.dialog>
- <!-- END: Medication Modal -->
+</x-base.dialog.panel>
+</x-base.dialog>
+<!-- END: Large Modal Content -->
 @endsection
 @push('custom-scripts')
 <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
 <script>
-
-
-
-document.addEventListener('DOMContentLoaded', function () {
-    const medicationModal = document.querySelector('#medication_modal');
-    const medicationSelect = document.querySelector('#medicine_name');
-    const medicationTypeSelect = document.querySelector('#medicine_type');
-    const medicationModeSelect = document.querySelector('#medicine_mode');
-
-    const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-            if (!medicationModal.classList.contains('hidden')) {
-                // Modal is visible
-                populateMedicationDropdown(medicationSelect);
-                populateMedicationTypeDropdown(medicationTypeSelect);
-                populateMedicationModeDropdown(medicationModeSelect);
-            }
-        });
+window.addEventListener('DOMContentLoaded', (event) => {
+        let status = {{ $patient->flow_status_id }};        
+        if (status >= 1 && status <= 10) {
+            setProgress(status);  
+         } else {
+            console.error('Invalid status:', status);
+        }
     });
 
-    // Observe changes to the modal's attributes
-    observer.observe(medicationModal, { attributes: true, attributeFilter: ['class'] });
-
-    function populateMedicationDropdown(selectElement) {
-        // Clear the dropdown
-        selectElement.innerHTML = '<option value="">Loading...</option>';
-
-        // Fetch data via AJAX
-        fetch('/get_all_medicines')
-            .then((response) => response.json())
-            .then((data) => {
-                selectElement.innerHTML = '<option value="">Select</option>';
-                data.forEach((medication) => {
-                    const option = document.createElement('option');
-                    option.value = medication.id; // Backend medication ID
-                    option.textContent = medication.medicine; // Backend medication name
-                    selectElement.appendChild(option);
-                });
-            })
-            .catch((error) => {
-                console.error('Error fetching medications:', error);
-                selectElement.innerHTML = '<option value="">Error loading options</option>';
-            });
+    function setProgress(status) {
+        const percentage = status * 10;
+        const statusTextElement = document.getElementById('profile-status-text');
+        if (statusTextElement) {
+            statusTextElement.innerText = `Complete your profile (${percentage}%)`; 
+        } else {
+            console.error("profile-status-text element not found.");
+        }
+        const progressBarElement = document.getElementById('progress-bar');
+        if (progressBarElement) {
+            progressBarElement.style.width = `${percentage}%`;
+        } else {
+            console.error("progress-bar element not found.");
+        }
     }
 
-    function populateMedicationModeDropdown(selectElement) {
-        // Clear the dropdown
-        selectElement.innerHTML = '<option value="">Loading...</option>';
-
-        // Fetch data via AJAX
-        fetch('/get_all_medicine_modes')
-            .then((response) => response.json())
-            .then((data) => {
-                selectElement.innerHTML = '<option value="">Select</option>';
-                data.forEach((medication) => {
-                    const option = document.createElement('option');
-                    option.value = medication.id; // Backend medication ID
-                    option.textContent = medication.medicine_mode; // Backend medication name
-                    selectElement.appendChild(option);
-                });
-            })
-            .catch((error) => {
-                console.error('Error fetching medications:', error);
-                selectElement.innerHTML = '<option value="">Error loading options</option>';
-            });
-    }
-
-    function populateMedicationTypeDropdown(selectElement) {
-        // Clear the dropdown
-        selectElement.innerHTML = '<option value="">Loading...</option>';
-
-        // Fetch data via AJAX
-        fetch('/get_all_medicine_types')
-            .then((response) => response.json())
-            .then((data) => {
-                selectElement.innerHTML = '<option value="">Select</option>';
-                data.forEach((medication) => {
-                    const option = document.createElement('option');
-                    option.value = medication.id; // Backend medication ID
-                    option.textContent = medication.medicine_type; // Backend medication name
-                    selectElement.appendChild(option);
-                });
-            })
-            .catch((error) => {
-                console.error('Error fetching medications:', error);
-                selectElement.innerHTML = '<option value="">Error loading options</option>';
-            });
-    }
-});
-
-
+    setProgress({{ $patient->flow_status_id }});
 </script>
-    @endpush

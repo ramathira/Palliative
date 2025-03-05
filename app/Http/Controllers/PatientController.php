@@ -10,6 +10,7 @@ use App\Models\PatientAddress;
 use App\Models\PatientBlueFormDetailedExamination;
 use App\Models\PatientBlueFormGeneralCondition;
 use App\Models\PatientBlueFormOtherDetails;
+use App\Models\PatientClassification;
 use App\Models\PatientComfortDevices;
 use App\Models\PatientDiagnosis;
 use App\Models\PatientDisease;
@@ -18,6 +19,7 @@ use App\Models\PatientFamily;
 use App\Models\PatientInitialDiagnosis;
 use App\Models\PatientLocation;
 use App\Models\PatientMedication;
+use App\Models\PatientPastTreatmentCategory;
 use App\Models\PatientPhysicalDifficulties;
 use App\Models\PatientTreatmentCategory;
 use Carbon\Carbon;
@@ -211,6 +213,7 @@ class PatientController extends Controller
                    'status'        => 1                  
                ]);
 
+               Patient::where('id', $request->patient_id)->update(['flow_status_id' => 2]);
                
            
 
@@ -239,8 +242,7 @@ class PatientController extends Controller
 
     
     public function save_patient_disease(Request $request)
-    {
-       
+    {      
 
         $validator = Validator::make($request->all(), [
             'patient_id'    => 'required|integer|exists:patient_master,id',           
@@ -248,12 +250,10 @@ class PatientController extends Controller
             'diagnosis_details' => 'required|string|max:1000',    
             'diagnosis_date' => 'required',         
             'prior_condition' => 'required|string|max:1000',      
-            'hospital_name' => 'required|string|max:30',              
-            'treatment_type' => 'required|numeric|max:2',                
+            'hospital_name' => 'required|string|max:30',            
             'present_condition' => 'required|string|max:1000',   
             'treatment_category.*' => 'required|integer|exists:mt_treatment_type,id', 
-            'diagnosis.*' => 'required|integer|exists:mt_diagnosis,id',
-                     
+            'diagnosis.*' => 'required|integer|exists:mt_diagnosis,id',                   
            
             
         ]);
@@ -326,6 +326,7 @@ class PatientController extends Controller
                         'patient_id' => $request->patient_id,
                         'comfort_devices_id' => $comfortdevices_id,
                         'enteredby' =>   auth()->user()->id,  
+                        'created_at' =>Carbon::now(),
                         'status' => 1
                     ];
                 }
@@ -337,13 +338,13 @@ class PatientController extends Controller
            
 
 
-            $treatment_type_ids = $request->input('treatment_type_id');
+            $treatment_type_ids = $request->input('treatment_category');
         
        
             if (!is_array($treatment_type_ids)) {
                 $treatment_type_ids = [$treatment_type_ids];
             }
-    
+            
             $patient_treatment_Data = [];        
             foreach ($treatment_type_ids as $treatment_type_id) {
                 if (!empty($treatment_type_id)) { 
@@ -354,17 +355,13 @@ class PatientController extends Controller
                         'status' => 1
                     ];
                 }
-            } 
+            }    
             if (!empty($patient_treatment_Data)) {
             \DB::table('patient_treatment_category')->insert($patient_treatment_Data);
             }
+          
 
-
-
-
-
-
-
+            Patient::where('id', $request->patient_id)->update(['flow_status_id' => 8]);
             \DB::commit();
 
             return response()->json([
@@ -502,11 +499,8 @@ class PatientController extends Controller
             if (!empty($patient_treatment_Data)) {
             \DB::table('patient_treatment_category')->insert($patient_treatment_Data);
             }
-    
 
-
-
-            $difficulty = $request->get('difficulty[]', []); // Remap "difficulty[]" to "difficulty"
+            $difficulty = $request->get('difficulty[]', []); 
             $duration = $request->get('duration[]', []);
             $period = $request->get('period[]', []);
 
@@ -549,7 +543,7 @@ class PatientController extends Controller
 
 
 
-            Patient::where('id', $request->patient_id)->update(['flow_status_id' => 2]);
+            Patient::where('id', $request->patient_id)->update(['flow_status_id' => 3]);
          
 
 
@@ -681,11 +675,54 @@ class PatientController extends Controller
         ->with('medicine_details', 'medication_type', 'medicine_mode')
         ->get();
      // dd($patient_medication);
+     $patient_intial_diagnosis = PatientInitialDiagnosis::select('details_from_disease', DB::raw("
+     CASE 
+             WHEN undertanding_abt_disease = 1 THEN 'Well Aware'
+             WHEN undertanding_abt_disease = 2 THEN 'Not Aware'
+             WHEN undertanding_abt_disease = 3 THEN 'Little Aware'
+                               
+         ELSE 'Other'
+     END AS undertanding_abt_disease
+ "),DB::raw("
+ CASE 
+         WHEN family_abt_disease = 1 THEN 'Well Aware'
+         WHEN family_abt_disease = 2 THEN 'Not Aware'
+         WHEN family_abt_disease = 3 THEN 'Little Aware'
+                           
+     ELSE 'Other'
+ END AS family_abt_disease
+"),DB::raw("
+CASE 
+        WHEN ward_member_aware = 1 THEN 'Ward Member is Aware'
+        WHEN ward_member_aware = 2 THEN 'Ward Member is not Aware'      
+                          
+    ELSE 'Other'
+END AS ward_member_aware
+"),DB::raw("
+CASE 
+        WHEN 	volunteer_type = 1 THEN 'Asha Worker'
+        WHEN 	volunteer_type = 2 THEN 'JPHN'
+        WHEN 	volunteer_type = 3 THEN 'JHI'
+          WHEN 	volunteer_type = 4 THEN 'MLSP'
+                          
+    ELSE 'Other'
+END AS 	volunteer_type
+"))
+     ->where('patient_id', $id)
+     ->where('status', 1)
+     ->first();
+
+     $patient_past_treatment_category = PatientPastTreatmentCategory::where('patient_id', $id)
+     ->whereIn('status', [1])
+     ->with('treatment_type')
+     ->get();
+
+
         if (!$patient) {
             abort(404); 
         }
     
-        return view('pages.patient.profile', compact('patient','patient_disease','patient_family','patient_medication','patient_location','patient_diagnosis','patient_treatment_category','patient_comfort_devices'));
+        return view('pages.patient.profile', compact('patient','patient_disease','patient_family','patient_medication','patient_location','patient_diagnosis','patient_treatment_category','patient_comfort_devices','patient_intial_diagnosis','patient_past_treatment_category'));
     }
 
 
@@ -925,7 +962,11 @@ class PatientController extends Controller
                 }
             }
     
-            // Save general condition
+            $existingRecord = PatientBlueFormGeneralCondition::where(['patient_id'=> $request->patient_id,'status'=>1])->first();
+            if ($existingRecord) {                
+                $existingRecord->status = 0;
+                $existingRecord->save();
+            }
             PatientBlueFormGeneralCondition::create([
                 'patient_id' => $request->patient_id,
                 'present_condition' => $request->present_condition,
@@ -937,7 +978,16 @@ class PatientController extends Controller
                 'enteredby' => auth()->user()->id,
                 'status' => 1,
             ]);
-    
+            $flow_status_id=4;
+            $existingRecord = PatientBlueFormDetailedExamination::where(['patient_id'=> $request->patient_id,'status'=>1])->first();
+            if ($existingRecord) {  
+                $flow_status_id++;
+            }
+            $existingRecord = PatientBlueFormOtherDetails::where(['patient_id'=> $request->patient_id,'status'=>1])->first();
+            if ($existingRecord) {  
+                $flow_status_id++;
+            }
+            Patient::where('id', $request->patient_id)->update(['flow_status_id' => $flow_status_id]);
             \DB::commit();
     
             return redirect()->route('patient_blue_form', ['id' => $request->patient_id])
@@ -967,7 +1017,12 @@ class PatientController extends Controller
                 'skin_integrity' => 'required|in:1,2',
                 'pressure_sore' => 'required|in:1,2',
                 'private_hygiene' => 'required|in:1,2',                
-            ]);         
+            ]); 
+            $existingRecord = PatientBlueFormDetailedExamination::where(['patient_id'=> $request->patient_id,'status'=>1])->first();
+            if ($existingRecord) {                
+                $existingRecord->status = 0;
+                $existingRecord->save();
+            }        
             PatientBlueFormDetailedExamination::create([
                 'patient_id' => $request->patient_id,
                 'systolic_bp' => $request->systolic_bp,
@@ -981,6 +1036,19 @@ class PatientController extends Controller
                 'enteredby' => auth()->user()->id,
                 'status' => 1,
             ]);
+
+            $flow_status_id=3;
+            $existingRecord = PatientBlueFormGeneralCondition::where(['patient_id'=> $request->patient_id,'status'=>1])->first();
+            if ($existingRecord) {  
+                $flow_status_id=$flow_status_id+2;
+                $existingRecord = PatientBlueFormOtherDetails::where(['patient_id'=> $request->patient_id,'status'=>1])->first();
+                if ($existingRecord) {  
+                    $flow_status_id++;
+                }
+            }          
+            
+           
+            Patient::where('id', $request->patient_id)->update(['flow_status_id' => $flow_status_id]);
     
             \DB::commit();    
             return redirect()->route('patient_blue_form', ['id' => $request->patient_id])
@@ -1042,6 +1110,12 @@ class PatientController extends Controller
             $no_support_sytem = $request->no_support_sytem ?? null;
             $social_constraints_detail = $request->social_constraints_detail ?? null;
 
+            $existingRecord = PatientBlueFormOtherDetails::where(['patient_id'=> $request->patient_id,'status'=>1])->first();
+            if ($existingRecord) {                
+                $existingRecord->status = 0;
+                $existingRecord->save();
+            } 
+
             PatientBlueFormOtherDetails::create([
                 'patient_id' => $request->patient_id,
                 'mental_constraint' => $request->mental_constraint,
@@ -1061,7 +1135,18 @@ class PatientController extends Controller
                 'enteredby' => auth()->user()->id,
                 'status' => 1,
             ]);
-    
+
+
+            $flow_status_id=3;
+            $existingRecord = PatientBlueFormGeneralCondition::where(['patient_id'=> $request->patient_id,'status'=>1])->first();
+            if ($existingRecord) {  
+                $flow_status_id++;
+                $existingRecord = PatientBlueFormDetailedExamination::where(['patient_id'=> $request->patient_id,'status'=>1])->first();
+                if ($existingRecord) {  
+                    $flow_status_id=$flow_status_id+2;
+                }
+            } 
+            Patient::where('id', $request->patient_id)->update(['flow_status_id' => $flow_status_id]);
             \DB::commit();    
             return redirect()->route('patient_blue_form', ['id' => $request->patient_id])
                     ->with('success', 'Patient detailed examination saved successfully!')
@@ -1123,9 +1208,7 @@ public function blue_form_medicine_save(Request $request) {
             'med_dose' => 'required|numeric',
             'dose_unit' => 'required|string',
             'med_frequency' => 'required|string',
-            'med_period' => 'required|string',
-            'duration' => 'required|string',
-            'timespan' => 'required|string',
+            'med_period' => 'required|string',            
             'medicine_mode' => 'required|string',
         ]);
 
@@ -1163,7 +1246,221 @@ public function blue_form_medicine_save(Request $request) {
 }
 
 
+// public function pending_blue_form()
+// {      
+//     // \DB::enableQueryLog();  
+//     $patients = Patient::select('id','first_name','second_name','dob','gender');
+//     // if(auth()->user()->hasRole('Palliative Care Nurse') )
+//     // {
+//         $patients =$patients->where('status',1);
+//     // }
+
+//   //  $patients = $patients->get();
+//     $patients = $patients->paginate(10);
+//     // dd(\DB::getQueryLog()); 
+//     return view('pages.patient.blue_form_pending', compact('patients'));
+// }
+
+
+public function pending_pink_list()
+{      
+       $list_type="pink_pending";
+    return view('pages.patient.list', compact('list_type'));
+}
+public function completed_pink_list()
+{      
+    $list_type="pink_completed";
+    return view('pages.patient.list', compact('list_type'));
+}
+public function pending_blue_list()
+{      
+       $list_type="blue_pending";
+    return view('pages.patient.list', compact('list_type'));
+}
+public function completed_blue_list()
+{      
+    $list_type="blue_completed";
+    return view('pages.patient.list', compact('list_type'));
+}
+public function pending_classify_list()
+{      
+       $list_type="classify_pending";
+    return view('pages.patient.list', compact('list_type'));
+}
+public function completed_classify_list()
+{      
+    $list_type="classify_completed";
+    return view('pages.patient.list', compact('list_type'));
+}
+public function pending_white_list()
+{      
+       $list_type="white_pending";
+    return view('pages.patient.list', compact('list_type'));
+}
+public function completed_white_list()
+{      
+    $list_type="white_completed";
+    return view('pages.patient.list', compact('list_type'));
+}
+public function edit_patient($id)
+{
+    $patient_id=$id;
+    $flow_status_id = Patient::where('id', $id)->pluck('flow_status_id')->first();
+    if($flow_status_id==1 || $flow_status_id==2)
+    return view('pages/patient/register_new_patient',compact('flow_status_id','patient_id'));
+   
+}
+
+
+public function getPatientsList(Request $request)
+{
+    $listType = $request->get('list_type');
+    $columns = [ 'patient_code', 'first_name', 'second_name','dob','phone_no']; 
+    $patients = Patient::query();
+
+    if($listType=="pink_pending")
+    {
+        $patients->whereIn('flow_status_id',[1,2]);
+    }
+    else if($listType=="pink_completed")
+    {
+        $patients->whereIn('flow_status_id',[3,4,5,6,7,8]);
+    }
+    else if($listType=="blue_pending")
+    {
+        $patients->whereIn('flow_status_id',[3,4,5]);
+    }
+    else if($listType=="blue_completed")
+    {
+        $patients->whereIn('flow_status_id',[6,7,8]);
+    }
+    else if($listType=="classify_pending")
+    {
+        $patients->where('flow_status_id',6)->whereNull('class');
+    }
+    else if($listType=="classify_completed")
+    {
+        $patients->where('flow_status_id',7);
+    }
+    else if($listType=="white_pending")
+    {
+        $patients->whereIn('flow_status_id',[7]);
+    }
+    else if($listType=="white_completed")
+    {
+        $patients->where('flow_status_id',8);
+    }
+
+    if(auth()->user()->hasRole('Junior Health Inspector') || auth()->user()->hasRole('Junior Public Health Nurse'))	    
+    {
+        // $patients =$patients->where('enteredby',auth()->user()->id);
+    }
+    // else if(auth()->user()->hasRole('Mid Level Service Provider Nurse'))	    
+    // {
+    //     $patients.=$patients->join('patient_location', 'patient_master.id', '=', 'patient_location.patient_id')
+    //                             ->join('mt_subcentres', 'patient_location.subcentre_id', '=', 'mt_subcentres.id');
+    // }
+    if ($search = $request->input('search.value')) {
+        $patients->where(function($query) use ($search) {
+            $query->where('patient_code', 'like', "%{$search}%")
+                  ->orWhere('first_name', 'like', "%{$search}%")
+                  ->orWhere('second_name', 'like', "%{$search}%")
+                  ->orWhere('dob', 'like', "%{$search}%")
+                  ->orWhere('phone_no', 'like', "%{$search}%");
+        });
+    }
+    $orderColumn = $columns[$request->input('order.0.column')];
+    $orderDir = $request->input('order.0.dir', 'asc');
+    $patients->orderBy($orderColumn, $orderDir);
+    $totalRecords = $patients->count();  
+    $filteredPatients = $patients->skip($request->input('start'))->take($request->input('length'))->get();
     
+    $patientsData = $filteredPatients->map(function($patient) {
+        $patient->name = $patient->first_name . ' ' . $patient->second_name; // Concatenate names
+        unset($patient->first_name); 
+        unset($patient->second_name); 
+        return $patient;
+    });
+    // Return JSON response
+    return response()->json([
+        'draw' => (int) $request->input('draw'),
+
+        'recordsTotal' => $totalRecords, // Total number of records
+
+        'recordsFiltered' => $patients->count(), // Filtered count (before pagination)
+
+        'data' => $patientsData
+    ]);
+}
+
+
+
+public function save_classify(Request $request)
+{
+   
+
+    $validator = Validator::make($request->all(), [
+        'patient_id'    => 'required|integer|exists:patient_master,id',        
+        'classify' => 'required|integer|in:1,2',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json([
+            'success' => false,
+            'errors'  => $validator->errors(),
+        ], 422); 
+    }
+
+    try {
+        \DB::beginTransaction();
+
+        PatientClassification::create([
+            'patient_id'    => $request->patient_id,    
+            'patient_type'  => $request->classify,
+            'enteredby' =>   auth()->user()->id,            
+            'status'        => 1
+                                                         
+        ]);
+
+        Patient::where('id', $request->patient_id)->update(['flow_status_id' => 7,'class'=> $request->classify]);
+
+
+        $existingRecord = PatientDisease::where(['patient_id'=> $request->patient_id,'status'=>1])->first();
+        if ($existingRecord) {                
+            Patient::where('id', $request->patient_id)->update(['flow_status_id' => 8]);
+
+        } 
+
+        // Commit the transaction
+        \DB::commit();
+
+        return redirect()->route('patient.profile', ['id' => $request->patient_id])->with('success', 'Patient classified successfully!');
+    }
+    catch (\Illuminate\Validation\ValidationException $e) {
+       
+        return response()->json([
+            'success' => false,
+            'errors' => $e->errors(),  
+        ], 422);  
+    }catch (\Exception $e) {
+        return response()->json([
+            'success' => false,
+            'message' => 'An error occurred while saving.',
+            'error'   => $e->getMessage(),
+        ], 500);
+    }
+
+}
+
+
+
+public function edit_white_form($id)
+{    
+   $patient_id=$id;
+    return view('pages/patient/register_patient',compact('patient_id'));   
+
+   
+}
 
  
     

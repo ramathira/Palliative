@@ -336,29 +336,23 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('/register_patient', [PatientController::class, 'add_new_patient'])->name('patient.create');
-
     Route::post('/save-patient-basic', [PatientController::class, 'save_patient_basic'])->name('patient.save-patient-basic');
-
     Route::post('/save-patient-location', [PatientController::class, 'save_patient_location'])->name('patient.save-patient-location');
-
     Route::post('/save-patient-disease', [PatientController::class, 'save_patient_disease'])->name('patient.save-patient-disease');
-
-    Route::get('/patient_list', [PatientController::class, 'patient_list'])->name('patient.list');
-
+    // Route::get('/patient_list', [PatientController::class, 'patient_list'])->name('patient.list');
     Route::get('/patient_profile/{id}', [PatientController::class, 'patient_profile'])->name('patient.profile');
-
     Route::post('/patient_family_save', [PatientController::class, 'save_family'])->name('patient_family_save');
-
     Route::post('/patient_medicine_save', [PatientController::class, 'save_medicine'])->name('patient_medicine_save');
-
     Route::get('/pending_with_mlsp', [PatientController::class, 'pending_with_mlsp'])->name('patient.pending_with_mlsp');
+    Route::get('/edit_patient/{id}', [PatientController::class, 'edit_patient'])->name('patient.edit_patient');
 
 
-
-
+    
+    Route::get('/getPatientsList', [PatientController::class, 'getPatientsList'])->name('getPatientsList');
 
     Route::get('/register_new_patient_jphn', [PatientController::class, 'register_new_patient_jphn'])->name('register_new_patient_jphn');
-
+    Route::get('/pink_pending_list', [PatientController::class, 'pending_pink_list'])->name('pink_pending.list');
+    Route::get('/pink_completed_list', [PatientController::class, 'completed_pink_list'])->name('pink_completed.list');
     Route::post('/patient_basic_details_save_jphn', [PatientController::class, 'patient_basic_details_save_jphn'])->name('patient_basic_details_save_jphn');
 
     Route::post('/save-patient-disease-jphn', [PatientController::class, 'save_patient_disease_jphn'])->name('patient.save-patient-disease-jphn');
@@ -371,6 +365,15 @@ Route::middleware('auth')->group(function () {
     Route::post('/updateMedicationStatus', [PatientController::class, 'updateMedicationStatus'])->name('updateMedicationStatus');
     Route::post('/blue_form_medicine_save', [PatientController::class, 'blue_form_medicine_save'])->name('blue_form_medicine_save');
     Route::post('/deleteMedication', [PatientController::class, 'deleteMedication'])->name('deleteMedication');
+    Route::get('/blue_pending_list', [PatientController::class, 'pending_blue_list'])->name('blue_pending.list');
+    Route::get('/blue_completed_list', [PatientController::class, 'completed_blue_list'])->name('blue_completed.list');
+    Route::get('/classify_pending_list', [PatientController::class, 'pending_classify_list'])->name('classify_pending.list');
+    Route::get('/classify_completed_list', [PatientController::class, 'completed_classify_list'])->name('classify_completed.list');
+
+    Route::post('/patient_classify_save', [PatientController::class, 'save_classify'])->name('patient_classify_save');
+    Route::get('/white_pending_list', [PatientController::class, 'pending_white_list'])->name('white_pending.list');
+    Route::get('/white_completed_list', [PatientController::class, 'completed_white_list'])->name('white_completed.list');
+    Route::get('/edit_white_form/{id}', [PatientController::class, 'edit_white_form'])->name('edit_white_form');
     /* Blue Form */
 
     Route::get('/subcentres', [ListController::class, 'get_subcentre']);
@@ -425,6 +428,8 @@ Route::middleware('auth')->group(function () {
       Route::get('/get_day_plan_palliative_nurse/{plan_date}', [ListController::class, 'get_day_plan_palliative_nurse']);
 
       Route::get('/get_drugs_of_patient/{patient_id}', [ListController::class, 'getPatientDrugs']);
+
+      Route::get('/get_patient_physical_difficulty', [ListController::class, 'getPhyDiffOfPatient']);
 
 });
 

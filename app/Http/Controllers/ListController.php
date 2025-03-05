@@ -17,6 +17,7 @@ use App\Models\MonthlySchedulePalliativeNurse;
 use App\Models\Patient;
 use App\Models\PatientLocation;
 use App\Models\PatientMedication;
+use App\Models\PatientPhysicalDifficulties;
 use App\Models\Role;
 use App\Models\TreatmentTypes;
 use Illuminate\Http\Request;
@@ -313,6 +314,23 @@ class ListController extends Controller
         $medications = PatientMedication::where('patient_id', $patient_id)              
         ->get();
         return response()->json($medications);
+    }
+
+    public function getPhyDiffOfPatient(Request $request)
+    {
+        $patient_id = $request->patient_id;
+$physical_difficulties = PatientPhysicalDifficulties::select(
+        'physical_difficulty', 
+        'duration', 
+        DB::raw("CASE WHEN period = 1 THEN 'days' WHEN period = 2 THEN 'weeks' WHEN period = 3 THEN 'months'  WHEN period = 4 THEN 'years'  ELSE 'unknown' END as period_label"), 
+        \DB::raw("DATE_FORMAT(created_at, '%d-%m-%Y') as created_at_date")
+    )
+    ->where('patient_id', $patient_id)
+    ->orderBy('created_at', 'asc')
+    ->get();
+    
+         return response()->json($physical_difficulties);
+
     }
 
 }

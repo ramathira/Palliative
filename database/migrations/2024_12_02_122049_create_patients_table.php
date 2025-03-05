@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('dob');
             $table->tinyInteger('gender') ->comment('1-Male,2-Female,3-Others');
             $table->string('phone_no',12);
-            $table->string('aadhar',12);     
+            $table->string('aadhar',12)->nullable();     
             $table->tinyInteger('status')  ;
             $table->foreign('status')->references('id')->on('mt_patient_status')->onDelete('cascade');  
             $table->timestamps();
