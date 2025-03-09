@@ -108,7 +108,7 @@
                                 </span>
                             </x-base.tab.button>
                         </x-base.tab>
-                        {{-- <x-base.tab
+                        <x-base.tab
                             class="bg-slate-50 first:rounded-l-[0.6rem] last:rounded-r-[0.6rem] [&[aria-selected='true']_button]:text-current"
                             id="example-3-tab"
                             selected="{{ request()->query('page') === 'achievements' }}"
@@ -117,9 +117,9 @@
                                 class="flex w-full items-center justify-center whitespace-nowrap rounded-[0.6rem] py-2.5 text-[0.94rem] text-slate-500 xl:w-40"
                                 as="button"
                             >
-                                Achievements
+                                Physical Difficulties
                             </x-base.tab.button>
-                        </x-base.tab> --}}
+                        </x-base.tab>
                         {{-- <x-base.tab
                             class="bg-slate-50 first:rounded-l-[0.6rem] last:rounded-r-[0.6rem] [&[aria-selected='true']_button]:text-current"
                             id="example-4-tab"
@@ -531,194 +531,416 @@
                                         @endif
                                     </div>
                                     <div class="box box--stacked flex flex-col">
-                                        <div class="p-5 font-medium">Medication</div>
-                                        <div class="overflow-x-auto xl:overflow-hidden">
-                                            <x-base.table class="border-b border-dashed border-slate-200/80 max-w-full">
-                                                <x-base.table.thead>
-                                                    <x-base.table.tr>
-                                                        <x-base.table.td
-                                                            class="border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500"
-                                                        >
-                                                            Medicine
-                                                        </x-base.table.td>
-                                                        <x-base.table.td
-                                                            class="border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500"
-                                                        >
-                                                            Dose
-                                                        </x-base.table.td>
-                                                        <x-base.table.td
-                                                            class="border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500"
-                                                        >
-                                                            Frequency
-                                                        </x-base.table.td>
-                                                        <x-base.table.td
-                                                        class="border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500"
-                                                    >
-                                                        Period
-                                                    </x-base.table.td>
-                                                    <x-base.table.td
-                                                    class="border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500"
-                                                >
-                                                    Duration
-                                                </x-base.table.td>
-                                                <x-base.table.td
-                                                    class="border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500"
-                                                    >
-                                                    Timespan
-                                                </x-base.table.td>
-                                                    <x-base.table.td
-                                                        class="border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500"
-                                                    >
-                                                        Route of Administration
-                                                    </x-base.table.td>
-                                                    <x-base.table.td
-                                                    class="border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500"
-                                                >
-                                                   Status
-                                                </x-base.table.td>
-                                                <x-base.table.td
-                                                class="border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500"
-                                            >
-                                               Entered On
-                                            </x-base.table.td>
-                                                    </x-base.table.tr>
-                                                </x-base.table.thead>
-                                                <x-base.table.tbody>
-                                                    @foreach ($patient_medication as $medicine)
-                                                        <x-base.table.tr class="[&_td]:last:border-b-0">
-                                                            <x-base.table.td
-                                                                class="border-dashed py-4 dark:bg-darkmode-600"
-                                                            >
-                                                                <div class="flex items-center">      
-                                                                    {{ $medicine->medication_type->short_code }}                                                              
-                                                                      
-                                                                
-                                                                    {{ $medicine->medicine_details->medicine }}        
-                                                                                                                                 
-                                                                </div>
-                                                            </x-base.table.td>
+                                        <div class="p-5 font-medium">Medication</div>                               
+                                            <div class="overflow-x-auto">
+                                                @if(!$patient_medication->isEmpty()) 
+                                                    <x-base.table class="border">
+                                                        <x-base.table.thead>
+                                                            <x-base.table.tr>
+                                                                <x-base.table.th
+                                                                class="bg-slate-50 !pr-2 dark:bg-darkmode-800"></x-base.table.th>
+                                                                <x-base.table.th
+                                                                class="bg-slate-50 dark:bg-darkmode-800"></x-base.table.th>                                               
+                                                                <x-base.table.th
+                                                                class="whitespace-nowrap bg-slate-50 !px-2 text-slate-500 dark:bg-darkmode-800"
+                                                                >
+                                                                    Dose
+                                                                </x-base.table.th>
+                                                                <x-base.table.th
+                                                                class="whitespace-nowrap bg-slate-50 !px-2 text-slate-500 dark:bg-darkmode-800"
+                                                                >
+                                                                    Frequency
+                                                                </x-base.table.th>
+                                                                <x-base.table.th
+                                                                class="whitespace-nowrap bg-slate-50 !px-2 text-slate-500 dark:bg-darkmode-800"
+                                                                >
+                                                                    Period
+                                                                </x-base.table.th>                                               
+                                                                <x-base.table.th
+                                                                class="whitespace-nowrap bg-slate-50 !px-2 text-slate-500 dark:bg-darkmode-800"
+                                                                >
+                                                                    Route of Administration
+                                                                </x-base.table.th>
+                                                                <x-base.table.th
+                                                                class="whitespace-nowrap bg-slate-50 !px-2 text-slate-500 dark:bg-darkmode-800"
+                                                                >
+                                                                    Status
+                                                                </x-base.table.th>
+                                                                <x-base.table.th
+                                                                class="whitespace-nowrap bg-slate-50 !px-2 text-slate-500 dark:bg-darkmode-800"
+                                                                >
+                                                                    Enteredby
+                                                                </x-base.table.th>
+                                                                <x-base.table.th
+                                                                class="whitespace-nowrap bg-slate-50 !px-2 text-slate-500 dark:bg-darkmode-800"
+                                                                >
+                                                                    Entered on
+                                                                </x-base.table.th>
+                                                                <x-base.table.th
+                                                                class="bg-slate-50 !px-2 dark:bg-darkmode-800"></x-base.table.th>
+                                                            </x-base.table.tr>
+                                                        </x-base.table.thead>
+                                                        <x-base.table.tbody> <?php $i=1; ?>
+                                                            @foreach($patient_medication as $medication)
+                                                                <x-base.table.tr>
+                                                                    <x-base.table.td class="!pr-2">{{ $i; }}</x-base.table.td>
+                                                                    <x-base.table.td class="whitespace-nowrap">
+                                                                        {{ $medication->medication_type->short_code}} {{  $medication->medicine_details->medicine;   }}
+                                                                    </x-base.table.td>
+                                                                    <x-base.table.td class="!px-2">
+                                                                        {{ $medication->dose;   }}  
+                                                                    <span class="-mt-px rounded-md border border-primary/10 bg-primary/10 text-primary font-medium text-xs"> {{ $medication->unit_dose;   }}</span>
 
-                                                            <x-base.table.td
-                                                            class="border-dashed py-4 dark:bg-darkmode-600"
-                                                        >
-                                                        <div class="ml-3.5">
-                                                           
-                                                                {{ $medicine->dose }}
-                                                           
-                                                           
-                                                        </div>
-                                                        </x-base.table.td>
-                                                        <x-base.table.td
-                                                        class="border-dashed py-4 dark:bg-darkmode-600"
-                                                    >
-                                                    <div class="ml-3.5">
-                                                       <?php
-                                                       switch($medicine->frequency)
-                                                       {
-                                                        CASE 1: $frequency="Once"; break;
-                                                        CASE 2: $frequency="Twice"; break;
-                                                        CASE 3: $frequency="Thrice"; break;
-                                                       }
-                                                        
-                                                        ?>
-                                                            {{  $frequency   }}
-                                                       
-                                                       
-                                                    </div>
-                                                    </x-base.table.td>
-                                                    <x-base.table.td
-                                                    class="border-dashed py-4 dark:bg-darkmode-600"
-                                                >
-                                                <div class="ml-3.5">
-                                                   <?php
-                                                   switch($medicine->period)
-                                                   {
-                                                    CASE 1: $period="Daily"; break;
-                                                    CASE 2: $period="Weekly"; break;
-                                                    CASE 3: $period="Monthly"; break;
-                                                   }
-                                                    
-                                                    ?>
-                                                        {{  $period   }}
-                                                   
-                                                   
-                                                </div>
-                                                </x-base.table.td>
-                                                <x-base.table.td
-                                                class="border-dashed py-4 dark:bg-darkmode-600"
-                                            >
-                                            <div class="ml-3.5">
-                                               
-                                                    {{ $medicine->duration }}
-                                               
-                                               
-                                            </div>
-                                            </x-base.table.td>
-                                                <x-base.table.td
-                                                class="border-dashed py-4 dark:bg-darkmode-600"
-                                            >
-                                            <div class="ml-3.5">
-                                               
-                                                <?php
-                                                $timespan = "Not specified"; 
-                                                switch($medicine->timespan)
-                                                {
-                                                 CASE 1: $timespan="Days"; break;
-                                                 CASE 2: $timespan="Weeks"; break;
-                                                 CASE 3: $timespan="Months"; break;
-                                                }
-                                                 
-                                                 ?>
-                                                     {{  $timespan   }}
-                                                
-                                               
-                                               
-                                            </div>
-                                            </x-base.table.td>
-                                            <x-base.table.td
-                                            class="border-dashed py-4 dark:bg-darkmode-600"
-                                        >
-                                        <div class="ml-3.5">
-                                           
-                                                {{ $medicine->medicine_mode->medicine_mode	 }}
-                                           
-                                           
-                                        </div>
-                                        </x-base.table.td>
-                                        <x-base.table.td
-                                        class="border-dashed py-4 dark:bg-darkmode-600"
-                                    >
-                                    <div class="ml-3.5">                                      
-                                        <div
-                                        class="ml-1 flex items-center rounded-md border<?php if( $medicine->status == 1 ) { ?> border-success/10 bg-success/10  text-success <?php } else { ?> border-primary/10 bg-primary/10  text-primary <?php } ?> px-1.5 py-px text-xs font-medium ">
-                                        <span class="-mt-px"> {{ $medicine->status == 1 ? 'Active' : 'Inactive' }}</span>
-                                    </div>
-                                           
-                                  
-                                       
-                                    </div>
-                                    </x-base.table.td>
-                                    <x-base.table.td
-                                    class="border-dashed py-4 dark:bg-darkmode-600"
-                                >
-                                <div class="ml-3.5">
-                                   
-                                        {{ $medicine->enteredon }}
-                                   
-                                   
-                                </div>
-                                </x-base.table.td>
+                                                                    </x-base.table.td>
+                                                                    <x-base.table.td class="!px-2">
+                                                                        {{ $medication->frequency;   }} {{ $medication->period;   }}
+                                                                    </x-base.table.td>
+                                                                    <x-base.table.td class="!px-2">
+                                                                        {{ $medication->duration;   }} {{ $medication->timespan;   }}  
+                                                                    </x-base.table.td>
+                                                                    <x-base.table.td class="!pl-4 text-slate-500">
+                                                                        {{ $medication->medicine_mode->medicine_mode;   }} 
+                                                                    </x-base.table.td>
+                                                                    <x-base.table.td class="!pl-4 text-slate-500 {{ $medication->status == 1 ? 'text-success' : 'text-grey' }} ">
                                                             
+                                                                        <?php if($medication->status==1) echo "Active";
+                                                                        elseif($medication->status==2) echo "Inactive";                                          
+                                                                        else echo "";
+                                                                        ?>                              
+                                                                    </x-base.table.td>
+                                                                    <x-base.table.td class="!pl-4 text-slate-500">
+                                                                        {{ $medication->enteredBy->name;   }} 
+                                                                    </x-base.table.td>
+                                                                    <x-base.table.td class="!pl-4 text-slate-500">
+                                                                        {{ \Carbon\Carbon::parse($medication->created_at)->format('d-M-Y') }}
+                                                                    </x-base.table.td>
+                                                                    <x-base.table.td class="!pl-4 text-slate-500">
+                                                                        <div x-data="{ open: false, action: '', medicationId: null }" class="flex items-center justify-center">
+                                                                            <!-- Menu Component -->
+                                                                            <x-base.menu class="h-5" x-show="!open" x-transition> <!-- Hide the menu if modal is open -->
+                                                                                <x-base.menu.button class="h-5 w-5 text-slate-500">
+                                                                                    <x-base.lucide class="h-5 w-5 fill-slate-400/70 stroke-slate-400/70" icon="MoreVertical" />
+                                                                                </x-base.menu.button>
+                                                                                <x-base.menu.items class="w-40">
+                                                                                    <!-- Inactive Item -->
+                                                                                    <x-base.menu.item @click="open = true; action = 'inactive'; medicationId = {{ $medication->id }}">
+                                                                                        <x-base.lucide class="mr-2 h-4 w-4" icon="CheckSquare" />
+                                                                                        Inactive
+                                                                                    </x-base.menu.item>
+                                                                                    <!-- Delete Item -->
+                                                                                    <x-base.menu.item @click="open = true; action = 'delete'; medicationId = {{ $medication->id }}" class="text-danger">
+                                                                                        <x-base.lucide class="mr-2 h-4 w-4" icon="Trash2" />
+                                                                                        Delete
+                                                                                    </x-base.menu.item>
+                                                                                </x-base.menu.items>
+                                                                            </x-base.menu>
+                                                                        
+                                                                            <!-- Confirmation Modal -->
+                                                                            <div x-show="open" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50" @click.away="open = false">
+                                                                                <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full z-60">
+                                                                                    <h2 class="text-lg font-semibold mb-4">Are you sure?</h2>
+                                                                                    <p x-show="action === 'inactive'">Do you want to mark this record as inactive?</p>
+                                                                                    <p x-show="action === 'delete'">Are you sure you want to delete this record?</p>
+                                                                                    <div class="flex justify-between mt-4">
+                                                                                        <button @click="open = false" class="px-4 py-2 bg-gray-300 text-gray-800 rounded">Cancel</button>
+                                                                                        <button @click="deleteRecord" class="px-4 py-2 bg-red-500 text-white rounded">Yes</button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        
+                                                                    </x-base.table.td>
+                                                                    <?php $i++;?>
+                                                                </x-base.table.tr>                               
+                                                            @endforeach                                                                                     
+                                                        </x-base.table.tbody>
+                                                    </x-base.table>
+                                                @endif
+                                                 <br><br>
+                                                <x-base.table class="border" id="medication-table">
+                                                    <input type="hidden" name="patient_id" value="{{ $patient->id }}">
+                                                    <x-base.table.thead>
+                                                        <x-base.table.tr>
+                                                            <x-base.table.th class="bg-slate-50 !pr-2 dark:bg-darkmode-800">Medicine</x-base.table.th>
+                                                            <x-base.table.th class="bg-slate-50 dark:bg-darkmode-800">Type</x-base.table.th>                                               
+                                                            <x-base.table.th class="whitespace-nowrap bg-slate-50 !px-2 text-slate-500 dark:bg-darkmode-800">
+                                                                Dose
+                                                            </x-base.table.th>
+                                                            <x-base.table.th class="whitespace-nowrap bg-slate-50 !px-2 text-slate-500 dark:bg-darkmode-800">
+                                                                Unit
+                                                            </x-base.table.th>
+                                                            <x-base.table.th class="whitespace-nowrap bg-slate-50 !px-2 text-slate-500 dark:bg-darkmode-800">
+                                                                Frequency
+                                                            </x-base.table.th>
+                                                            <x-base.table.th class="whitespace-nowrap bg-slate-50 !px-2 text-slate-500 dark:bg-darkmode-800">
+                                                                Period
+                                                            </x-base.table.th>   
+                                                            <x-base.table.th class="whitespace-nowrap bg-slate-50 !px-2 text-slate-500 dark:bg-darkmode-800">
+                                                                Duration
+                                                            </x-base.table.th>
+                                                            <x-base.table.th class="whitespace-nowrap bg-slate-50 !px-2 text-slate-500 dark:bg-darkmode-800">
+                                                                Timespan
+                                                            </x-base.table.th>                                            
+                                                            <x-base.table.th class="whitespace-nowrap bg-slate-50 !px-2 text-slate-500 dark:bg-darkmode-800">
+                                                                Route
+                                                            </x-base.table.th>
                                                         
                                                         </x-base.table.tr>
-                                                    @endforeach
-                                                </x-base.table.tbody>
-                                            </x-base.table>
+                                                    </x-base.table.thead>
+                                                    <x-base.table.tbody id="medicine_table">                                              
+                                                        <x-base.table.tr class="medication-row">   
+                                                        
+                                                            <x-base.table.td class="whitespace-nowrap">
+                                                                <x-base.form-select class="medicine_name" name="medicine_name" required>
+                                                                    <option value="">Select</option>                 
+                                                                </x-base.form-select>                                                    
+                                                            </x-base.table.td>
+                                                            <x-base.table.td class="whitespace-nowrap">                                                  
+                                                                <x-base.form-select class="medicine_type" name="medicine_type" required>
+                                                                    <option value="">Select</option>               
+                                                                </x-base.form-select> 
+                                                            </x-base.table.td>
+
+                                                            <x-base.table.td class="!px-2">
+                                                                <x-base.form-input
+                                                                id="modal-form-1"
+                                                                type="number"
+                                                                placeholder="Dose"
+                                                                name="med_dose"
+                                                                />
+                                                            </x-base.table.td>
+                                                            <x-base.table.td class="!px-2">
+                                                                <x-base.form-select id="dose_unit" name="dose_unit" required>
+                                                                    <option value="">Select</option> 
+                                                                    <option value="1">mg</option> 
+                                                                    <option value="2">ml</option> 
+                                                                    <option value="3">gm</option> 
+                                                                </x-base.form-select>
+                                                            </x-base.table.td>
+                                                            <x-base.table.td class="!px-2">
+                                                                <x-base.form-select id="med_frequency" name="med_frequency" required>
+                                                                    <option value="">Select</option> 
+                                                                    <option value="1">Once</option> 
+                                                                    <option value="2">Twice</option> 
+                                                                    <option value="3">Thrice</option> 
+                                                                    <option value="4">Four times</option> 
+                                                                    <option value="5">Five times</option> 
+                                                                    <option value="6">Six times</option> 
+                                                                    <option value="7">Alternate Days</option> 
+                                                                </x-base.form-select>
+                                                            </x-base.table.td>
+                                                            <x-base.table.td class="!px-2">
+                                                                <x-base.form-select id="med_period" name="med_period" required>
+                                                                    <option value="">Select</option> 
+                                                                    <option value="1">Daily</option> 
+                                                                    <option value="2">Weekly</option> 
+                                                                    <option value="3">Monthly</option> 
+                                                                </x-base.form-select>   
+                                                            </x-base.table.td>
+                                                            <x-base.table.td class="!pl-4 text-slate-500">
+                                                                <x-base.form-input
+                                                                id="modal-form-1"
+                                                                type="text"
+                                                                placeholder="Duration"
+                                                                name="duration"
+
+                                                                />
+                                                            </x-base.table.td>
+                                                            <x-base.table.td class="!px-2">
+                                                                <x-base.form-select id="timespan" name="timespan">
+                                                                    <option value="">Select</option> 
+                                                                    <option value="1">Days</option> 
+                                                                    <option value="2">Weeks</option> 
+                                                                    <option value="3">Months</option> 
+                                                                    <option value="4">Years</option>                 
+                                                                </x-base.form-select> 
+                                                            </x-base.table.td>
+                                                            <x-base.table.td class="!px-2">
+                                                                <x-base.form-select class="medicine_mode" name="medicine_mode" required>   
+                                                                    <option value="">Select</option>                                 
+                                                                </x-base.form-select>   
+                                                            </x-base.table.td>
+                                                            
+                                                        </x-base.table.tr>                                       
+                                                    </x-base.table.tbody>
+                                                </x-base.table>
+                                            </div>
+                                            <x-base.button
+                                                class="w-full mt-4 border-dashed"
+                                                variant="outline-primary"
+                                                id="add-new-button"
+                                            >
+                                            <x-base.lucide
+                                                class="mr-2 h-4 w-4 stroke-[1.3]"
+                                                icon="Plus"
+                                            />
+                                                Add New
+                                            </x-base.button>
+                                            <div class="mt-6 flex border-t border-dashed border-slate-300/70 pt-5 md:justify-end">
+                                                <x-base.button
+                                                    class="w-full border-primary/50 px-4 md:w-auto"
+                                                    variant="outline-primary"
+                                                    id="save-medications"
+                                                >
+                                                    Save Changes
+                                                </x-base.button>
+                                            </div>
                                         </div>
-                                       
-                                    </div>
+
+
+
+
+                                    @if($patient_general_condition->isEmpty())
+                                        <div class="box box--stacked flex flex-col">
+                                            <div class="p-5 font-medium">General Condition</div>                                      
+                                            <div class="overflow-x-auto">
+                                                <div class="box box--stacked col-span-12 flex flex-col p-5 md:col-span-6 xl:col-span-4">
+                                                    <a
+                                                        class="text-[0.94rem] font-medium text-primary"
+                                                        href=""
+                                                    >
+                                                    Present_condition
+                                                    </a>
+                                                    <div class="mb-5 mt-1 leading-relaxed text-slate-500">
+                                                        {{ $patient_general_condition->present_condition ?? '' }}
+                                                        <x-base.menu class="absolute right-0 top-0 mr-5 mt-5">
+                                                            <x-base.menu.button class="h-5 w-5 text-slate-500">
+                                                                <x-base.lucide
+                                                                    class="h-5 w-5 fill-slate-400/70 stroke-slate-400/70"
+                                                                    icon="MoreVertical"
+                                                                />
+                                                            </x-base.menu.button>
+                                                            <x-base.menu.items class="w-40">
+                                                                <x-base.menu.item>
+                                                                    <x-base.lucide
+                                                                        class="mr-2 h-4 w-4"
+                                                                        icon="Copy"
+                                                                    /> Copy
+                                                                    Link
+                                                                </x-base.menu.item>
+                                                                <x-base.menu.item>
+                                                                    <x-base.lucide
+                                                                        class="mr-2 h-4 w-4"
+                                                                        icon="Trash"
+                                                                    />
+                                                                    Delete
+                                                                </x-base.menu.item>
+                                                            </x-base.menu.items>
+                                                        </x-base.menu>
+                                                        <div
+                                                            class="mt-auto flex flex-col gap-3 border-t border-dashed border-slate-300/70 pt-5">
+                                                            <div class="flex items-center">
+                                                                <div class="text-slate-500">General Condition:</div>
+                                                                <div class="ml-auto">
+                                                                    <div
+                                                                        class="flex items-center rounded-md border border-success/10 bg-success/10 px-1.5 py-px text-xs text-success">
+                                                                        <span class="-mt-px"> 
+                                                                            {{ $patient_general_condition->present_condition ?? '' }}
+                                                                                    
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="flex items-center">
+                                                                <div class="text-slate-500">Feeding Method:</div>
+                                                                <div class="ml-auto">
+                                                                    <div class="flex items-center">  
+                                                                        @if($patient_general_condition && $patient_general_condition->feeding == 1)                                                                     
+                                                                            <div class="flex items-center rounded-md border border-success/10 bg-success/10 px-1.5 py-px text-xs text-success">
+                                                                                <span class="-mt-px"> {{ $patient_general_condition->feeding_method ?? '' }}</span>
+                                                                            </div>
+                                                                        @elseif($patient_general_condition && $patient_general_condition->feeding == 2)
+                                                                            <div class="flex items-center rounded-md border border-danger/10 bg-danger/10 px-1.5 py-px text-xs text-danger">
+                                                                                <span class="-mt-px"> {{ $patient_general_condition->feeding_method ?? '' }}</span>
+                                                                            </div>      
+                                                                        @endif
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                            <div class="flex items-center">
+                                                                <div class="text-slate-500">Sleep:</div>
+                                                                <div class="ml-auto text-slate-500">                                                                  
+                                                                    <div class="flex items-center">  
+                                                                        @if($patient_general_condition && $patient_general_condition->sleep == 1)                                                                     
+                                                                            <div class="flex items-center rounded-md border border-success/10 bg-success/10 px-1.5 py-px text-xs text-success">
+                                                                                <span class="-mt-px"> {{ $patient_general_condition->sleep_condition ?? '' }}</span>
+                                                                            </div>
+                                                                        @elseif($patient_general_condition && $patient_general_condition->sleep == 2)
+                                                                            <div class="flex items-center rounded-md border border-danger/10 bg-danger/10 px-1.5 py-px text-xs text-danger">
+                                                                                <span class="-mt-px"> {{ $patient_general_condition->sleep_condition ?? '' }}</span>
+                                                                            </div>      
+                                                                        @endif
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="flex items-center">
+                                                                <div class="text-slate-500">Bowel Habits:</div>
+                                                                <div class="flex items-center">  
+                                                                    @if($patient_general_condition && $patient_general_condition->bowel == 1)                                                                     
+                                                                        <div class="flex items-center rounded-md border border-success/10 bg-success/10 px-1.5 py-px text-xs text-success">
+                                                                            <span class="-mt-px"> {{ $patient_general_condition->bowel_condition ?? '' }}</span>
+                                                                        </div>
+                                                                    @elseif($patient_general_condition && ($patient_general_condition->bowel == 2 || $patient_general_condition->bowel == 3 || $patient_general_condition->bowel == 2))
+                                                                        <div class="flex items-center rounded-md border border-danger/10 bg-danger/10 px-1.5 py-px text-xs text-danger">
+                                                                            <span class="-mt-px"> {{ $patient_general_condition->bowel_condition ?? '' }}</span>
+                                                                        </div>      
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                            <div class="flex items-center">
+                                                                <div class="text-slate-500">Colostomy:</div>
+                                                                <div class="ml-auto text-slate-500">
+                                                                    @if($patient_general_condition && $patient_general_condition->colostomy == 1)                                                                     
+                                                                            <div class="flex items-center rounded-md border border-success/10 bg-success/10 px-1.5 py-px text-xs text-success">
+                                                                                <span class="-mt-px"> {{ $patient_general_condition->colostomy_condition ?? '' }}</span>
+                                                                            </div>
+                                                                        @elseif($patient_general_condition && $patient_general_condition->colostomy == 2)
+                                                                            <div class="flex items-center rounded-md border border-danger/10 bg-danger/10 px-1.5 py-px text-xs text-danger">
+                                                                                <span class="-mt-px"> {{ $patient_general_condition->colostomy_condition ?? '' }}</span>
+                                                                            </div>      
+                                                                        @endif
+                                                                </div>
+                                                            </div>
+                                                            <div class="flex items-center">
+                                                                <div class="text-slate-500">Bladder Habits:</div>
+                                                                <div class="ml-auto text-slate-500">
+                                                                    @if($patient_general_condition && $patient_general_condition->bladder_habit == 1)                                                                     
+                                                                            <div class="flex items-center rounded-md border border-success/10 bg-success/10 px-1.5 py-px text-xs text-success">
+                                                                                <span class="-mt-px"> {{ $patient_general_condition->bladder_habit_condition ?? '' }}</span>
+                                                                            </div>
+                                                                        @elseif($patient_general_condition && $patient_general_condition->bladder_habit == 2)
+                                                                            <div class="flex items-center rounded-md border border-danger/10 bg-danger/10 px-1.5 py-px text-xs text-danger">
+                                                                                <span class="-mt-px"> {{ $patient_general_condition->bladder_habit_condition ?? '' }}</span>
+                                                                            </div>      
+                                                                        @endif
+                                                                </div>
+                                                            </div>
+                                                         
+                                                          
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>         
+                                        </div>
+                                    @endif    
+
+                                    
                                 </div>
                             </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                            
                             <div class="relative col-span-12 row-start-1 xl:col-span-4 xl:col-start-9">
                                 <div class="sticky top-[6.2rem] flex flex-col gap-y-7">
                                     <div class="box box--stacked flex flex-col p-5">
@@ -964,348 +1186,122 @@
                            
                         </div>
                     </x-base.tab.panel>
-                    {{-- <x-base.tab.panel
+                    <x-base.tab.panel
                         id="example-3"
                         selected="{{ request()->query('page') === 'achievements' }}"
                     >
-                        <div class="mt-3.5 grid grid-cols-12 gap-x-6 gap-y-10">
+                         <div class="mt-3.5 grid grid-cols-12 gap-x-6 gap-y-10">
+                            <div class="overflow-auto xl:overflow-visible">
+                                <x-base.table class="border-b border-slate-200/60">
+                                    <x-base.table.thead>
+                                        <x-base.table.tr>                                           
+                                            <x-base.table.td
+                                                class="border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500"
+                                            >
+                                                Physical Difficulty
+                                            </x-base.table.td>
+                                            <x-base.table.td
+                                                class="border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500"
+                                            >
+                                                Duration
+                                            </x-base.table.td>                                           
+                                            <x-base.table.td
+                                                class="border-t border-slate-200/60 bg-slate-50 py-4 text-center font-medium text-slate-500"
+                                            >
+                                                Enteredby
+                                            </x-base.table.td>
+                                            <x-base.table.td
+                                                class="w-36 border-t border-slate-200/60 bg-slate-50 py-4 text-center font-medium text-slate-500"
+                                            >
+                                                Enteredon
+                                            </x-base.table.td>
+                                            <x-base.table.td
+                                            class="w-36 border-t border-slate-200/60 bg-slate-50 py-4 text-center font-medium text-slate-500"
+                                        >
+                                            Status
+                                        </x-base.table.td>
+                                        </x-base.table.tr>
+                                    </x-base.table.thead>
+                                    <x-base.table.tbody>
+                                        @foreach($patient_difficulties as $patient_difficulty)
+                                            <x-base.table.tr class="[&_td]:last:border-b-0">                                                
+                                                <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
+                                                    <a
+                                                        class="whitespace-nowrap font-medium"
+                                                        href=""
+                                                    >
+                                                    {{ $patient_difficulty->physical_difficulty }}
+                                                </a>                                                   
+                                                </x-base.table.td>
+                                                <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">                                                   
+                                                    <a
+                                                    class="whitespace-nowrap font-medium"
+                                                    href=""
+                                                    >
+                                                    {{ $patient_difficulty->duration }}
+                                                    </a>
+                                                    <div class="mt-0.5 whitespace-nowrap text-xs text-slate-500">
+                                                        {{ $patient_difficulty->period }}
+                                                    </div>                                                 
+                                                </x-base.table.td>
+                                                <x-base.table.td class="border-dashed py-4 text-center dark:bg-darkmode-600">
+                                                    <div class="whitespace-nowrap">
+                                                        {{ $patient_difficulty->enteredBy->name }}
+                                                    </div>
+                                                </x-base.table.td>
+                                                <x-base.table.td class="border-dashed py-4 text-center dark:bg-darkmode-600">
+                                                    <div class="whitespace-nowrap">
+                                                       
+                                                        {{ $patient_difficulty->created_at }}
+                                                    </div>
+                                                </x-base.table.td>
+                                                <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
+                                                    <div class='text-success'>
+                                                       
+                                                        <div class="ml-1.5 whitespace-nowrap">
+                                                           Active
+                                                        </div>
+                                                    </div>
+                                                </x-base.table.td>
+                                                <x-base.table.td class="relative border-dashed py-4 dark:bg-darkmode-600">
+                                                    <div class="flex items-center justify-center">
+                                                        <x-base.menu class="h-5">
+                                                            <x-base.menu.button class="h-5 w-5 text-slate-500">
+                                                                <x-base.lucide
+                                                                    class="h-5 w-5 fill-slate-400/70 stroke-slate-400/70"
+                                                                    icon="MoreVertical"
+                                                                />
+                                                            </x-base.menu.button>
+                                                            <x-base.menu.items class="w-40">
+                                                                <x-base.menu.item>
+                                                                    <x-base.lucide
+                                                                        class="mr-2 h-4 w-4"
+                                                                        icon="CheckSquare"
+                                                                    />
+                                                                    Edit
+                                                                </x-base.menu.item>
+                                                                <x-base.menu.item class="text-danger">
+                                                                    <x-base.lucide
+                                                                        class="mr-2 h-4 w-4"
+                                                                        icon="Trash2"
+                                                                    />
+                                                                    Delete
+                                                                </x-base.menu.item>
+                                                            </x-base.menu.items>
+                                                        </x-base.menu>
+                                                    </div>
+                                                </x-base.table.td>
+                                            </x-base.table.tr>
+                                        @endforeach
+                                    </x-base.table.tbody>
+                                </x-base.table>
+                            </div>
+                               
+                             
+                               
                           
-                                <div class="box box--stacked col-span-12 flex flex-col md:col-span-6 xl:col-span-4">
-                                    <div class="ml-5 mt-5 flex">
-                                        <span
-                                            class="mr-auto flex items-center rounded-md border border-success/10 bg-success/10 px-2 py-0.5 text-xs font-medium text-success"
-                                        >
-                                            <span class="-mt-px">category</span>
-                                        </span>
-                                    </div>
-                                    <x-base.menu class="absolute right-0 top-0 mr-5 mt-5">
-                                        <x-base.menu.button class="h-5 w-5 text-slate-500">
-                                            <x-base.lucide
-                                                class="h-5 w-5 fill-slate-400/70 stroke-slate-400/70"
-                                                icon="MoreVertical"
-                                            />
-                                        </x-base.menu.button>
-                                        <x-base.menu.items class="w-40">
-                                            <x-base.menu.item>
-                                                <x-base.lucide
-                                                    class="mr-2 h-4 w-4"
-                                                    icon="Copy"
-                                                /> Copy
-                                                Link
-                                            </x-base.menu.item>
-                                            <x-base.menu.item>
-                                                <x-base.lucide
-                                                    class="mr-2 h-4 w-4"
-                                                    icon="Trash"
-                                                />
-                                                Delete
-                                            </x-base.menu.item>
-                                        </x-base.menu.items>
-                                    </x-base.menu>
-                                    <div class="mt-5 flex flex-col items-center px-5 pb-10">
-                                        <div class="relative h-[72px] w-[72px]">
-                                            <div
-                                                class="flex h-full w-full items-center justify-center overflow-hidden rounded-full border border-slate-200/70 bg-theme-1/5">
-                                                <x-base.lucide
-                                                    class="h-6 w-6 fill-theme-1/10 stroke-[0.7] text-theme-1"
-                                                    icon=""
-                                                />
-                                            </div>
-                                        </div>
-                                        <div class="mt-3 text-[0.94rem] font-medium text-primary">
-                                            title
-                                        </div>
-                                        <div class="mt-1.5 text-center text-slate-500">
-                                            description
-                                        </div>
-                                        <div class="mt-5 text-xs uppercase text-slate-400">
-                                            Collaborators
-                                        </div>
-                                        <div class="mt-3 flex justify-center">
-                                            <div class="image-fit zoom-in h-10 w-10">
-                                                <x-base.tippy
-                                                    class="rounded-full border-2 border-white"
-                                                    src=""
-                                                    alt="Tailwise - Admin Dashboard Template"
-                                                    as="img"
-                                                    content="name"
-                                                />
-                                            </div>
-                                            <div class="image-fit zoom-in -ml-3 h-10 w-10">
-                                                <x-base.tippy
-                                                    class="rounded-full border-2 border-white"
-                                                    src=""
-                                                    alt="Tailwise - Admin Dashboard Template"
-                                                    as="img"
-                                                    content="name"
-                                                />
-                                            </div>
-                                            <div class="image-fit zoom-in -ml-3 h-10 w-10">
-                                                <x-base.tippy
-                                                    class="rounded-full border-2 border-white"
-                                                    src=""
-                                                    alt="Tailwise - Admin Dashboard Template"
-                                                    as="img"
-                                                    content="name"
-                                                />
-                                            </div>
-                                            <div class="image-fit zoom-in -ml-3 h-10 w-10">
-                                                <x-base.tippy
-                                                    class="rounded-full border-2 border-white"
-                                                    src=""
-                                                    alt="Tailwise - Admin Dashboard Template"
-                                                    as="img"
-                                                    content="name"
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="flex border-t border-slate-200/80">
-                                        <div class="flex flex-1 flex-col items-center py-3">
-                                            <div class="text-base font-medium">
-                                               level
-                                            </div>
-                                            <div class="text-slate-500">Level</div>
-                                        </div>
-                                        <div class="flex flex-1 flex-col items-center border-x border-slate-200/80 py-3">
-                                            <div class="text-base font-medium">
-                                                duration
-                                            </div>
-                                            <div class="text-slate-500">Duration</div>
-                                        </div>
-                                        <div class="flex flex-1 flex-col items-center py-3">
-                                            <div class="text-base font-medium">
-                                             score
-                                            </div>
-                                            <div class="text-slate-500">Score</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="box box--stacked col-span-12 flex flex-col md:col-span-6 xl:col-span-4">
-                                    <div class="ml-5 mt-5 flex">
-                                        <span
-                                            class="mr-auto flex items-center rounded-md border border-success/10 bg-success/10 px-2 py-0.5 text-xs font-medium text-success"
-                                        >
-                                            <span class="-mt-px">category</span>
-                                        </span>
-                                    </div>
-                                    <x-base.menu class="absolute right-0 top-0 mr-5 mt-5">
-                                        <x-base.menu.button class="h-5 w-5 text-slate-500">
-                                            <x-base.lucide
-                                                class="h-5 w-5 fill-slate-400/70 stroke-slate-400/70"
-                                                icon="MoreVertical"
-                                            />
-                                        </x-base.menu.button>
-                                        <x-base.menu.items class="w-40">
-                                            <x-base.menu.item>
-                                                <x-base.lucide
-                                                    class="mr-2 h-4 w-4"
-                                                    icon="Copy"
-                                                /> Copy
-                                                Link
-                                            </x-base.menu.item>
-                                            <x-base.menu.item>
-                                                <x-base.lucide
-                                                    class="mr-2 h-4 w-4"
-                                                    icon="Trash"
-                                                />
-                                                Delete
-                                            </x-base.menu.item>
-                                        </x-base.menu.items>
-                                    </x-base.menu>
-                                    <div class="mt-5 flex flex-col items-center px-5 pb-10">
-                                        <div class="relative h-[72px] w-[72px]">
-                                            <div
-                                                class="flex h-full w-full items-center justify-center overflow-hidden rounded-full border border-slate-200/70 bg-theme-1/5">
-                                                <x-base.lucide
-                                                    class="h-6 w-6 fill-theme-1/10 stroke-[0.7] text-theme-1"
-                                                    icon=""
-                                                />
-                                            </div>
-                                        </div>
-                                        <div class="mt-3 text-[0.94rem] font-medium text-primary">
-                                            title
-                                        </div>
-                                        <div class="mt-1.5 text-center text-slate-500">
-                                            description
-                                        </div>
-                                        <div class="mt-5 text-xs uppercase text-slate-400">
-                                            Collaborators
-                                        </div>
-                                        <div class="mt-3 flex justify-center">
-                                            <div class="image-fit zoom-in h-10 w-10">
-                                                <x-base.tippy
-                                                    class="rounded-full border-2 border-white"
-                                                    src=""
-                                                    alt="Tailwise - Admin Dashboard Template"
-                                                    as="img"
-                                                    content="name"
-                                                />
-                                            </div>
-                                            <div class="image-fit zoom-in -ml-3 h-10 w-10">
-                                                <x-base.tippy
-                                                    class="rounded-full border-2 border-white"
-                                                    src=""
-                                                    alt="Tailwise - Admin Dashboard Template"
-                                                    as="img"
-                                                    content="name"
-                                                />
-                                            </div>
-                                            <div class="image-fit zoom-in -ml-3 h-10 w-10">
-                                                <x-base.tippy
-                                                    class="rounded-full border-2 border-white"
-                                                    src=""
-                                                    alt="Tailwise - Admin Dashboard Template"
-                                                    as="img"
-                                                    content="name"
-                                                />
-                                            </div>
-                                            <div class="image-fit zoom-in -ml-3 h-10 w-10">
-                                                <x-base.tippy
-                                                    class="rounded-full border-2 border-white"
-                                                    src=""
-                                                    alt="Tailwise - Admin Dashboard Template"
-                                                    as="img"
-                                                    content="name"
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="flex border-t border-slate-200/80">
-                                        <div class="flex flex-1 flex-col items-center py-3">
-                                            <div class="text-base font-medium">
-                                               level
-                                            </div>
-                                            <div class="text-slate-500">Level</div>
-                                        </div>
-                                        <div class="flex flex-1 flex-col items-center border-x border-slate-200/80 py-3">
-                                            <div class="text-base font-medium">
-                                                duration
-                                            </div>
-                                            <div class="text-slate-500">Duration</div>
-                                        </div>
-                                        <div class="flex flex-1 flex-col items-center py-3">
-                                            <div class="text-base font-medium">
-                                             score
-                                            </div>
-                                            <div class="text-slate-500">Score</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="box box--stacked col-span-12 flex flex-col md:col-span-6 xl:col-span-4">
-                                    <div class="ml-5 mt-5 flex">
-                                        <span
-                                            class="mr-auto flex items-center rounded-md border border-success/10 bg-success/10 px-2 py-0.5 text-xs font-medium text-success"
-                                        >
-                                            <span class="-mt-px">category</span>
-                                        </span>
-                                    </div>
-                                    <x-base.menu class="absolute right-0 top-0 mr-5 mt-5">
-                                        <x-base.menu.button class="h-5 w-5 text-slate-500">
-                                            <x-base.lucide
-                                                class="h-5 w-5 fill-slate-400/70 stroke-slate-400/70"
-                                                icon="MoreVertical"
-                                            />
-                                        </x-base.menu.button>
-                                        <x-base.menu.items class="w-40">
-                                            <x-base.menu.item>
-                                                <x-base.lucide
-                                                    class="mr-2 h-4 w-4"
-                                                    icon="Copy"
-                                                /> Copy
-                                                Link
-                                            </x-base.menu.item>
-                                            <x-base.menu.item>
-                                                <x-base.lucide
-                                                    class="mr-2 h-4 w-4"
-                                                    icon="Trash"
-                                                />
-                                                Delete
-                                            </x-base.menu.item>
-                                        </x-base.menu.items>
-                                    </x-base.menu>
-                                    <div class="mt-5 flex flex-col items-center px-5 pb-10">
-                                        <div class="relative h-[72px] w-[72px]">
-                                            <div
-                                                class="flex h-full w-full items-center justify-center overflow-hidden rounded-full border border-slate-200/70 bg-theme-1/5">
-                                                <x-base.lucide
-                                                    class="h-6 w-6 fill-theme-1/10 stroke-[0.7] text-theme-1"
-                                                    icon=""
-                                                />
-                                            </div>
-                                        </div>
-                                        <div class="mt-3 text-[0.94rem] font-medium text-primary">
-                                            title
-                                        </div>
-                                        <div class="mt-1.5 text-center text-slate-500">
-                                            description
-                                        </div>
-                                        <div class="mt-5 text-xs uppercase text-slate-400">
-                                            Collaborators
-                                        </div>
-                                        <div class="mt-3 flex justify-center">
-                                            <div class="image-fit zoom-in h-10 w-10">
-                                                <x-base.tippy
-                                                    class="rounded-full border-2 border-white"
-                                                    src=""
-                                                    alt="Tailwise - Admin Dashboard Template"
-                                                    as="img"
-                                                    content="name"
-                                                />
-                                            </div>
-                                            <div class="image-fit zoom-in -ml-3 h-10 w-10">
-                                                <x-base.tippy
-                                                    class="rounded-full border-2 border-white"
-                                                    src=""
-                                                    alt="Tailwise - Admin Dashboard Template"
-                                                    as="img"
-                                                    content="name"
-                                                />
-                                            </div>
-                                            <div class="image-fit zoom-in -ml-3 h-10 w-10">
-                                                <x-base.tippy
-                                                    class="rounded-full border-2 border-white"
-                                                    src=""
-                                                    alt="Tailwise - Admin Dashboard Template"
-                                                    as="img"
-                                                    content="name"
-                                                />
-                                            </div>
-                                            <div class="image-fit zoom-in -ml-3 h-10 w-10">
-                                                <x-base.tippy
-                                                    class="rounded-full border-2 border-white"
-                                                    src=""
-                                                    alt="Tailwise - Admin Dashboard Template"
-                                                    as="img"
-                                                    content="name"
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="flex border-t border-slate-200/80">
-                                        <div class="flex flex-1 flex-col items-center py-3">
-                                            <div class="text-base font-medium">
-                                               level
-                                            </div>
-                                            <div class="text-slate-500">Level</div>
-                                        </div>
-                                        <div class="flex flex-1 flex-col items-center border-x border-slate-200/80 py-3">
-                                            <div class="text-base font-medium">
-                                                duration
-                                            </div>
-                                            <div class="text-slate-500">Duration</div>
-                                        </div>
-                                        <div class="flex flex-1 flex-col items-center py-3">
-                                            <div class="text-base font-medium">
-                                             score
-                                            </div>
-                                            <div class="text-slate-500">Score</div>
-                                        </div>
-                                    </div>
-                                </div>
-                          
-                        </div>
-                    </x-base.tab.panel> --}}
+                        </div> 
+                    </x-base.tab.panel>
                     {{-- <x-base.tab.panel
                         id="example-4"
                         selected="{{ request()->query('page') === 'contacts' }}"
@@ -1837,9 +1833,14 @@
 </x-base.dialog.panel>
 </x-base.dialog>
 <!-- END: Large Modal Content -->
+
+
+
 @endsection
 @push('custom-scripts')
 <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
+
 <script>
 window.addEventListener('DOMContentLoaded', (event) => {
         let status = {{ $patient->flow_status_id }};        
@@ -1867,4 +1868,204 @@ window.addEventListener('DOMContentLoaded', (event) => {
     }
 
     setProgress({{ $patient->flow_status_id }});
+
+
+
+
+    jQuery(document).ready(function() {
+    const $select = jQuery('.medicine_name');   
+    if ($select.length) {
+  jQuery.ajax({
+            url: '/get_all_medicines',
+            type: 'GET',
+            dataType: 'json',
+            success: function (response) {
+                const $select = jQuery('.medicine_name');
+    
+               
+                if ($select.length) {
+                    $select.empty().append('<option value="">Select</option>');
+    
+                    response.forEach(function (data) {
+                        $select.append('<option value="' + data.id + '">' + data.medicine + '</option>');
+                    });
+                } else {
+                    console.error('Medicine select element not found.');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('Error fetching Medicine:', error);
+            }
+        });
+
+
+        jQuery.ajax({
+            url: '/get_all_medicine_modes',
+            type: 'GET',
+            dataType: 'json',
+            success: function (response) {
+                const $select = jQuery('.medicine_mode');
+    
+               
+                if ($select.length) {
+                    $select.empty().append('<option value="">Select</option>');
+    
+                    response.forEach(function (data) {
+                        $select.append('<option value="' + data.id + '">' + data.medicine_mode + '</option>');
+                    });
+                } else {
+                    console.error('Medicine select element not found.');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('Error fetching Medicine:', error);
+            }
+        });
+
+        jQuery.ajax({
+            url: '/get_all_medicine_types',
+            type: 'GET',
+            dataType: 'json',
+            success: function (response) {
+                const $select = jQuery('.medicine_type');
+    
+               
+                if ($select.length) {
+                    $select.empty().append('<option value="">Select</option>');
+    
+                    response.forEach(function (data) {
+                        $select.append('<option value="' + data.id + '">' + data.medicine_type + '</option>');
+                    });
+                } else {
+                    console.error('Medicine select element not found.');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('Error fetching Medicine:', error);
+            }
+        });
+
+       
+    }
+});
+
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById('add-new-button').addEventListener('click', function () {
+        var tableBody = document.getElementById('medication-table');
+        if (tableBody) {
+            var lastRow = document.querySelector('.medication-row');
+
+            if (lastRow) {
+                var newRow = lastRow.cloneNode(true);
+                var inputs = newRow.querySelectorAll('input, select');
+                inputs.forEach(function (input) {
+                    if (input.type !== "checkbox") {
+                        input.value = '';  
+                    }
+                });
+
+                tableBody.appendChild(newRow);
+            } else {
+                console.error('Last row not found.');
+            }
+        } else {
+            console.error('Table body not found.');
+        }
+    });
+});
+
+
+
+
+$(document).ready(function () {
+    $('#save-medications').on('click', function () {
+        const saveButton = $('#save-medications');  saveButton.text('Saving...');
+        document.getElementById("save-medications").disabled = true;
+        saveMedicationData();      
+    });
+
+    function saveMedicationData() {
+        let medicationData = [];
+
+        // Extract patient_id from URL
+        const urlSegments = window.location.pathname.split('/');
+        const patientId = document.querySelector('input[name="patient_id"]').value;
+
+        // Loop through each row in the table
+        $('.medication-row').each(function () {
+            const row = $(this);
+            const rowData = {
+                medicine_name: row.find('.medicine_name').val(),
+                medicine_type: row.find('.medicine_type').val(),
+                med_dose: row.find('input[name="med_dose"]').val(),
+                dose_unit: row.find('select[name="dose_unit"]').val(),
+                med_frequency: row.find('select[name="med_frequency"]').val(),
+                med_period: row.find('select[name="med_period"]').val(),
+                duration: row.find('input[name="duration"]').val(),
+                timespan: row.find('select[name="timespan"]').val(),
+                medicine_mode: row.find('.medicine_mode').val(),
+                patient_id: patientId
+            };
+
+            // Only add row data if it's valid (non-empty)
+            if (rowData.medicine_name && rowData.medicine_type && rowData.med_dose) {
+                medicationData.push(rowData);
+            }
+        });
+
+        // Send the data to the server via AJAX
+        sendMedicationData(medicationData, patientId);  // Correctly pass `patientId` here
+    }
+
+    function sendMedicationData(data, patientId) {
+        jQuery.ajax({
+            url: '/blue_form_medicine_save',  
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                _token: '{{ csrf_token() }}',  
+                medicines: data, 
+                patient_id: patientId  
+            },
+            success: function(response) {
+                if (response.success) {
+                  location.reload();       
+                } else {
+                    alert('Error saving data!');
+                }
+            },
+            error: function(xhr, status, error) {
+              
+                alert('An error occurred while saving the medication data.');
+            }
+        });
+    }
+});
+
+
+
+function deleteRecord() {
+        // Example action based on the action type
+        if (this.action === 'inactive') {
+            // Inactivate record
+            console.log("Marking record as inactive with ID:", this.medicationId);
+            // You can use an AJAX request to update the record status here
+        } else if (this.action === 'delete') {
+            // Delete record
+            console.log("Deleting record with ID:", this.medicationId);
+            // Example: Perform an AJAX request to delete the record
+            // axios.delete('/delete-record/' + this.medicationId).then(response => {
+            //     // handle success
+            // }).catch(error => {
+            //     // handle error
+            // });
+        }
+
+        this.open = false; // Close the modal after the action
+    }
+
+
 </script>

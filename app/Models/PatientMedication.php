@@ -24,4 +24,8 @@ class PatientMedication extends Model
     {
         return $this->belongsTo(MedicineMode::class, 'route');
     }
+    public function enteredBy()
+    {
+        return $this->belongsTo(User::class, 'enteredby');
+    }
 }

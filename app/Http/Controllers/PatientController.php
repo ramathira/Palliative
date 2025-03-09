@@ -670,10 +670,18 @@ class PatientController extends Controller
         ->where('patient_id', $id)
         ->where('status', 1)
         ->get();
-        $patient_medication = PatientMedication::where('patient_id', $id)
-        ->whereIn('status', [1,2])
-        ->with('medicine_details', 'medication_type', 'medicine_mode')
-        ->get();
+        $patient_medication = PatientMedication::select('id','medication','medicine_type','dose','duration','route','status', DB::raw('CASE WHEN dose_unit = 1 THEN "mg" WHEN dose_unit = 2 THEN "ml" WHEN dose_unit = 3 THEN "gm"  END AS unit_dose'),DB::raw('CASE WHEN 	frequency = 1 THEN "Once" WHEN frequency = 2 THEN "Twice" WHEN frequency = 3 THEN "Thrice" WHEN frequency = 4 THEN "Four times" WHEN frequency = 5 THEN "Five times" WHEN frequency = 6 THEN "Six times" WHEN frequency = 7 THEN "Alternate days" END AS frequency'),DB::raw('CASE WHEN period = 1 THEN "daily" WHEN period = 2 THEN "weekly" WHEN period = 3 THEN "monthly"  END AS period'),DB::raw('CASE WHEN timespan = 1 THEN "days" WHEN 	timespan = 2 THEN "weeks" WHEN timespan = 3 THEN "months" WHEN timespan = 4 THEN "years"  END AS timespan'),'enteredby','created_at')
+                                    ->with([
+                                        'medicine_details' => function($query) {
+                                            $query->select('id', 'medicine');  
+                                        },
+                                       
+
+                                      
+                                    ])
+                                ->where('patient_id', $id)
+                                ->whereIn('status',[1,2])
+                                ->get();
      // dd($patient_medication);
      $patient_intial_diagnosis = PatientInitialDiagnosis::select('details_from_disease', DB::raw("
      CASE 
@@ -717,12 +725,64 @@ END AS 	volunteer_type
      ->with('treatment_type')
      ->get();
 
+     $patient_difficulties = PatientPhysicalDifficulties::select('physical_difficulty','duration',DB::raw("
+     CASE 
+             WHEN 	period = 1 THEN 'days'
+             WHEN 	period = 2 THEN 'weeks'
+             WHEN 	period = 3 THEN 'months'
+            WHEN 	period = 4 THEN 'years'                               
+         ELSE 'Other'
+     END AS 	period
+     "),'created_at','enteredby')->where('patient_id', $id)
+         ->get();
+    $patient_general_condition = PatientBlueFormGeneralCondition::select('present_condition','feeding_method',DB::raw("
+    CASE 
+            WHEN feeding_method = 1 THEN 'Oral'
+            WHEN feeding_method = 2 THEN 'Ryles Tube'                                        
+        ELSE 'Other'
+    END AS 	feeding
+    "),'sleep',DB::raw("
+    CASE 
+            WHEN sleep = 1 THEN 'Normal'
+            WHEN sleep = 2 THEN 'Reduced Sleep'                                        
+        ELSE 'Other'
+    END AS 	sleep_condition
+    "),'bowel',DB::raw("
+    CASE 
+            WHEN 	bowel = 1 THEN 'Normal'
+            WHEN 	bowel = 2 THEN 'Incontinence'
+            WHEN 	bowel = 3 THEN 'Loose Stool'
+           WHEN 	bowel = 4 THEN 'Constipation	'                               
+        ELSE 'Other'
+    END AS 	bowel_condition
+    "),'colostomy',DB::raw("
+    CASE 
+            WHEN colostomy = 1 THEN 'Present'
+            WHEN colostomy = 2 THEN 'Absent'                                        
+        ELSE 'Other'
+    END AS 	colostomy_condition
+    "),'bladder_habit',DB::raw("
+    CASE 
+            WHEN bladder_habit = 1 THEN 'Normal'
+            WHEN bladder_habit = 2 THEN 'on CBD'                                        
+        ELSE 'Other'
+    END AS 	bladder_habit_condition
+    "))
+                                ->where('patient_id', $id)
+                                ->where('status',1)
+                                ->first();
+
+    $patient_detailed_examination = PatientBlueFormDetailedExamination::where('patient_id', $id)
+         ->get();
+    $patient_other_condition = PatientBlueFormOtherDetails::where('patient_id', $id)
+         ->get();     
+
 
         if (!$patient) {
             abort(404); 
         }
     
-        return view('pages.patient.profile', compact('patient','patient_disease','patient_family','patient_medication','patient_location','patient_diagnosis','patient_treatment_category','patient_comfort_devices','patient_intial_diagnosis','patient_past_treatment_category'));
+        return view('pages.patient.profile', compact('patient','patient_disease','patient_family','patient_medication','patient_location','patient_diagnosis','patient_treatment_category','patient_comfort_devices','patient_intial_diagnosis','patient_past_treatment_category','patient_difficulties','patient_general_condition','patient_detailed_examination','patient_other_condition'));
     }
 
 
